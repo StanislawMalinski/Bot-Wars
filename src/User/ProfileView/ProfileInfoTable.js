@@ -2,22 +2,6 @@ import { useEffect, useState } from "react";
 import {PointsService} from "../../services/PointsService";
 import {XAxis, YAxis, CartesianGrid, Tooltip, LineChart, Line  } from 'recharts';
 
-function StatsTable(props) {
-    return (
-        <table>
-            <tr>
-                <th>Wins</th>
-                <th>Losses</th>
-                <th>Draws</th>
-            </tr>
-            <tr>
-                <td>{props.wins}</td>
-                <td>{props.losses}</td>
-                <td>{props.draws}</td>
-            </tr>
-        </table>
-    );
-}
 
 function RatingTable(props) {
     const [history, setHistory] = useState([{id: 0, logDate: "", points: 0, playerId: 0}]);
@@ -26,17 +10,17 @@ function RatingTable(props) {
         setHistory(PointsService.getPointsHistoryForPlayer(props.playerid)["data"]);
     }, [props.playerid]);
 
+    var ticksize = 20;
     const chart = 
-        <LineChart data={history} width={1000} height={300}>
-            <CartesianGrid />
-            <Tooltip />
-            <XAxis dataKey="logDate" />
-            <YAxis dataKey="rating"  />
-            <Line type="linear" dataKey="rating" stroke="#01FF00" fill="#01FF00" /> 
-        </LineChart>;
-
-        console.log(history);
-
+        <ResponsiveContainer minWidth={100} minHeight={200}>
+            <LineChart data={history}>
+                <CartesianGrid/>
+                <Tooltip labelStyle={{fontSize: ticksize}} contentStyle={{fontSize: ticksize}}/>
+                <XAxis dataKey="logDate" tick={{fontSize: ticksize}} />
+                <YAxis dataKey="rating" tick={{fontSize: ticksize}} />
+                <Line type="linear" dataKey="rating" stroke="#01FF00" fill="#01FF00" /> 
+            </LineChart>
+        </ResponsiveContainer>
     return (
         <>
         {chart}
@@ -85,8 +69,6 @@ function TournamentsPlayedTable(props) {
 
 function changeState(newState) {
     switch (newState) {
-        case "stats":
-            return <StatsTable wins={10} losses={5} draws={3} />;
         case "rating":
             return <RatingTable/>;
         case "bots":
@@ -101,10 +83,10 @@ function changeState(newState) {
 }
 
 function ProfileInfoTable(props) {
-    const { state } = props;
+    const { state, user } = props;
     const [content, setContent] = useState(null);
     useEffect(() => {
-        const con = changeState(state);
+        var con = changeState(state);
         setContent(con);
     }, [state]);
 

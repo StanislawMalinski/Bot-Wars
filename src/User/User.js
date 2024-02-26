@@ -9,13 +9,21 @@ function User({ isAuthenticated, user, login, logout }) {
         {isAuthenticated ? (
           <button onClick={logout}>Logout</button>
         ) : (
-        <>
-          <Link to="/login">
-              <button className="login-btn">Login</button>
+          <>
+          <button>
+          <Link to="login">
+              Login
           </Link>
-          <Link to="/register">
-              <button className="login-btn">Register</button>
+          </button>
+
+          <button>
+          <Link to="register">
+            Register
           </Link>
+          </button>
+          <button onClick={() => login({ username: 'exampleUser' })}>
+            test
+          </button>
         </>
         )}
         </>

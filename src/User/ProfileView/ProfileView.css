@@ -7,7 +7,7 @@
 
     justify-items: stretch;
     align-content: stretch;
-    height: 100%;
+    height: 100hw;
 }
 
 .user-photo {
@@ -53,8 +53,36 @@
 }
 
 .user-info-table-buttons-container {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     justify-content:space-evenly;
+}
+
+@media (max-aspect-ratio: 1){
+    .user-info-table-buttons-container {    
+        grid-template-columns: 1fr 1fr;
+    } 
+}
+
+@media (max-aspect-ratio: 5/6) { 
+    /*Handling collapse*/
+    .main-container {
+        grid-template-columns: 0% 100%;
+    }
+    
+    .notcollapse {
+        background-color: red;
+        visibility: collapse;
+        width: 0;
+    }   
+
+    .collapse {
+        visibility: visible;
+    }
+}
+
+.collapse {
+    visibility: collapse;
 }
 
 .user-overview {
@@ -74,8 +102,6 @@
 .settings-button {
     width: 100%;
     align-self: flex-end;
-
-    bottom: 0;
 }
 
 .cell {
