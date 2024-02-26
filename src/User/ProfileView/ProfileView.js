@@ -1,12 +1,11 @@
 import { useParams } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
-import { getUser } from '../../services/Api';
+import { GetUser } from '../../services/Api';
 import ProfileInfoTable from './ProfileInfoTable';
 import ProfileInfoTableAchievements from './ProfileInfoTableAchievements';
 
 import './ProfileView.css';
 import ProfileInfoTableButtons from './ProfileInfoTableButtons';
-
 
 function ProfileView() {
     const { id } = useParams();
@@ -16,7 +15,7 @@ function ProfileView() {
 
 
     useEffect(() => {
-        setUser(getUser({"playerid" : id}));
+        setUser(GetUser({"playerId" : id}));
     }, [id]);
 
 

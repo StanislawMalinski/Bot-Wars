@@ -1,60 +1,128 @@
 {
     "protocol": "http",
-    "host": "10.147.17.20",
-    "port": 8080,
+    "host": "localhost", 
+    "port": 3000,
     "path": "api/",
     "version": "v1",
     "urls": {
         "achievements": {
-            "path": "/Achievements",
+            "path": "/Achievement",
             "functions":{
-                "GetachievementsForPlayer": {
-                    "path": "/getachievementsForPlayer",
+                "GetAchievementsForPlayer": {
+                    "path": "/getAchievementsForPlayer",
                     "method": "GET",
                     "params": ["playerId"]
                 },
-                "GetachievementTypes": {
-                    "path": "/getachievementTypes",
+                "GetAchievementTypes": {
+                    "path": "/getAchievementTypes",
                     "method": "GET"
                 }
             }   
         },
+        "administrative": {
+            "path": "/Administrative",
+            "functions": {
+                "BanPlayer": {
+                    "path": "/banPlayer",
+                    "method": "PUT",
+                    "params": ["playerId"]
+                },
+                "UnbanPlayer": {
+                    "path": "/unbanPlayer",
+                    "method": "PUT",
+                    "params": ["playerId"]
+                }
+            }
+        },
+        "bot": {
+            "path": "/Bot",
+            "functions": {
+                "GetAll": {
+                    "path": "/getAll",
+                    "method": "GET"
+                },
+                "GetOne": {
+                    "path": "/getOne",
+                    "method": "GET",
+                    "params": ["id"]
+                },
+                "Add": {
+                    "path": "/add",
+                    "method": "POST",
+                    "body": ["name","description","gameId","botFile","isAvailableForPlay"]
+                },
+                "Delete" :  {
+                    "path": "/delete",
+                    "method": "DELETE",
+                    "params": ["id"]
+                }
+            }
+        },
+        "database" : {
+            "path": "/Database",
+            "functions": {
+                "ResetDatabase" :
+                {
+                    "path": "/reset",
+                    "method": "GET"
+                },
+                "DeleteDatabase" :
+                {
+                    "path": "/delete",
+                    "method": "DELETE"
+                }
+            }
+        },
         "gametype" : {
             "path": "/GameType",
             "functions": {
-                "AddGameType": {
-                    "path": "/add",
-                    "method": "POST",
-                    "body": ["numbersOfPlayer","lastModification","gameFile","gameInstructions","interfaceDefinition","isAvaiableForPlay"]
+                "GetGameType": {
+                    "path": "/getOne",
+                    "method": "GET",
+                    "params": ["id"]
                 },
                 "GetGameTypes": {
                     "path": "/getAll",
                     "method": "GET"
                 },
-                "DeleteGameType": {
-                    "path": "/delete",
-                    "method": "DELETE",
-                    "params": ["id"]
+                "GetAvailableGameTypes": {
+                    "path": "/getAvailable",
+                    "method": "GET"
+                },
+                "AddGameType": {
+                    "path": "/add",
+                    "method": "POST",
+                    "body": ["numbersOfPlayer","lastModification","gameFile","gameInstructions","interfaceDefinition","isAvaiableForPlay"]
                 },
                 "UpdateGameType": {
                     "path": "/update",
                     "method": "PUT",
                     "body": ["id","numbersOfPlayer","lastModification","gameFile","gameInstructions","interfaceDefinition","isAvaiableForPlay"]
+                },
+                "DeleteGameType": {
+                    "path": "/delete",
+                    "method": "DELETE",
+                    "params": ["id"]
                 }
             }
         },
         "player" : {
             "path": "/Player",
             "functions": {
-                "registerPlayer": {
+                "RegisterPlayer": {
                     "path": "/register",
                     "method": "POST",
                     "body": ["name","email","password", "roleId", "isBanned", "points"]
                 },
-                "loginPlayer": {
+                "LoginPlayer": {
                     "path": "/login",
                     "method": "POST",
                     "body": ["email","password"]
+                },
+                "GetPlayer": {
+                    "path": "/getPlayerInfo",
+                    "method": "GET",
+                    "params": ["playerId"]
                 }
             }
         },
@@ -66,8 +134,8 @@
                     "method": "GET",
                     "params": ["playerId"]
                 },
-                "GetLeadboards": {
-                    "path": "/getLeadboards",
+                "GetLeaderboard": {
+                    "path": "/getLeaderboards",
                     "method": "GET"
                 },
                 "GetPointsHistoryForPlayer": {
@@ -104,12 +172,12 @@
                     "method": "GET",
                     "params": ["id"]
                 },
-                "registerBot": {
+                "RegisterBot": {
                     "path": "/registerBot",
                     "method": "PUT",
                     "body": ["tournamentsId","botId"]
                 },
-                "unregisterBot": {
+                "UnregisterBot": {
                     "path": "/unregisterBot",
                     "method": "PUT",
                     "params": ["tournamentsId","botId"]
@@ -129,11 +197,6 @@
                     "method": "POST",
                     "params": ["id"],
                     "body": ["playerId","isDarkTheme","language"]
-                },
-                "DeleteUserSettings": {
-                    "path": "/delete",
-                    "method": "DELETE",
-                    "params": ["id"]
                 },
                 "GetUserSettings": {
                     "path": "/getForPlayer",
