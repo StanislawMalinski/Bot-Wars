@@ -3,26 +3,48 @@ import React, { useState } from 'react';
 import './Form.scss';
 import { connect } from 'react-redux';
 import { login, logout } from '../User/actions';
+import {TournamentService} from "../services/TournamentService";
+
 
 function AddTournamentForm({isAuthenticated, user, login, logout }) {
 
-    // state hooks
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [gameType, setGameType] = useState('');
     const [playerLimit, setPlayerLimit] = useState('');
     const [date, setDate] = useState('');
-    // const [restrictions, setRestrictions] = useState([]);
+    const [message, setMessage] = useState('');
 
     if (!isAuthenticated) {
-        return <div>Resource not allowed :( </div>;
+        return <div>Resource not allowed </div>;
     }
-    // Handle form submissions and updates here
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const tournamentData = {
+            title,
+            description,
+            gameType,
+            playerLimit: parseInt(playerLimit, 10),
+            date
+        };
+
+        try {
+            const response = await TournamentService.addTournament(tournamentData);
+            
+            console.log(response);
+            setMessage('Tournament added successfully');
+        } catch (e) {
+            console.error(e);
+            setMessage('There was a problem with adding the tournament.');
+        }
+    };
 
     return (
         <div className="form">
             <h1>Dodaj nowy turniej</h1>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label htmlFor="title">Tytuł</label>
                     <input 
@@ -53,7 +75,6 @@ function AddTournamentForm({isAuthenticated, user, login, logout }) {
                         value={gameType}
                         onChange={e => setGameType(e.target.value)}
                     >
-                        {/* Map through types of games here */}
                     </select>
                 </div>
 
@@ -85,12 +106,12 @@ function AddTournamentForm({isAuthenticated, user, login, logout }) {
                     />
                 </div>
 
-                {/* Add logic for restrictions if needed */}
-                
                 <div className="form-group actions">
                     <button type="submit" className="submit">Dodaj turniej</button>
                     <button type="button" className="cancel">Anuluj</button>
                 </div>
+
+                {message && <p>{message}</p>}
             </form>
         </div>
     );

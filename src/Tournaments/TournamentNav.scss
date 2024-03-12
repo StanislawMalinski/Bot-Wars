@@ -1,0 +1,83 @@
+@import '../index';
+
+.user-info-strip {
+    width: 100%;
+    background-color: #333;
+    color: white;
+    padding: 0.5em;
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-shadow: none;
+    font-family: Arial, Helvetica, sans-serif;
+
+    a {
+        text-decoration: none;
+        color: white;
+    }
+
+    .username {
+        font-size: 1.2em;
+        padding: 0 0.4em;
+        text-decoration: none;
+        color: white;
+    }
+
+    .score {
+        font-size: 0.9em;
+    }
+
+    .icons {
+        i {
+            margin: 0 0.5em;
+            cursor: pointer;
+        }
+    }
+}
+
+.tournament-nav {
+    width: 100%;
+    display: flex;
+    justify-content: left;
+    margin: 10px 0.5em;
+    padding: 10px;
+    font-size: 1.5em;
+    background-color: #242424;
+    border: #393a39 3px solid;
+    border-radius: 2px;
+  
+    .menu-btn {
+      margin: 0 0.5em;
+      padding: 0.1em 0.2em;
+      width: 8em;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      // Add flex-direction for .menu-btn if necessary here
+    
+      &.active .btn {
+        background-color: lighten(black, 5%);
+        color: white;
+      }
+    }
+  
+    a {
+      text-decoration: none;
+      color: white;
+    }
+    
+    // Add responsive styles
+    @media (max-width: 768px) { // Adjust breakpoint as needed
+      flex-direction: column;
+      align-items: flex-start;
+      font-size: 1.2em; // Smaller font size for smaller screens
+  
+      .menu-btn {
+        width: 100%; // Full width for vertical layout
+        margin: 10px 0;
+      }
+    }
+  }
+  
+

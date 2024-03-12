@@ -30,6 +30,7 @@ body {
 
 .clickable, .btn {
   transition: background-color 0.3s, color 0.3s;
+  width: 100%;
 }
 
 .clickable:hover, .btn:hover {
