@@ -36,7 +36,11 @@ const tournaments = getListOfTournaments();
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <App/>,
+        element: <App mode={"home"}/>,
+    },
+    {
+        path: "/player/:id",
+        element: <ProfileView/>,
     },
     {
         path: "/player/:id",
