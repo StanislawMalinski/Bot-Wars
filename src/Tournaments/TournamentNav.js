@@ -8,16 +8,6 @@ import { connect } from 'react-redux';
 function TournamentNav({ isAuthenticated }) {
     return (
         <>
-            <div className="user-info-strip">
-                <div className="userData">
-                    <Link to="/">  <span className="username">Username</span> </Link>
-                    <span className="score">1234</span>
-                </div>
-                <div className="icons">
-                    {/* <i className="icon-settings"></i> */}
-                    <span className="score">set</span>
-                </div>
-            </div>
             <nav className="tournament-nav">
                 <NavLink exact className="menu-btn" activeClassName="active" to="/tournaments/home">
                     <button className="btn">Tournaments</button>

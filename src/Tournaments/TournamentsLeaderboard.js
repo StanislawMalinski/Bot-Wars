@@ -1,13 +1,14 @@
 import TournamentNav from './TournamentNav';
 import { connect } from 'react-redux';
+import UserButtons from "../User/UserButtons";
+import Leaderboard from "./leaderboard";
 
 function TournamentsLeaderboard({ tournaments, isAuthenticated }) {
     return (
         <div className="tournaments-container">
-
-            <TournamentNav /> 
-
-            <h1>Leaderboard</h1>            
+            <UserButtons></UserButtons>
+            <TournamentNav />
+            <Leaderboard></Leaderboard>
         </div>
     );
 }

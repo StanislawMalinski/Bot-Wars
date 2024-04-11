@@ -1,18 +1,15 @@
 import './TournamentList.scss';
 import DeleteTournamentButton from './DeleteTournamentButton';
 import TournamentNav from '../Tournaments/TournamentNav';
-import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import UserButtons from '../User/UserButtons';
+import {Link, useNavigate} from 'react-router-dom';
 import { connect } from 'react-redux';
 import { TournamentService } from "../services/TournamentService";
 import React, { useState, useEffect } from "react";
 
-
-
 function TournamentsList({ tournaments, isAuthenticated }) {
     const navigate = useNavigate();
     const currentDate = new Date();
-
     const [tournamentList, setTournamentList] = useState([]);
     const [message, setMessage] = useState('');
 
@@ -54,29 +51,21 @@ function TournamentsList({ tournaments, isAuthenticated }) {
 
     return (
         <div className="tournaments-container">
-
+            <UserButtons/>
             <TournamentNav/>
-
-
             <div className="tournaments-box">
                 <h1>Upcoming Tournaments</h1>
-
                 {isAuthenticated && (
                         <Link className="menu-btn" activeClassName="active" to="/tournaments/add">
-
                             <button className="btn">Add Your Tournament</button>
-
                         </Link>
-                        
                     )}
-
                 <div className="tournament-headers">
                     <span className="header-detail">Name</span>
                     <span className="header-detail">Author</span>
                     <span className="header-detail">Date</span>
                     <span className="header-detail">Action</span>
                 </div>
-
                 <div className="tournaments-content">
                     {upcomingTournaments.map(tournament => (
                         <div>
@@ -84,7 +73,6 @@ function TournamentsList({ tournaments, isAuthenticated }) {
                         <DeleteTournamentButton key={tournament.id} />
                         </div>
                     ))}
-
                     {upcomingTournaments.map(tournament => (
                         <TournamentItem key={tournament.id} tournament={tournament} />
                     ))}
@@ -96,16 +84,12 @@ function TournamentsList({ tournaments, isAuthenticated }) {
                     <span className="header-detail">Date</span>
                     <span className="header-detail">Action</span>
                 </div>
-
-                
-
                 <div className="tournaments-content">
                     {pastTournaments.map(tournament => (
                         <TournamentItem key={tournament.id} tournament={tournament} />
                     ))}
                 </div>
             </div>
-
             <p>{message}</p>
         </div>
     );
