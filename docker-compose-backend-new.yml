@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+
+    bot_wars_engine:
+        image: stanislawmalinski/bot-wars-engine:latest
+        ports:
+            - "7177:7177"
+        depends_on:
+            - bot_wars_db
+            
+    bot_wars_filegatherer:
+        image: stanislawmalinski/bot-wars-filegatherer:latest
+        ports:
+            - "7002:8080"
+        volumes:
+            - file_gatherer:/app/Storage
+            
+    bot_wars_db:
+        image: "mcr.microsoft.com/mssql/server:2022-latest"
+        ports:
+            - "1433:1433"
+        environment:
+            SA_PASSWORD: "Sqlhaslo123!"
+            ACCEPT_EULA: "Y"
+            MSSQL_PID: "Evaluation"
+        volumes:
+            - bot_wars_db:/var/lib/mssql
+
+    bot_wars_api:
+        image: stanislawmalinski/bot-wars-api:latest
+        ports:
+            - "8080:8080"
+            - "8081:8081"
+        depends_on:
+            - bot_wars_db
+        restart: always
+
+volumes:
+    bot_wars_db:
+        driver: local
+    file_gatherer:
+        driver: local
+        driver_opts:
+            type: none
+            o: bind
+            device: FileGatherer/Storage
+
