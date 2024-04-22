@@ -1,0 +1,30 @@
+.list {
+  border: #0be400;
+  border-style: solid;
+  margin-top: 80px;
+}
+.leaderboard-item{
+  border-bottom: 3px solid #0be400;
+  padding: 5px;
+  display: grid;
+  align-items: center;
+  align-content: center;
+  grid-template-columns: 100px 3fr 1fr 1fr;
+  justify-items: center;
+}
+.leaderboard-item:nth-last-of-type(1){
+  border-bottom: none;
+}
+.leaderboard-item:first-of-type{
+  border-top: none;
+  div{
+    text-align: center;
+    font-size: 22px;
+  }
+}
+@media (max-width: 768px) {
+  .leaderboard-item{width: max-content;}
+  .standings {overflow-x: scroll;}
+  .leaderboard-item:first-of-type{width: 650px;}
+  .heading{font-size: 40px;}
+}

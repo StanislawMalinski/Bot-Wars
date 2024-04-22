@@ -16,7 +16,6 @@ function GamesList({games, isAuthenticated, user, login, logout }) {
                 const gl = await GameService.getListOfGames();
                 setGamesList(gl.data.data);
             } catch (e) {
-                console.log(e);
                 setMessage('There was a problem with fetching game data.');
             }
         };
