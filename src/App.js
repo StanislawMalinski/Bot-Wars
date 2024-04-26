@@ -1,10 +1,13 @@
 import './App.scss'
 import User from "./User/User";
 import {Link} from "react-router-dom";
+import UserButtons from './User/UserButtons';
 
 function App() {
     return (
         <div className="app">
+            <UserButtons/>
+
             <div className="title">
                 <h1>Bot-Wars</h1>
                 <div className="login-btns">

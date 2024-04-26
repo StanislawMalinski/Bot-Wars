@@ -20,7 +20,7 @@
     "sass": "^1.69.5",
     "web-vitals": "^2.1.4"
   },
-  "proxy": "http://localhost:8080/",
+  "proxy": "http://10.242.93.198:8080/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
