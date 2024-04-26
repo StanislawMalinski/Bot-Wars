@@ -24,7 +24,7 @@ function ProfileView() {
         <div className='main-container'>
             <div className='cell row1col1'> 
                 <div className='widget user-photo'>
-                    <img className='profile-image' src={user.photoURL} alt='user-photo'/>
+                    <img className='profile-image' src={user.photoURL} alt='user'/>
                 </div>
             </div>
             <div className='cell row1col2'>

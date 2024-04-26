@@ -24,6 +24,18 @@ export const getListOfTournaments = () => {
             limitations: 'nie można skakać', 
             state: 'nie ok',  
             image: './resources/icons8-male-user-50.png'
+        },
+        {
+            id: 3, 
+            name: 'Nazwa turnieju 2', 
+            description: 'Opis turnieju 2 asdigaoiefbhdqi webfpqieuh qpirehbfu eqriuubf qierbnfpiruebnf piqewr  ubnf piw    ebnf pe iw2ub pi;eub fp iwefub  pweibu', 
+            gameType: 'Warcaby',
+            participantsAmount: 2, 
+            maxParticipants: 4, 
+            date: '2024-12-23', 
+            limitations: 'nie można skakać', 
+            state: 'nie ok',  
+            image: './resources/icons8-male-user-50.png'
         }
     ]
 };

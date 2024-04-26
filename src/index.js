@@ -18,6 +18,8 @@ import TournamentDetails from "./Tournaments/TournamentDetails";
 import ProfileView from "./User/ProfileView/ProfileView";
 import About from "./about.js";
 import Leaderboard from "./Tournaments/leaderboard.js";
+import TournamentsHelp from "./Tournaments/TournamentsHelp";
+import TournamentsLeaderboard from "./Tournaments/TournamentsLeaderboard";
 import { Provider } from 'react-redux';
 import store from './User/store';
 import { getListOfTournaments } from './Tournaments/getListOfTournaments';
@@ -56,12 +58,20 @@ const router = createBrowserRouter([
         element: <EditTournamentForm />,
     },
     {
-        path: "/tournaments",
+        path: "/tournaments/home",
         element: <TournamentsList tournaments={tournaments} />,
     },
     {
         path: "/tournaments/details/:tournamentId",
         element: <TournamentDetails />,
+    },
+    {
+        path: "/tournaments/help",
+        element: <TournamentsHelp />,
+    },
+    {
+        path: "/tournaments/leaderboard",
+        element: <TournamentsLeaderboard />,
     },
     {
         path: "/register",

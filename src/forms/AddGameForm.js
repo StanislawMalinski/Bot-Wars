@@ -6,7 +6,7 @@ import {GameService} from "../services/GameService";
 function AddGameForm({isAuthenticated, user, login, logout}) {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
-    const [file, setFile] = useState('');
+    const [setFile] = useState('');
     const [message, setMessage] = useState(true);
 
     const handleSubmit = async (e) => {
@@ -14,7 +14,7 @@ function AddGameForm({isAuthenticated, user, login, logout}) {
 
         try {
             console.log(name,description)
-            const response = await GameService.addGameType(10,name,description,"string",true)
+            await GameService.addGameType(10,name,description,"string",true)
             setMessage('Game added succesfully')
         } catch (e) {
             setMessage('There was a problem with adding game.')

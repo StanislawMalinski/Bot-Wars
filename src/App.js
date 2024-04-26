@@ -18,7 +18,7 @@ function App() {
                     </Link>
                 </div>
                 <div className="menu-btn">
-                    <Link to="tournaments">
+                    <Link to="tournaments/home">
                         <button className="btn">Tournaments</button>
                     </Link>
                 </div>
