@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import './Form.scss';
 import { connect } from 'react-redux';
-import { login, logout } from '../User/actions';
+import { login, logout } from '../User/store';
 import {TournamentService} from "../services/TournamentService";
 
 

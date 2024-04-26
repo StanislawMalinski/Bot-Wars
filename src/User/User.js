@@ -1,6 +1,6 @@
 import '../App.scss'
 import { connect } from 'react-redux';
-import { login, logout } from './actions';
+import { login, logout } from './store';
 import {Link} from "react-router-dom";
 
 function User({ isAuthenticated, user, login, logout }) {

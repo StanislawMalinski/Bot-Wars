@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import './Form.scss';
 import { connect } from 'react-redux';
-import { login, logout } from '../User/actions';
+import { login, logout } from '../User/store';
 import { getListOfTournaments } from '../Tournaments/getListOfTournaments';
 
 function EditTournamentForm({ isAuthenticated, user, login, logout }) {
@@ -23,7 +23,6 @@ function EditTournamentForm({ isAuthenticated, user, login, logout }) {
   const [date, setDate] = useState('');
 
   useEffect(() => {
-    // Initialize state based on tournament data when available
     if (tournament) {
       setTitle(tournament.name);
       setDescription(tournament.description);
@@ -36,8 +35,6 @@ function EditTournamentForm({ isAuthenticated, user, login, logout }) {
   if (!isAuthenticated) {
     return <div>Resource not allowed :( </div>;
   }
-
-  // Handle form submissions and updates here
 
     return (
         <div className="form">
@@ -105,8 +102,6 @@ function EditTournamentForm({ isAuthenticated, user, login, logout }) {
                     />
                 </div>
 
-                {/* Add logic for restrictions if needed */}
-                
                 <div className="form-group actions">
                     <button type="submit" className="submit">Dodaj turniej</button>
                     <button type="button" className="cancel">Anuluj</button>
