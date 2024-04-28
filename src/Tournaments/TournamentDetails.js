@@ -3,7 +3,7 @@ import { getListOfTournaments } from './getListOfTournaments';
 import { useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { login, logout } from '../User/actions';
+import { login, logout } from '../User/store';
 function TournamentDetails({isAuthenticated, user, login, logout }) {
 
     const { tournamentId } = useParams();

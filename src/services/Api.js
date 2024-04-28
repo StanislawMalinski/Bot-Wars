@@ -2,7 +2,6 @@ import axios from "axios";
 import c from "./client.config.json";
 const baseURL = c["protocol"] + "://" + c["host"] + ":" + c["port"] + "/" + c["path"] + c["version"];
 
-
 export const Api = axios.create({
     baseURL: '/api/v1/',
     withCredentials: true

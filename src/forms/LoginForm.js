@@ -3,7 +3,7 @@ import './Form.scss'
 import React, { useState } from "react";
 import {UserService} from "../services/UserService";
 import { connect } from 'react-redux';
-import { login, logout } from '../User/actions';
+import { login, logout } from '../User/store';
 
 function LoginForm({isAuthenticated, user, login, logout}) {
 
@@ -15,8 +15,7 @@ function LoginForm({isAuthenticated, user, login, logout}) {
         e.preventDefault();
 
         try {
-            const response = await UserService.loginUser(email, password)
-            login({ email: email , token: response.data.data})
+            await UserService.loginUser(email, password)
             setMessage('Login succesful.')
         } catch (e) {
             setMessage('There was a problem with login.')

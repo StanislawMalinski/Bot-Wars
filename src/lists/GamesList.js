@@ -2,7 +2,7 @@ import './List.scss'
 import DeleteGameButton from './DeleteGameButton';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { login, logout } from '../User/actions';
+import { login, logout } from '../User/store';
 import React, { useState, useEffect } from "react";
 import {GameService} from "../services/GameService";
 function GamesList({games, isAuthenticated, user, login, logout }) {
@@ -28,15 +28,17 @@ function GamesList({games, isAuthenticated, user, login, logout }) {
             <h1>Games</h1>
             <div className="menu-btns container-list">
                 <div className="item-list">
-                    {isAuthenticated && (
+                    {isAuthenticated && user.role === 'Admin' && (
                         <div className="menu-btns list-element btn">
                             <Link className="item-name add-btn color-primary-3" to="/games/add">Dodaj grę</Link>
                         </div>
                     )}
                     {gamesList.map((game, index) => (
                         <div key={index} className="menu-btns list-element btn">
-                            <button className="item-name color-primary-3 btn">{game.gameFile}</button>
+                            <button className="item-name color-primary-3 btn">{game.gameFileName}</button>
+                          {isAuthenticated && user.role === 'Admin' && (
                             <DeleteGameButton gameId={index} />
+                          )}
                         </div>
                     ))}
                 </div>

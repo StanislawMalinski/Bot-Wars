@@ -4,7 +4,7 @@ import logoutIcon from '../resources/logout.svg';
 import userIcon from '../resources/user.svg';
 import settingsIcon from '../resources/settings.svg';
 import { connect } from 'react-redux';
-import { login, logout } from './actions';
+import { login, logout } from './store';
 import {Link} from "react-router-dom";
 
 function UserButtons({ isAuthenticated, user, login, logout }) {

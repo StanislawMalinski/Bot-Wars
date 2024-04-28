@@ -1,7 +1,7 @@
 import './TournamentNav.scss';
 import React from "react";
 import { NavLink, Link } from 'react-router-dom';
-import { login, logout } from '../User/actions';
+import { login, logout } from '../User/store';
 import { connect } from 'react-redux';
 
 
