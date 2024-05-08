@@ -1,0 +1,19 @@
+.ban-container{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 50px;
+
+    .ban-form{
+        flex-basis: 45%;
+
+        input{
+            width:100%;
+        }
+    }
+
+}
+@media only screen and (max-width: 650px) {
+    .ban-container{
+        flex-direction: column;
+    }
+}

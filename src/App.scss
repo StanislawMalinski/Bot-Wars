@@ -28,6 +28,10 @@
     margin: 3px;
     width: 23%
   }
+  .menu-btns.admin .menu-btn{
+    width: 32%
+  }
+
 
   .menu-btns {
     margin-top: 25px;
@@ -38,6 +42,9 @@
 
   @media only screen and (max-width: 650px) {
     .menu-btn {
+      width: 100%
+    }
+    .menu-btns.admin .menu-btn{
       width: 100%
     }
   }

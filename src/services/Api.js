@@ -1,11 +1,23 @@
 import axios from "axios";
 import c from "./client.config.json";
+import store from '../User/store'
+
 const baseURL = c["protocol"] + "://" + c["host"] + ":" + c["port"] + "/" + c["path"] + c["version"];
 
 export const Api = axios.create({
     baseURL: '/api/v1/',
     withCredentials: true
+    
 })
+Api.interceptors.request.use(function (config) {
+    try{
+        const token = store.getState().user.token;
+        config.headers.Authorization =  'Bearer ' + token; 
+    }catch(e){}
+    return config;
+});
+// await Api.get('GameType/getAll')
+// Api.defaults.headers['Authorization'] = 'sdfsdfsd';
 
 function prepareParams(data, params) {
     if (params === undefined || params.length === 0) {

@@ -31,6 +31,13 @@ export const GameService = {
              return Api.processError(e)
         }
     },
+    getAllForPlayer: async function (login) {
+        try {
+            return await Api.get(`GameType/getAllForPlayer?name=${login}`);
+        } catch(e) {
+             return Api.processError(e)
+        }
+    },
     addGameType: async function (numOfPlayers, gameFile, gameInstructions, interfaceDefinition, isAvaiableForPlay) {
         try {
             return await Api.post('GameType/add',{

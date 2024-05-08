@@ -17,6 +17,10 @@ import EditTournamentForm from "./forms/EditTournamentForm";
 import TournamentDetails from "./Tournaments/TournamentDetails";
 import ProfileView from "./User/ProfileView/ProfileView";
 import About from "./about.js";
+import Admin from "./admin/Admin";
+import PlayerBots from "./admin/PlayerBots";
+import PlayerGames from "./admin/PlayerGames";
+import PlayerTournaments from "./admin/PlayerTournaments";
 import Leaderboard from "./Tournaments/leaderboard.js";
 import TournamentsHelp from "./Tournaments/TournamentsHelp";
 import TournamentsLeaderboard from "./Tournaments/TournamentsLeaderboard";
@@ -93,6 +97,23 @@ const router = createBrowserRouter([
         path: "/leaderboard",
         element: <Leaderboard/>,
     },
+    {
+        path: "/admin",
+        element: <Admin/>,
+    },
+    {
+        path: "/admin/PlayerBots",
+        element: <PlayerBots/>,
+    },
+    {
+        path: "/admin/PlayerGames",
+        element: <PlayerGames/>,
+    },
+    {
+        path: "/admin/PlayerTournaments",
+        element: <PlayerTournaments/>,
+    },
+    
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
