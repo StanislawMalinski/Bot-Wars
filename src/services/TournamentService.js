@@ -41,7 +41,15 @@ export const TournamentService = {
                 interfaceDefinition: interfaceDefinition,
                 isAvaiableForPlay: isAvaiableForPlay
               })
-
+        } catch(e) {
+             return Api.processError(e)
+        }
+    },
+    getForPlayer: async function (login) {
+        try {
+            return await Api.post(`Tournament/getFiltered`,{
+                creator:login
+              })
         } catch(e) {
              return Api.processError(e)
         }
