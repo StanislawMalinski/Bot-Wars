@@ -30,6 +30,8 @@ import store from './User/store';
 import { getListOfTournaments } from './Tournaments/getListOfTournaments';
 import UserSettings from './User/Settings/UserSettings';
 import AnimatedBackground from "./AnimatedBackground";
+import MatchesSearch from './Matches/MatchesSearch';
+import MatchView from './Match/MatchView';
 
 const games = [{name:'Szachy', id:1}, {name:'Warcaby', id:2}, {name:'Scrabble', id:3}, {name:'Chińczyk', id:4}, {name:'Go', id:5}]
 
@@ -55,6 +57,14 @@ const router = createBrowserRouter([
     {
         path: "/games/add",
         element: <AddGameForm games={games}/>,
+    },
+    {
+        path: "/matches/:tournamentId?/:playerName?/:maxDate?/:minDate?/:gameType?",
+        element: <MatchesSearch />,
+    },
+    {
+        path: "/match/:id",
+        element: <MatchView />,
     },
     {
         path: "/tournaments/add",
