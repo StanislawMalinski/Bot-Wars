@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import {PointsService} from "../../services/PointsService";
-import {XAxis, YAxis, CartesianGrid, Tooltip, LineChart, Line  } from 'recharts';
+import {XAxis, YAxis, CartesianGrid, ResponsiveContainer, Tooltip, LineChart, Line  } from 'recharts';
 
 
 function RatingTable(props) {

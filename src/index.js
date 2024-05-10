@@ -39,7 +39,7 @@ const router = createBrowserRouter([
         element: <App/>,
     },
     {
-        path: "/player/:id",
+        path: "/player/:name",
         element: <ProfileView/>,
     },
     {

@@ -67,7 +67,7 @@ export const UserService = {
             if (Number.isInteger(parseInt(idOrName))) {
                 return await Api.get(`Player/getPlayerInfo?playerId=${idOrName}`)
             } else if (typeof idOrName === 'string') {
-                return await Api.get(`Player/getPlayerInfoByName?playerName=${idOrName}`)
+                return await Api.get(`Player/GetPlayerInfoByName?playerName=${idOrName}`)
             }
         } catch(e) {
             return Api.processError(e)
@@ -117,7 +117,7 @@ export const UserService = {
         // Parameters:
         //// playerId - integer - int64
         try {
-            return await Api.get(`Player/getImageForPlayer?id=${id}`)
+            return await Api.get(`Player/getImageForPlayer?playerId=${id}`)
         } catch(e) {
             return Api.processError(e)
         }
