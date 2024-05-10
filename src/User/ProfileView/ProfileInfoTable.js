@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import {GetPointsHistoryForPlayer} from "../../services/Api";
+import {PointsService} from "../../services/PointsService";
 import {XAxis, YAxis, CartesianGrid, Tooltip, LineChart, Line  } from 'recharts';
 
 function StatsTable(props) {
@@ -23,7 +23,7 @@ function RatingTable(props) {
     const [history, setHistory] = useState([{id: 0, logDate: "", points: 0, playerId: 0}]);
     
     useEffect(() => {
-        setHistory(GetPointsHistoryForPlayer(props.playerid)["data"]);
+        setHistory(PointsService.getPointsHistoryForPlayer(props.playerid)["data"]);
     }, [props.playerid]);
 
     const chart = 

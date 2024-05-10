@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
-import { GetUser } from '../../services/Api';
+import { UserService } from '../../services/UserService'
 import ProfileInfoTable from './ProfileInfoTable';
 import ProfileInfoTableAchievements from './ProfileInfoTableAchievements';
 
@@ -15,7 +15,7 @@ function ProfileView() {
 
 
     useEffect(() => {
-        setUser(GetUser({"playerId" : id}));
+        setUser(UserService.getPlayerInfo(id));
     }, [id]);
 
 

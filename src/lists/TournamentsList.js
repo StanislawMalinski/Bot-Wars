@@ -10,44 +10,44 @@ import React, { useState, useEffect } from "react";
 function TournamentsList({ tournaments, isAuthenticated }) {
     const navigate = useNavigate();
     const currentDate = new Date();
-    const [tournamentList, setTournamentList] = useState([]);
+
+    const [upcomingTournaments, setUpcomingTournaments] = useState([]);
+    const [pastTournaments, setPastTournaments] = useState([]);
     const [message, setMessage] = useState('');
 
     useEffect(() => {
-        const fetchTournamentData = async () => {
-            try {
-                const gl = await TournamentService.getListOfTournaments();
-                setTournamentList(gl.data.data);
-            } catch (e) {
-                console.log(e);
-                setMessage('Sorry, there was a problem with fetching tournament data.Try again later');
-            }
-        };
+        TournamentService.getListOfTournaments(
+            {"page":0, "pagesize":10, "maxPlayOutDate": currentDate,})
+        .then((response) => {
+            setPastTournaments(response.data);
+        }).catch((error) => {
+            console.log(error);
+            setMessage('Sorry, there was a problem with fetching tournament data.Try again later');
+        });
 
-        fetchTournamentData();
+        TournamentService.getListOfTournaments(
+            {"page":0, "pagesize":10, "minPlayOutDate": currentDate,})
+        .then((response) => {
+            setUpcomingTournaments(response.data);
+        }).catch((error) => {
+            console.log(error);
+            setMessage('Sorry, there was a problem with fetching tournament data.Try again later');
+        });
     }, []);
 
-    const upcomingTournaments = tournamentList.filter(t => {
-        const tournamentDate = new Date(t.tournamentsDate);
-        return tournamentDate > currentDate;
-    });
-    const pastTournaments = tournamentList.filter(t => {
-        const tournamentDate = new Date(t.tournamentsDate);
-        return tournamentDate <= currentDate;
-    });;
+    const handleTournamentClick = (tournamentId) => {
+        navigate(`/tournaments/details/${tournamentId}`);
+    };
+
 
     const TournamentItem = ({ tournament }) => (
         <div className="tournament-item" onClick={() => handleTournamentClick(tournament.id)}>
-            <div className="tournament-detail">{tournament.tournamentsTitle}</div>
+            <div className="tournament-detail">{tournament.tournamentTitle}</div>
             <div className="tournament-detail">{tournament.author}</div>
             <div className="tournament-detail">{tournament.tournamentsDate}</div>
             <div className="tournament-detail">{tournament.playersLimit}</div>
         </div>
     );
-
-    const handleTournamentClick = (tournamentId) => {
-        navigate(`/tournaments/details/${tournamentId}`);
-    };
 
     return (
         <div className="tournaments-container">
@@ -67,13 +67,15 @@ function TournamentsList({ tournaments, isAuthenticated }) {
                     <span className="header-detail">Action</span>
                 </div>
                 <div className="tournaments-content">
-                    {upcomingTournaments.map(tournament => (
+                    {isAuthenticated ?
+                    upcomingTournaments.map(tournament => (
                         <div>
                         <TournamentItem key={tournament.id} tournament={tournament} />
-                        <DeleteTournamentButton key={tournament.id} />
+                        <DeleteTournamentButton tournamentId={tournament.id} />
                         </div>
-                    ))}
-                    {upcomingTournaments.map(tournament => (
+                    )) 
+                    : 
+                    upcomingTournaments.map(tournament => (
                         <TournamentItem key={tournament.id} tournament={tournament} />
                     ))}
                 </div>
