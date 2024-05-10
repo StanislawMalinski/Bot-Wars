@@ -16,29 +16,18 @@ function TournamentsList({ tournaments, isAuthenticated }) {
     const [message, setMessage] = useState('');
 
     useEffect(() => {
-        TournamentService.getListOfTournaments(
-            {"page":0, "pagesize":10, "maxPlayOutDate": currentDate,})
+        TournamentService.getListOfTournaments(1, 10)
         .then((response) => {
             setPastTournaments(response.data);
         }).catch((error) => {
             console.log(error);
             setMessage('Sorry, there was a problem with fetching tournament data.Try again later');
         });
-
-        TournamentService.getListOfTournaments(
-            {"page":0, "pagesize":10, "minPlayOutDate": currentDate,})
-        .then((response) => {
-            setUpcomingTournaments(response.data);
-        }).catch((error) => {
-            console.log(error);
-            setMessage('Sorry, there was a problem with fetching tournament data.Try again later');
-        });
-    }, []);
+    }, [currentDate]);
 
     const handleTournamentClick = (tournamentId) => {
         navigate(`/tournaments/details/${tournamentId}`);
     };
-
 
     const TournamentItem = ({ tournament }) => (
         <div className="tournament-item" onClick={() => handleTournamentClick(tournament.id)}>

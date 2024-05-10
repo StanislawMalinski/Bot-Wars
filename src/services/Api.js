@@ -7,14 +7,21 @@ const baseURL = c["protocol"] + "://" + c["host"] + ":" + c["port"] + c["path"] 
 export const Api = axios.create({
     baseURL: baseURL,
     withCredentials: true
-    
 })
+Api.req = async (apiCall) => {
+    return apiCall().catch((e) => console.log(e))
+}
 Api.interceptors.request.use(function (config) {
     try{
         const token = store.getState().user.token;
         config.headers.Authorization =  'Bearer ' + token; 
     }catch(e){}
     return config;
+});
+axios.interceptors.response.use(function (response) {
+    return response;
+}, function (error) {
+    console.log(error)
 });
 // await Api.get('GameType/getAll')
 // Api.defaults.headers['Authorization'] = 'sdfsdfsd';

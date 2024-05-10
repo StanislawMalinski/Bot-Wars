@@ -1,26 +1,13 @@
-import { Api } from './Api'
+import {Api} from './Api'
 
 export const UserSettings = {
-    getUserSettings: async function () {
-        // Type GET
-        try {
-            return await Api.get(`UserSettings/get`)
-        } catch(e) {
-             return Api.processError(e)
-        }
-    },
-    updateUserSettings: async function (isDarkTheme, language) {
-        // Type PUT
-        // Body:
-        //// isDarkTheme - boolean
-        //// language - string
-        try {
-            return await Api.put(`UserSettings/update`, {
-                isDarkTheme: isDarkTheme,
-                language: language
-            })
-        } catch(e) {
-             return Api.processError(e)
-        }
-    },
+  getUserSettings: async function () {
+    return await Api.req(() => {return Api.get(`UserSettings/get`)})
+  },
+  updateUserSettings: async function (isDarkTheme, language) {
+    return await Api.req(() => {return Api.put(`UserSettings/update`, {
+      isDarkTheme: isDarkTheme,
+      language: language
+    })})
+  },
 };

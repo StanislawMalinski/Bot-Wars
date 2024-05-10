@@ -9,7 +9,7 @@ function Leaderboard({isAuthenticated, user, login, logout }) {
     useEffect(() => {
         const fetchLeaderboardsData = async () => {
             try {
-                const gl = await PointsService.getLeaderboards();
+                const gl = await PointsService.getLeaderboards(1, 10);
                 setLeaderboardsList(gl.data.data);
             } catch (e) {
                 setMessage('There was a problem with fetching leaderboards data.');
