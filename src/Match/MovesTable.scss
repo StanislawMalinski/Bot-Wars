@@ -1,0 +1,115 @@
+
+.move-table {
+    width: fit-content;
+    overflow: hidden;
+
+    height: 90vh;
+
+    .move-table-container {
+        display: grid;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+
+        grid-template-rows: auto 60px;
+
+        .move-table-container-scrollable-table {
+            overflow-y: scroll;
+            scrollbar-width: none;
+            height: 100%;
+
+            border: 1px solid #000; 
+            table {
+                thead {
+                    position: sticky;
+                    top: 0;
+                    padding: 20px;
+                    background-color: #000;
+                    
+                    tr {
+                        th {
+                            font-size: 20px;
+                        }
+                    }
+                }
+                tbody {
+                    tr {
+                        td {
+                            font-size: 20px;
+                        }
+                    }
+                }
+            }
+        }
+    }    
+}
+
+.match-table-btns-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    justify-content: center;
+    align-items: center;
+    column-gap: 5px;
+    button {
+        padding: 10px;
+        font-size: 20px;
+        border: 1px solid #000;
+        background-color: #000;
+        color: #fff;
+        transition: 0.3s;
+
+        &:hover {
+            background-color: #fff;
+            color: #000;
+        }
+    }
+}
+
+.match-table-btn {
+    
+}
+
+.move-element-row {
+    cursor: pointer;
+    transition: all 0.5s ease-in-out;
+
+    &:hover {
+        background-image:radial-gradient(circle, #146f06, #072b02);
+    }
+}
+
+p {
+    font-size: 16px;
+}
+
+.red {
+    color: red;
+}
+
+.green {
+    color: green;
+}
+
+.blue {
+    color: blue;
+}
+.yellow {
+    color: yellow;
+}
+.brown {
+    color: brown;
+}
+.pink {
+    color: #ff31e0;
+}
+.white {
+    color: white;
+}
+
+.player-0 {
+    background-color: #313131;
+}
+
+.player-1 {
+    background-color: #1b1b1b;
+}
