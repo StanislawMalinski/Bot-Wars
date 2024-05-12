@@ -1,0 +1,25 @@
+.paginator {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  margin: 0;
+
+  li {
+    display: inline-block;
+    margin: 0 5px;
+    cursor: pointer;
+    font-size: 16px;
+    color: #000;
+    transition: all 0.3s;
+    color: #259a08;
+
+    &:hover {
+      color: #249b06;
+    }
+
+    &.active {
+      color: #4586ff;
+      text-shadow: 0 0 10px #35ff02;
+    }
+  }
+}
