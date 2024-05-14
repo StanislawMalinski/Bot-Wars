@@ -36,7 +36,7 @@ export default function SettingPopup(props) {
         return null;
     }
     
-    var but = <button className='user-setting-button'>{triggername}</button>
+    const but = <button className='user-setting-button'>{triggername}</button>
     return (<>
         <Popup className='user-setting-popup' trigger={but}>
             {close => 

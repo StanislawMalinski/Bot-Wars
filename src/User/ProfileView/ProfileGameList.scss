@@ -1,0 +1,40 @@
+.user-info-table {
+    height: 100%;
+    .user-info-table-content {
+        overflow-y: scroll;
+        .game-list-element-container {
+            display: grid;
+            grid-template-columns: max-content auto 15px;
+            padding: 2px 5px;
+
+            .game-list-element-availability {
+                overflow: hidden;
+                display: flex;
+                .not-available-icon {
+                    top: 0; 
+                    width: 100%;
+                    aspect-ratio: 1;
+                }    
+            }
+
+            p {
+                font-size: 20px;
+                transition: all 0.3s ease;
+            }
+
+            p:hover {
+                cursor: pointer;
+                text-shadow: #309e00 0px 0px 5px;
+                color: #79ec48;
+            }
+        }
+
+        .light {
+            background-color: #222222;
+        }
+
+        .dark {
+            background-color: #080808;
+        }
+    }
+}

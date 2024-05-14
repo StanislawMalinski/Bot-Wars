@@ -1,0 +1,56 @@
+.user-info-table {
+    height: 100%;
+    .user-info-table-content {
+        overflow-y: scroll;
+        .tournament-list-element-container {
+            display: grid;
+            grid-template-columns: 70% auto;
+            padding: 2px 5px;
+
+            p {
+                font-size: 20px;
+                transition: all 0.3s ease;
+            }
+
+            .tournament-list-element-status {
+                text-align: right;
+            }
+
+            .tournament-list-element-title {
+                &:hover {
+                    cursor: pointer;
+                    text-shadow: #309e00 0px 0px 5px;
+                    color: #79ec48;
+                }
+            }
+
+            .yellow {
+                color: #fff826;
+            }
+
+            .dark-blue {
+                color: #12287a;
+            }
+
+            .orange {
+                color: #e89d26;
+            }
+
+            .green {
+                color: #257802;
+            }
+
+            .red {
+                color: #ff0000;
+            }
+        }
+
+        .light {
+            background-color: #222222;
+        }
+
+        .dark {
+            background-color: #080808;
+        }
+    }
+}

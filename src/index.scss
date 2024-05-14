@@ -64,10 +64,16 @@ button {
   display: inline-block;
   font-size: 20px;
   cursor: pointer;
+
+  transition: all 0.5s ease-out;
+}
+
+button:hover {
+  text-shadow: #079200 0 0 15px;
 }
 
 div {
-  text-shadow: 1px 1px 0.1cm #fff;
+  color: #6d6d6d;
   font-size: 45px;
 }
 

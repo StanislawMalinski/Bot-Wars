@@ -1,0 +1,156 @@
+.main-container {
+    height: 95vh;
+    .main-container-grid {
+        height: auto;
+        display: grid;
+        grid-template-columns: 20% 80%;
+        grid-template-rows: min-content min-content 1fr;
+        align-items: start;
+
+        justify-items: stretch;
+        align-content: stretch;
+        
+
+        .profile-image {
+            border: 3px solid black;
+            border-radius: 1px;
+
+            width: 100%;
+            aspect-ratio: 1/1;
+
+            object-fit: cover;
+            background-color: #0b0b0b;
+        }
+
+        .change-photo {
+            font-size: 15px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .user-info {
+            background-color: #1b1b1b;
+            font-size: 30%;
+            padding: 10px;
+            height: 100%;
+        }
+
+        .user-info .user-info-text {
+            color: aqua;
+        }
+
+        .user-info-table-container {
+            padding: 20px;
+            margin: 20px;
+            height: 100%;
+
+            background-color: #1b1b1b;
+        }
+
+        .user-info-table-button {
+            width: 100%;
+            display: inline;
+        }
+
+        .user-info-table-buttons-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            justify-content:space-evenly;
+        }
+
+        @media (max-aspect-ratio: 1){
+            .user-info-table-buttons-container {    
+                grid-template-columns: 1fr 1fr;
+            } 
+        }
+
+        @media (max-aspect-ratio: 5/6) { 
+            /*Handling collapse*/
+            .main-container {
+                grid-template-columns: 0% 100%;
+            }
+            
+            .notcollapse {
+                background-color: red;
+                visibility: collapse;
+                width: 0;
+            }   
+
+            .collapse {
+                visibility: visible;
+            }
+        }
+
+        .collapse {
+            visibility: collapse;
+        }
+
+        .user-overview {
+            height: 100%;
+        }
+
+        .user-overview-container {
+            width: fit-content;
+            position: relative;
+            margin-left: auto;
+        }
+
+        .widget {
+            margin: 10px;   
+        }
+
+        .settings-button {
+            width: 100%;
+            align-self: flex-end;
+        }
+
+        .cell {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: 100%;
+        }
+
+        .user-achievements {
+            bottom: 0;
+            padding: 10px;
+            border: 3px solid black;
+        }
+
+        img { 
+            max-width:100%;
+            bottom: 0;
+        }
+
+        p {
+            margin: 0;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            border: 0;
+        }
+
+        .user-ban-icon {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            padding: 10px;
+
+            background-color: #686868;
+            border-radius: 5px;
+        }
+
+        .user-deleted-icon{
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            padding: 10px;
+            top: 80px;
+
+            background-color: #686868;
+            border-radius: 5px;
+        }
+    }
+}
