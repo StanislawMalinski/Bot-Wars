@@ -1,0 +1,121 @@
+#include <iostream>
+#include <vector>
+#include <string>
+using namespace std;
+
+struct Card {
+    string suit;
+    string faceValue;
+};
+
+int countPoints(const vector<Card>& hand) {
+    int points = 0;
+    int numAces = 0;
+
+    for (const auto& card : hand) {
+        if (card.faceValue == "Jack" || card.faceValue == "Queen" || card.faceValue == "King") {
+            points += 10;
+        } else if (card.faceValue == "Ace") {
+            numAces++;
+            points += 11;
+        } else {
+            try {
+                int value = stoi(card.faceValue);
+                points += value;
+            } catch (const invalid_argument& e) {
+                cerr << "Nieprawidłowa wartość karty: " << card.faceValue << endl;\
+            }
+        }
+    }
+    while (points > 21 && numAces > 0) {
+        points -= 10;
+        numAces--;
+    }
+    return points;
+}
+
+bool isValidCard(const string& faceValue, const string& suit) {
+    string acceptedFaceValues[] = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace"};
+    string acceptedSuits[] = {"Hearts", "Diamonds", "Clubs", "Spades"};
+
+    bool isValidFaceValue = false;
+    for (const string& acceptedValue : acceptedFaceValues) {
+        if (faceValue == acceptedValue) {
+            isValidFaceValue = true;
+            break;
+        }
+    }
+
+    bool isValidSuit = false;
+    for (const string& acceptedSuit : acceptedSuits) {
+        if (suit == acceptedSuit) {
+            isValidSuit = true;
+            break;
+        }
+    }
+
+    return isValidFaceValue && isValidSuit;
+}
+
+int main() {
+    string input;
+
+    vector<Card> playerHand;
+    vector<Card> dealerHand;
+
+    while (true) {
+        getline(cin, input);
+        playerHand = vector<Card>();
+        dealerHand = vector<Card>();
+        size_t dealerIndex = input.find("d:");
+        string playerData = input.substr(0, dealerIndex);
+        string dealerData = input.substr(dealerIndex + 2);
+
+        size_t pos = 0;
+        string delimiter = " ";
+        while ((pos = playerData.find(delimiter)) != string::npos) {
+            string cardStr = playerData.substr(0, pos);
+            size_t underscorePos = cardStr.find("_");
+            string faceValue = cardStr.substr(0, underscorePos);
+            string suit = cardStr.substr(underscorePos + 1);
+            if (isValidCard(faceValue, suit)) {
+                playerHand.push_back({suit, faceValue});
+            }
+            playerData.erase(0, pos + delimiter.length());
+        }
+
+        pos = 0;
+        while ((pos = dealerData.find(delimiter)) != string::npos) {
+            string cardStr = dealerData.substr(0, pos);
+            size_t underscorePos = cardStr.find("_");
+            string faceValue = cardStr.substr(0, underscorePos);
+            string suit = cardStr.substr(underscorePos + 1);
+            if (isValidCard(faceValue, suit)) {
+                dealerHand.push_back({suit, faceValue});
+            }
+            dealerData.erase(0, pos + delimiter.length());
+        }
+
+        size_t underscorePos = dealerData.find("_");
+        string faceValue = dealerData.substr(0, underscorePos);
+        string suit = dealerData.substr(underscorePos + 1);
+        if (isValidCard(faceValue, suit)) {
+            dealerHand.push_back({suit, faceValue});
+        }
+        if (countPoints(playerHand)>18 && playerHand.size()==2)
+            cout<<"double" << endl;
+        else
+        {
+            if(countPoints(dealerHand) == 11)
+            cout<<"insurance" << endl;
+                
+            else{
+                if(countPoints(playerHand)<18)
+                cout<<"hit" << endl;
+                else cout<<"stand" << endl;
+                }
+        }
+    }
+
+    return 0;
+}
