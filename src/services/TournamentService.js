@@ -1,17 +1,17 @@
 import {Api} from './Api'
 
 export const TournamentService = {
-  getFilteredTournaments: async function (page, pageSize, tournamentTitle, minPlayOutDate, maxPlayOutDate, creator, userParticipation) {
-    return await Api.req(() => {return Api.get(`Tournament/getFiltered?page=${page}&pageSize=${pageSize}`, {
-      tournamentTitle: tournamentTitle,
-      minPlayOutDate: minPlayOutDate,
-      maxPlayOutDate: maxPlayOutDate,
-      creator: creator,
-      userParticipation: userParticipation
-    })})
+  getFilteredTournaments: async function (page, pageSize, {tournamentTitle, minPlayOutDate, maxPlayOutDate, creator, userParticipation}) {
+    const body = {};
+    if (tournamentTitle) body["tournamentTitle"] = tournamentTitle;    
+    if (minPlayOutDate) body["minPlayOutDate"] = minPlayOutDate;
+    if (maxPlayOutDate) body.maxPlayOutDate = maxPlayOutDate;
+    if (creator) body.creator = creator;
+    if (userParticipation) body.userParticipation = userParticipation;
+    return await Api.req(() => {return Api.post(`Tournament/getFiltered?page=${page}&pageSize=${pageSize}`, body)})
   },
   getListOfTournaments: async function (page, pageSize) {
-    return await Api.req(() => {return Api.get(`Tournament/getFiltered?page=${page}&pageSize=${pageSize}`)})
+    return await Api.req(() => {return Api.post(`Tournament/getFiltered?page=${page}&pageSize=${pageSize}`, {})})
   },
   deleteTournament: async function (id) {
     return await Api.req(() => {return Api.delete(`Tournament/delete?id=${id}`)})

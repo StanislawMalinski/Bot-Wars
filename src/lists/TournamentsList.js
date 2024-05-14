@@ -5,24 +5,28 @@ import UserButtons from '../User/UserButtons';
 import {Link, useNavigate} from 'react-router-dom';
 import { connect } from 'react-redux';
 import { TournamentService } from "../services/TournamentService";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 
 function TournamentsList({ tournaments, isAuthenticated }) {
     const navigate = useNavigate();
     const currentDate = new Date();
-
     const [upcomingTournaments, setUpcomingTournaments] = useState([]);
     const [pastTournaments, setPastTournaments] = useState([]);
     const [message, setMessage] = useState('');
-
+    
     useEffect(() => {
-        TournamentService.getListOfTournaments(1, 10)
-        .then((response) => {
-            setPastTournaments(response.data);
-        }).catch((error) => {
-            console.log(error);
-            setMessage('Sorry, there was a problem with fetching tournament data.Try again later');
-        });
+        TournamentService.getFilteredTournaments(0, 10, {minPlayOutDate: currentDate.toISOString()})
+            .then((response) => {
+                setUpcomingTournaments(response.data.data);
+            }).catch((error) => {
+                setMessage('Error loading tournaments');
+            });
+        TournamentService.getFilteredTournaments(0, 10, {maxPlayOutDate: currentDate.toISOString()})
+            .then((response) => {
+                setPastTournaments(response.data.data);
+            }).catch((error) => {
+                setMessage('Error loading tournaments');
+            });
     }, [currentDate]);
 
     const handleTournamentClick = (tournamentId) => {
@@ -58,9 +62,9 @@ function TournamentsList({ tournaments, isAuthenticated }) {
                 <div className="tournaments-content">
                     {isAuthenticated ?
                     upcomingTournaments.map(tournament => (
-                        <div>
-                        <TournamentItem key={tournament.id} tournament={tournament} />
-                        <DeleteTournamentButton tournamentId={tournament.id} />
+                        <div key={tournament.id}>
+                            <TournamentItem key={tournament.id} tournament={tournament} />
+                            <DeleteTournamentButton tournamentId={tournament.id} />
                         </div>
                     )) 
                     : 
