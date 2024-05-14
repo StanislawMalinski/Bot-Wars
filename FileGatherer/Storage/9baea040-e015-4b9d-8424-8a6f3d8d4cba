@@ -1,0 +1,271 @@
+#include <iostream>
+#include <vector>
+#include <ctime>
+#include <cstdlib>
+#include <string>
+
+using namespace std;
+
+struct Card {
+    string suit;
+    string faceValue;
+};
+
+class Deck {
+private:
+    vector<Card> cards;
+
+public:
+    Deck() {
+        string suits[] = {"Hearts", "Diamonds", "Clubs", "Spades"};
+        string faceValues[] = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace"};
+
+        for (const auto &suit : suits) {
+            for (const auto &faceValue : faceValues) {
+                cards.push_back({suit, faceValue});
+            }
+        }
+    }
+
+    void shuffle() {
+        srand(time(nullptr));
+        for (int i = 0; i < cards.size(); ++i) {
+            int randomIndex = rand() % cards.size();
+            swap(cards[i], cards[randomIndex]);
+        }
+    }
+
+    void displayDeck() {
+        for (const auto &card : cards) {
+            cout << card.faceValue << " of " << card.suit << endl;
+        }
+    }
+
+    Card drawCard() {
+        if (cards.empty()) {
+            string suits[] = {"Hearts", "Diamonds", "Clubs", "Spades"};
+            string faceValues[] = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace"};
+
+            for (const auto &suit : suits) {
+                for (const auto &faceValue : faceValues) {
+                    cards.push_back({suit, faceValue});
+                }
+            }
+            shuffle();
+        }
+
+        Card drawnCard = cards.back();
+        cards.pop_back();
+        return drawnCard;
+    }
+};
+
+//-------------------------------------------------
+
+int countPoints(const vector<Card>& hand) {
+    int points = 0;
+    int numAces = 0;
+
+    for (const auto& card : hand) {
+        if (card.faceValue == "Jack" || card.faceValue == "Queen" || card.faceValue == "King") {
+            points += 10;
+        } else if (card.faceValue == "Ace") {
+            numAces++;
+            points += 11;
+        } else {
+            points += stoi(card.faceValue);
+        }
+    }
+
+    while (points > 21 && numAces > 0) {
+        points -= 10;
+        numAces--;
+    }
+    return points;
+}
+
+//-------------------------------------------------
+
+int dealerTurn(Deck& deck, std::vector<Card>& dealerHand) {
+    int sum = 0;
+    for (const auto& card : dealerHand) {
+        if (card.faceValue == "Jack" || card.faceValue == "Queen" || card.faceValue == "King") {
+            sum += 10;
+        } else if (card.faceValue == "Ace") {
+            sum += 11;
+        } else {
+            sum += std::stoi(card.faceValue);
+        }
+    }
+
+    while (sum <= 17) {
+        Card newCard = deck.drawCard();
+        dealerHand.push_back(newCard);
+        sum = countPoints(dealerHand);
+    }
+    return sum;
+}
+void giveBotInfo(int botId, std::vector<Card>& playerHand, std::vector<Card>& dealerHand){
+    
+    cout << botId<< endl;
+    for (const auto& card : playerHand) {
+        cout << card.faceValue.c_str() << "_"<<card.suit.c_str() << " ";
+    }
+    cout << "d: ";
+    for (const auto& card : dealerHand) {
+        cout << card.faceValue.c_str() << "_"<<card.suit.c_str()<<" ";
+    }
+    cout << endl;
+}
+
+//-------------------------------------------------
+Deck deck;
+double countpoints(std::vector<int>& bot, std::vector<Card>& dealerHand){ //{0 handValue, 1 splitValue, 2 doubledBet, 3 surrendered, 4 insurance};
+    int dealer = countPoints(dealerHand);
+    
+    if (bot[3]) // jeśli się podda
+        return -0.5;
+        
+    if (bot[4])
+        if(dealerHand.size() == 2 && dealer == 21) // ubezpieczenie
+            return 0;
+        else
+            return -1.5;
+            
+    if (bot[1] != 0){ // jeśli jest 2 ręka
+        double sum=0;
+        if (bot[0] < 22)
+            if (bot[0] > dealer || dealer > 21)
+                sum += 1;
+            else sum -=1;
+        else sum -=1;
+            
+
+        if (bot[1] < 22)
+            if (bot[1] > dealer || dealer > 21)
+                sum += 1;
+            else sum -=1;
+        else sum -=1;
+        return sum;
+    }
+
+    if ((bot[0] > dealer && bot[0] < 22) || (bot[0] < 22 && dealer > 21))
+        if (bot[2])
+            return 2;
+        else return 1;
+    else
+        if (bot[2])
+            return -2;
+        else return -1;
+}
+
+vector<int> servebot(int botId, std::vector<Card>& playerHand, std::vector<Card>& dealerHand){
+    if(playerHand.size()==0){
+        playerHand.push_back(deck.drawCard());
+        playerHand.push_back(deck.drawCard());
+    }
+
+    int handValue = countPoints(playerHand);
+    int splitValue = 0;
+    int doubledBet = 0;
+    int surrendered = 0;
+    int insurance = 0;
+
+    if(countPoints(playerHand) == 21)
+        return {handValue, splitValue, doubledBet, surrendered, insurance};
+
+    giveBotInfo(botId, playerHand, dealerHand);
+    string response;
+    cin >> response;
+
+    if (response == "hit") {
+        while(response == "hit" && countPoints(playerHand) < 21){
+            playerHand.push_back(deck.drawCard());
+            giveBotInfo(botId, playerHand, dealerHand);
+            cin >> response;
+        }
+        handValue = countPoints(playerHand);
+    } else if (response == "double") {
+        if(countPoints(playerHand) == 9 ||countPoints(playerHand) == 10 || countPoints(playerHand) == 11){
+            playerHand.push_back(deck.drawCard());
+            doubledBet = 1;
+        }
+    } else if (response == "split") {
+        if (playerHand.size() == 2 && playerHand[0].faceValue == playerHand[1].faceValue) {
+            std::vector<Card> splitHand1;
+            std::vector<Card> splitHand2;
+            splitHand1.push_back(playerHand[0]);
+            splitHand2.push_back(playerHand[1]);
+            splitHand1.push_back(deck.drawCard());
+            splitHand2.push_back(deck.drawCard());
+
+            giveBotInfo(botId, splitHand1, dealerHand);
+            cin >> response;
+            while(response == "hit"){
+                splitHand1.push_back(deck.drawCard());
+                giveBotInfo(botId, splitHand1, dealerHand);
+                string response;
+                cin >> response;
+            }
+
+            giveBotInfo(botId, splitHand2, dealerHand);
+            cin >> response;
+            while(response == "hit"){
+                splitHand2.push_back(deck.drawCard());
+                giveBotInfo(botId, splitHand2, dealerHand);
+                string response;
+                cin >> response;
+            }
+
+            handValue = countPoints(splitHand1);
+            splitValue = countPoints(splitHand2);
+        }
+    } else if (response == "surrender") {
+        surrendered = 1;
+    }
+      else if (response == "insurance") {
+        if(countPoints(dealerHand) == 10 || countPoints(dealerHand) == 11)
+            insurance = 1;
+    }
+    return {handValue, splitValue, doubledBet, surrendered, insurance};
+}
+
+int main() {
+
+    deck.shuffle();
+    double bot0money=10;
+    double bot1money=10;
+    std::vector<Card> dealerHand;
+    int turn = 0;
+
+    vector<int> bot0;
+    vector<int> bot1;
+    while((turn < 100 || bot0money != bot1money) && turn < 1000){
+        turn++;
+        dealerHand.push_back(deck.drawCard());
+
+        vector<Card> playerHand1;
+        vector<Card> playerHand2;
+
+        bot0 = servebot(0, playerHand1, dealerHand);
+        bot1 = servebot(1, playerHand2, dealerHand);
+
+        dealerTurn(deck, dealerHand);
+
+        bot0money += countpoints(bot0, dealerHand);
+        bot1money += countpoints(bot1, dealerHand);
+
+        if(bot0money < 1 || bot1money < 1)
+            break;
+        dealerHand = vector<Card>();
+    }
+
+    
+    cout << -1 << endl;
+    if(bot0money > bot1money)
+        cout << 0 << endl;
+    else
+        cout << 1 << endl;
+
+    return 0;
+}
