@@ -13,7 +13,7 @@ function GamesList({games, isAuthenticated, user, login, logout }) {
     useEffect(() => {
         const fetchGameData = async () => {
             try {
-                const gl = await GameService.getListOfGames();
+                const gl = await GameService.getListOfGames(0, 10);
                 setGamesList(gl.data.data);
             } catch (e) {
                 setMessage('There was a problem with fetching game data.');
