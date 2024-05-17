@@ -17,13 +17,13 @@ function TournamentsList({ tournaments, isAuthenticated }) {
     useEffect(() => {
         TournamentService.getFilteredTournaments(0, 10, {minPlayOutDate: currentDate.toISOString()})
             .then((response) => {
-                setUpcomingTournaments(response.data.data);
+                setUpcomingTournaments(response.data.data.page);
             }).catch((error) => {
                 setMessage('Error loading tournaments');
             });
         TournamentService.getFilteredTournaments(0, 10, {maxPlayOutDate: currentDate.toISOString()})
             .then((response) => {
-                setPastTournaments(response.data.data);
+                setPastTournaments(response.data.data.page);
             }).catch((error) => {
                 setMessage('Error loading tournaments');
             });
