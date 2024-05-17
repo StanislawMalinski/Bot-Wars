@@ -8,7 +8,7 @@ export const TournamentService = {
     if (maxPlayOutDate) body.maxPlayOutDate = maxPlayOutDate;
     if (creator) body.creator = creator;
     if (userParticipation) body.userParticipation = userParticipation;
-    return await Api.req(() => {return Api.post(`Tournament/getFiltered?page=${page}&pageSize=${pageSize}`, body)})
+    return await Api.req(() => {return Api.post(`Tournament/getFiltered?PageNumber=${page}&PageSize=${pageSize}`, body)})
   },
   getListOfTournaments: async function (page, pageSize) {
     return await Api.req(() => {return Api.post(`Tournament/getFiltered?page=${page}&pageSize=${pageSize}`, {})})
