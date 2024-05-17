@@ -59,9 +59,6 @@ const router = createBrowserRouter([
     {
         path: "/tournaments/add",
         element: <AddTournamentForm />,
-        // In Future with more Turnaments
-        // Assuming getListOfTypesOfGames returns an array of game types
-        //element: <AddTournamentForm gameTypes={getListOfTypesOfGames()} />,
     },
     {
         path: "/tournaments/edit/:id",

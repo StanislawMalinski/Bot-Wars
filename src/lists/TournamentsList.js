@@ -1,7 +1,6 @@
 import './TournamentList.scss';
 import DeleteTournamentButton from './DeleteTournamentButton';
 import TournamentNav from '../Tournaments/TournamentNav';
-import UserButtons from '../User/UserButtons';
 import {Link, useNavigate} from 'react-router-dom';
 import { connect } from 'react-redux';
 import { TournamentService } from "../services/TournamentService";
@@ -44,7 +43,6 @@ function TournamentsList({ tournaments, isAuthenticated }) {
 
     return (
         <div className="tournaments-container">
-            <UserButtons/>
             <TournamentNav/>
             <div className="tournaments-box">
                 <h1>Upcoming Tournaments</h1>

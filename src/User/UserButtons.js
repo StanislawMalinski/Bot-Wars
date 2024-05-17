@@ -8,7 +8,6 @@ import { login, logout } from './store';
 import {Link} from "react-router-dom";
 
 function UserButtons({ isAuthenticated, user, login, logout }) {
-    //takie chwilowe bo nie ma jak z bakcu pobrać loginu i elo bo oba są querowane po player_id którego nie mamy, issue do omówienia na spotkaniu
     const huj = '{'
     const huj1 = '}'
     return (
