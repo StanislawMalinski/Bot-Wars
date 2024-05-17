@@ -17,7 +17,7 @@
 .color-secondary-2-4 { color: #3F05A2 }
 
 body {
-  background-color: #242424;
+  background-color: transparent;
   color: #363636;
   font-family: "Courier New", Courier, monospace;
   font-size: 12px;
@@ -49,7 +49,7 @@ h1 {
 }
 
 .menu-btns {
-  background-color: #242424;
+  background-color: transparent;
   border: #393a39 3px solid;
   border-radius: 2px;
 }
@@ -69,5 +69,12 @@ button {
 div {
   text-shadow: 1px 1px 0.1cm #fff;
   font-size: 45px;
+}
+
+.background-canvas {
+  position:fixed;
+  top:0;
+  left:0;
+  z-index: -1;
 }
 
