@@ -16,7 +16,7 @@ function RatingTable({user}) {
         }).catch((error) => {
             console.log(error);
         });
-    }, [user.id]);
+    }, [user, user.id, history]);
 
     var ticksize = 20;
     const chart = 
@@ -53,7 +53,7 @@ function ProfileInfoTable({ state, user }) {
     const [content, setContent] = useState(null);
     useEffect(() => {
         setContent(changeState(state, user));
-    }, [state]);
+    }, [state, user]);
 
     return (<>
         <div className="user-info-table">

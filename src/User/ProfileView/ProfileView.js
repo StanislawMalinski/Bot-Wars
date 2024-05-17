@@ -31,7 +31,7 @@ function ProfileView() {
         }).catch((error) => {
             console.log(error);
         });
-    }, [name]);
+    }, [name, user]);
 
     useEffect(() => {
         UserService.getImageForPlayer(user.id).then((data) => {

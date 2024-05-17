@@ -1,0 +1,38 @@
+.tournaments-form-container {
+    margin-top: 25px;
+    h2 {
+        margin: 20px 0;
+        text-align: center;
+        overflow-wrap: break-word;
+    }
+    .tournaments-form {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        .tournaments-form-wrapper {
+            max-width: 100%;
+        }
+        .tournaments-form-button-container {
+            display: flex;
+            flex-grow: 1;
+            margin-top: 10px;
+            justify-content: space-evenly;
+        }
+        div {
+            padding: 0 20px;
+            label {
+                margin-right: 20px;
+                overflow-wrap: break-word;
+            }
+        }
+    }
+    border: 2px solid #393a39;
+    margin-bottom: 20px;
+    padding: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+
+    @media (max-width: 768px) {
+        font-size: 0.8rem;
+        width: 100%;
+    }
+}

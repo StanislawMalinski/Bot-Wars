@@ -26,7 +26,7 @@
         background-color: #242424;
 
         h1 {
-            text-align: left;
+            text-align: center;
             margin: 0.5em 0.25em; 
             padding-top: 0.7em;
             font-size: 0.8em;
@@ -41,7 +41,6 @@
             border-bottom: 2px solid #393a39;
             font-family: Arial, Helvetica, sans-serif;
         }
-
         .header-detail {
             flex: 1;
             text-align: center;
@@ -63,7 +62,6 @@
                 margin-right: 0px;
             }
         }
-
         .tournaments-content {
             border: 2px solid #393a39;
             margin-bottom: 20px;
@@ -116,5 +114,11 @@
     @media (max-width: 768px) {
         font-size: 0.8rem; 
         width: 100%;
+        .tournament-wrapper{
+            overflow-x: scroll;
+            .tournaments-content{
+                width:700px;
+            }
+        }
     }
 }

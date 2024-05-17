@@ -20,7 +20,7 @@ export default function ProfileGameList({ user }) {
         }).catch((error) => {
             console.log(error);
         });
-    }, [user.id]);
+    }, [user.id, games]);
 
     const handleGameElementClick = (gameId) => {
         return () => navigate(`/games/details/${gameId}`);
