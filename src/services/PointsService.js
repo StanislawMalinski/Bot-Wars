@@ -1,11 +1,14 @@
-import { Api } from './Api'
+import {Api} from './Api'
+
 export const PointsService = {
 
-    getLeaderboards: async function () {
-        try {
-            return await Api.get('Points/getLeaderboards')
-        } catch(e) {
-             return Api.processError(e)
-        }
-    },
+  getLeaderboards: async function (page, pageSize) {
+    return await Api.req(() => {return Api.get(`Points/getLeaderboards?page=${page}&pageSize=${pageSize}`)})
+  },
+  getPointsForPlayer: async function (id) {
+    return await Api.req(() => {return Api.get(`Points/getPointsForPlayer?id=${id}`)})
+  },
+  getPointsHistoryForPlayer: async function (id) {
+    return await Api.req(() => {return Api.get(`Points/getPointsHistoryForPlayer?id=${id}`)})
+  },
 }

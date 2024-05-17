@@ -1,18 +1,11 @@
-import { Api } from './Api'
+import {Api} from './Api'
+
 export const AdminService = {
 
-    banPlayer: async function (id) {
-        try {
-            return await Api.put(`Administrative/banPlayer?playerId=${id}`);
-        } catch(e) {
-             return Api.processError(e)
-        }
-    },
-    unbanPlayer: async function (id) {
-        try {
-            return await Api.put(`Administrative/unbanPlayer?playerId=${id}`);
-        } catch(e) {
-             return Api.processError(e)
-        }
-    },
+  banPlayer: async function (id) {
+    return await Api.req(() => {return Api.put(`Administrative/banPlayer?playerId=${id}`)});
+  },
+  unbanPlayer: async function (id) {
+    return await Api.req(() => {return Api.put(`Administrative/unbanPlayer?playerId=${id}`)});
+  },
 }

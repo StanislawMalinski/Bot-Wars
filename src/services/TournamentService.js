@@ -1,57 +1,55 @@
-import { Api } from './Api'
-
-const getCurrentTime = () => {
-    const now = new Date();
-    const year = now.getFullYear();
-    const month = String(now.getMonth() + 1).padStart(2, '0');
-    const day = String(now.getDate()).padStart(2, '0');
-    const hours = String(now.getHours()).padStart(2, '0');
-    const minutes = String(now.getMinutes()).padStart(2, '0');
-    const seconds = String(now.getSeconds()).padStart(2, '0');
-    const milliseconds = String(now.getMilliseconds()).padStart(3, '0');
-    
-    return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}.${milliseconds}Z`;
-};
-
-const currentTime = getCurrentTime();
+import {Api} from './Api'
 
 export const TournamentService = {
-
-    getListOfTournaments: async function () {
-        try {
-            return await Api.get('Tournament/getAll')
-        } catch(e) {
-             return Api.processError(e)
-        }
-    },
-    deleteTournament: async function (id) {
-        try {
-            return await Api.delete(`Tournament/delete?id=${id}`);
-        } catch(e) {
-             return Api.processError(e)
-        }
-    },
-    addTournament: async function (numOfPlayers, gameFile, gameInstructions, interfaceDefinition, isAvaiableForPlay) {
-        try {
-            return await Api.post('Tournament/add',{
-                numbersOfPlayer: numOfPlayers,
-                lastModification: currentTime,
-                gameFile: gameFile,
-                gameInstructions: gameInstructions,
-                interfaceDefinition: interfaceDefinition,
-                isAvaiableForPlay: isAvaiableForPlay
-              })
-        } catch(e) {
-             return Api.processError(e)
-        }
-    },
-    getForPlayer: async function (login) {
-        try {
-            return await Api.post(`Tournament/getFiltered`,{
-                creator:login
-              })
-        } catch(e) {
-             return Api.processError(e)
-        }
-    },
+  getFilteredTournaments: async function (page, pageSize, {tournamentTitle, minPlayOutDate, maxPlayOutDate, creator, userParticipation}) {
+    const body = {};
+    if (tournamentTitle) body["tournamentTitle"] = tournamentTitle;    
+    if (minPlayOutDate) body["minPlayOutDate"] = minPlayOutDate;
+    if (maxPlayOutDate) body.maxPlayOutDate = maxPlayOutDate;
+    if (creator) body.creator = creator;
+    if (userParticipation) body.userParticipation = userParticipation;
+    return await Api.req(() => {return Api.post(`Tournament/getFiltered?page=${page}&pageSize=${pageSize}`, body)})
+  },
+  getListOfTournaments: async function (page, pageSize) {
+    return await Api.req(() => {return Api.post(`Tournament/getFiltered?page=${page}&pageSize=${pageSize}`, {})})
+  },
+  deleteTournament: async function (id) {
+    return await Api.req(() => {return Api.delete(`Tournament/delete?id=${id}`)})
+  },
+  addTournament: async function (tournamentTitle, description, gameId, playersLimit, tournamentsDate, constraints, image, memoryLimit, timeLimit) {
+    return await Api.req(() => {return Api.post(`Tournament/add`, {
+      tournamentTitle: tournamentTitle,
+      description: description,
+      gameId: gameId,
+      playersLimit: playersLimit,
+      tournamentsDate: tournamentsDate,
+      constraints: constraints,
+      image: image,
+      memoryLimit: memoryLimit,
+      timeLimit: timeLimit
+    })})
+  },
+  getTournament: async function (id) {
+    return await Api.req(() => {return Api.get(`Tournament/getOne?id=${id}`)})
+  },
+  registerBot: async function (tournamentId, botId) {
+    return await Api.req(() => {return Api.post(`Tournament/registerBot?tournamentId=${tournamentId}&botId=${botId}`)})
+  },
+  unregisterBot: async function (tournamentId, botId) {
+    return await Api.req(() => {return Api.delete(`Tournament/unregisterBot?tournamentId=${tournamentId}&botId=${botId}`)})
+  },
+  updateTournament: async function (tournamentId, tournamentTitle, description, gameId, playersLimit, tournamentsDate, constraints, image, memoryLimit, timeLimit) {
+    return await Api.req(() => {return Api.put(`Tournament/update`, {
+      tournamentId: tournamentId,
+      tournamentTitle: tournamentTitle,
+      description: description,
+      gameId: gameId,
+      playersLimit: playersLimit,
+      tournamentsDate: tournamentsDate,
+      constraints: constraints,
+      image: image,
+      memoryLimit: memoryLimit,
+      timeLimit: timeLimit
+    })})
+  },
 }

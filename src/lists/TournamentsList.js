@@ -5,49 +5,42 @@ import UserButtons from '../User/UserButtons';
 import {Link, useNavigate} from 'react-router-dom';
 import { connect } from 'react-redux';
 import { TournamentService } from "../services/TournamentService";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 
 function TournamentsList({ tournaments, isAuthenticated }) {
     const navigate = useNavigate();
     const currentDate = new Date();
-    const [tournamentList, setTournamentList] = useState([]);
+    const [upcomingTournaments, setUpcomingTournaments] = useState([]);
+    const [pastTournaments, setPastTournaments] = useState([]);
     const [message, setMessage] = useState('');
-
+    
     useEffect(() => {
-        const fetchTournamentData = async () => {
-            try {
-                const gl = await TournamentService.getListOfTournaments();
-                setTournamentList(gl.data.data);
-            } catch (e) {
-                console.log(e);
-                setMessage('Sorry, there was a problem with fetching tournament data.Try again later');
-            }
-        };
+        TournamentService.getFilteredTournaments(0, 10, {minPlayOutDate: currentDate.toISOString()})
+            .then((response) => {
+                setUpcomingTournaments(response.data.data);
+            }).catch((error) => {
+                setMessage('Error loading tournaments');
+            });
+        TournamentService.getFilteredTournaments(0, 10, {maxPlayOutDate: currentDate.toISOString()})
+            .then((response) => {
+                setPastTournaments(response.data.data);
+            }).catch((error) => {
+                setMessage('Error loading tournaments');
+            });
+    }, [currentDate]);
 
-        fetchTournamentData();
-    }, []);
-
-    const upcomingTournaments = tournamentList.filter(t => {
-        const tournamentDate = new Date(t.tournamentsDate);
-        return tournamentDate > currentDate;
-    });
-    const pastTournaments = tournamentList.filter(t => {
-        const tournamentDate = new Date(t.tournamentsDate);
-        return tournamentDate <= currentDate;
-    });;
+    const handleTournamentClick = (tournamentId) => {
+        navigate(`/tournaments/details/${tournamentId}`);
+    };
 
     const TournamentItem = ({ tournament }) => (
         <div className="tournament-item" onClick={() => handleTournamentClick(tournament.id)}>
-            <div className="tournament-detail">{tournament.tournamentsTitle}</div>
+            <div className="tournament-detail">{tournament.tournamentTitle}</div>
             <div className="tournament-detail">{tournament.author}</div>
             <div className="tournament-detail">{tournament.tournamentsDate}</div>
             <div className="tournament-detail">{tournament.playersLimit}</div>
         </div>
     );
-
-    const handleTournamentClick = (tournamentId) => {
-        navigate(`/tournaments/details/${tournamentId}`);
-    };
 
     return (
         <div className="tournaments-container">
@@ -67,13 +60,15 @@ function TournamentsList({ tournaments, isAuthenticated }) {
                     <span className="header-detail">Action</span>
                 </div>
                 <div className="tournaments-content">
-                    {upcomingTournaments.map(tournament => (
-                        <div>
-                        <TournamentItem key={tournament.id} tournament={tournament} />
-                        <DeleteTournamentButton key={tournament.id} />
+                    {isAuthenticated ?
+                    upcomingTournaments.map(tournament => (
+                        <div key={tournament.id}>
+                            <TournamentItem key={tournament.id} tournament={tournament} />
+                            <DeleteTournamentButton tournamentId={tournament.id} />
                         </div>
-                    ))}
-                    {upcomingTournaments.map(tournament => (
+                    )) 
+                    : 
+                    upcomingTournaments.map(tournament => (
                         <TournamentItem key={tournament.id} tournament={tournament} />
                     ))}
                 </div>

@@ -1,0 +1,99 @@
+import copy
+
+class Card:
+    def __init__(self, suit, value):
+        self.suit = suit
+        self.value = value
+
+    def __repr__(self):
+        return f"{self.value} of {self.suit}"
+    
+    def __str__(self):
+        return f"{self.value} of {self.suit}"
+
+
+def parse_cards(data):
+    hand_cards = []
+    cards = data.split('; Table: ')
+    #print(cards)
+    hand = cards[0].split(';')
+    #print(hand)
+    for card in hand:
+        val = int(card.split(' ')[0])
+        suit = card.split(' ')[2]
+        hand_cards.append(Card(suit, val))
+        #print(f'{val} of {suit}')
+    table = [card.strip() for card in cards[1].strip().split(';') if card.strip()]
+    table_cards = []
+    #print(table)
+    for card in table:
+        val = int(card.split(' ')[0])
+        suit = card.split(' ')[2]
+        table_cards.append(Card(suit, val))
+    return hand_cards, table_cards
+
+def count_points(hand):
+    if (len(hand) != 9):
+        raise ValueError("Wrong number of cards in hand!")
+    points = 0
+    distinct_values = set()
+    distinct_colors = set()
+    color_counts = {}
+    value_counts = {}
+
+    for card in hand:
+        distinct_values.add(card.value)
+        distinct_colors.add(card.suit)
+        color_counts[card.suit] = color_counts.get(card.suit, 0) + 1
+        value_counts[card.value] = value_counts.get(card.value, 0) + 1
+        
+    for card in hand:
+        if (color_counts[card.suit] == 5 and value_counts[card.value] == 5):
+            return 0
+
+    for color in distinct_colors:
+        if color_counts[color] > 4:
+            distinct_values = set()
+            value_counts = {}
+            for card in hand:
+                if (card.suit != color):
+                    distinct_values.add(card.value)
+                    value_counts[card.value] = value_counts.get(card.value, 0) + 1
+            
+    for value in distinct_values:
+        if value_counts[value] < 5:
+            points += int(value)
+
+    return points
+
+def exchange_card(player_hand, table_cards, hand_index, table_index):
+    if hand_index < 0 or hand_index >= len(player_hand):
+        print("Wrong card index.")
+        return
+    if table_index < 0 or table_index >= len(table_cards):
+        print("Wrong table index.")
+        return
+    hand = player_hand.copy()
+    hand[hand_index] = table_cards[table_index]
+    return hand
+
+def play():
+    while(True):
+        #print("Wczytuje")
+        status = input()
+        hand, table = parse_cards(status)
+        #print("Wczytane")
+        points = count_points(hand)
+        response = "fold"
+        #print("Rozpoczynam liczenie")
+        for i in range (9):
+            for j in range (5):
+                fake_hand = exchange_card(hand, table, i, j)
+                fake_points = count_points(fake_hand)
+                if (fake_points <= points):
+                    response = str(i) + " " + str(j)
+                    points = fake_points
+        
+        #print("Koncze liczenie")
+        print(response)
+play()
