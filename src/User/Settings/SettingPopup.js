@@ -29,7 +29,7 @@ export default function SettingPopup(props) {
 
     useEffect(() => {
         setContent(getContent(state))
-    }, [state])
+    }, [state, getContent])
 
     if (typeof triggername !== 'string') {
         console.error('triggername is not a string');

@@ -8,6 +8,7 @@ import {
     RouterProvider,
 } from "react-router-dom";
 import GamesList from "./lists/GamesList";
+import GameDetails from "./Games/GameDetails";
 import AddGameForm from "./forms/AddGameForm";
 import RegisterForm from "./forms/RegisterForm";
 import LoginForm from "./forms/LoginForm";
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
     {
         path: "/games",
         element: <GamesList games={games}/>,
+    },
+    {
+        path: "/games/details/:gameId",
+        element: <GameDetails />,
     },
     {
         path: "/games/add",
