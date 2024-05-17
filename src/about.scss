@@ -1,0 +1,350 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.about {
+    background-color: #242424;
+    max-width: 1200px;
+    width: 80%;
+    margin: auto;
+    padding: 40px;
+    gap: 20px;
+    text-align: center;
+}
+
+.about-container {
+    padding: 20px;
+    gap: 20px;
+}
+
+//  Description
+
+.description {
+    background-color: #363636b7;
+    padding: 20px;
+    border-radius: 5px;
+    color: #b5da32;
+    text-shadow: 1px 1px 0.05cm #fff;
+    font-size: 16px;
+    flex: 2;
+    margin: 10px;
+}
+
+.description > h2{
+    letter-spacing: 1px;
+    text-shadow: 0.5px 0.5px 0.08cm #fff;
+}
+
+.meet-the-team {
+    width: 100%;
+    border-radius: 5px;
+    background-color: #185515;
+    margin: 15px 0;
+}
+
+.meet-the-team > h2{
+    letter-spacing: 5px;
+    font-size: 34px;
+    text-shadow: 0.5px 0.5px 0.08cm #fff;
+}
+
+.animated-text {
+    position: relative;
+    display: inline-block;
+    animation: text-flicker 1.5s infinite;
+}
+
+@keyframes text-flicker {
+    10%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.3;
+    }
+}
+
+.section {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    text-align: left;
+}
+
+.section.reverse {
+    flex-direction: row-reverse;
+}
+
+.team-photo {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    border: 3px solid #14980D; /* Main Primary color */
+    box-shadow: 0 0 10px #0BE400; /* Highlight color */
+    margin: 10px;
+}
+
+.product-owner {
+    color: #24da00;
+    font-weight: bold;
+}
+
+.process h2, .description h2 {
+    color: #BC9310;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+
+// Timeline START
+
+.timeline-container {
+    position: relative;
+    padding-left: 40px;
+    margin-top: 40px;
+}
+
+.timeline-container:before {
+    content: '';
+    position: absolute;
+    left: 38px;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background-color: #0BE400;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 40px;
+    width: 100%;
+}
+
+.timeline-date {
+    position: absolute;
+    left: -80px;
+    top: 0;
+    width: 60px;
+    font-size: 14px;
+    color: #BC9310;
+    text-align: right;
+}
+
+.timeline-dot {
+    width: 20px;
+    height: 20px;
+    background-color: #0BE400;
+    border-radius: 50%;
+    position: absolute;
+    left: -10px;
+    top: 0;
+    transform: translateY(-50%);
+    transition: transform 0.3s;
+}
+
+.timeline-dot:hover {
+    transform: scale(1.2);
+}
+
+.timeline-content {
+    background-color: #14980D;
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+    box-shadow: 0 0 5px #0BE400;
+    position: relative;
+    margin-left: 25px;
+    max-width: 600px;
+    font-size: 14px;
+}
+
+.timeline-content > h3{
+
+    text-shadow: 0.5px 0.5px 0.08cm #fff;
+    letter-spacing: 1px;
+}
+
+.timeline-item:nth-child(even) .timeline-content {
+    margin-top: 20px;
+    background-color: #14980D;
+
+}
+
+.timeline-item:nth-child(odd) .timeline-content {
+    margin-bottom: 20px;
+    background-color: #14980d73;
+
+}
+
+.menu-btn {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.team-section {
+    margin: 40px 0;
+    text-align: left;
+}
+
+.team-members {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    text-align: center;
+}
+
+.team-member {
+    flex: 1 1 45%;
+    margin: 20px;
+}
+
+.team-member-title {
+    color: #BC9310;
+    margin-top: 10px;
+}
+
+.team-content {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    margin: 20px 0;
+}
+
+.team-description h3 {
+    color: #BC9310;
+    margin-top: 20px;
+}
+
+.team-description ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.team-description ul li {
+    margin-bottom: 10px;
+}
+
+.team-section  strong{
+    color: #14980D; 
+    font-size: 1.2em;
+    text-shadow: 0.5px 0.5px 0.02scm #fff;
+    letter-spacing: 1px;
+}
+
+.process {
+    margin-top: 60px;
+    flex-basis: 100%; /* Forces image to take full width */
+}
+
+.process-photo {
+    max-width: 400px;
+    height: auto;
+    border: 3px solid #14980D; /* Main Primary color */
+    box-shadow: 0 0 10px #0BE400; /* Highlight color */
+    margin: 10px;
+}   
+
+.home-button {
+    position: fixed;
+    top: -32px;
+    right: 20%;
+    transform: translateY(0);
+    background-color: #2E602B; /* Bright gold for interactivity */
+    border: none;
+    padding: 10px;
+    border-radius: 0 0 0 50%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 1000;
+    transition: transform 0.3s, background-color 0.3s, color 0.3s;
+}
+
+.home-button:hover {
+    transform: translateY(32px);
+    background-color: #337930; /* Slightly darker gold on hover */
+}
+
+.active {
+    transform: translateY(22px);
+}
+
+.deactive {
+    transform: translateY(0);
+    background-color: #EEB600; /* Slightly darker gold on hover */
+    color: #0BE400; /* Bright green on hover */
+}
+
+.home-image {
+    width: 24px;
+    height: 24px;
+}
+
+
+
+@media (max-width: 768px) {
+
+    .about {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .section {
+        flex-direction: column;
+    }
+
+    .timeline-container:before {
+        left: 20px;
+    }
+
+    .timeline-date {
+        left: -60px;
+        width: 40px;
+    }
+
+    .timeline-dot {
+        left: 10px;
+    }
+
+    .timeline-content {
+        margin-left: 60px;
+        max-width: 100%;
+    }
+
+    .team-content {
+        flex-direction: column;
+    }
+
+    .team-description {
+        margin-left: 0;
+        margin-top: 20px;
+    }
+
+    .team-members {
+        flex-direction: column;
+    }
+
+    .team-member {
+        flex: 1 1 100%;
+    }
+    .timeline-container:before {
+        content: '';
+        position: absolute;
+        left: 58px;
+        top: 0;
+        bottom: 0;
+        width: 4px;
+        background-color: #0BE400;
+    }
+
+    .process-photo {
+        max-width: 200px;
+        height: auto;
+        border: 3px solid #14980D; /* Main Primary color */
+        box-shadow: 0 0 10px #0BE400; /* Highlight color */
+        margin: 10px;
+    } 
+}
