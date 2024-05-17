@@ -63,8 +63,22 @@
                 margin-right: 0px;
             }
         }
-
-        .tournaments-content {
+        .tournaments-form-container{
+            margin-top: 25px;
+            h2{margin:20px 0;text-align: center;}
+            .tournaments-form{
+                display: flex;
+                flex-wrap: wrap;
+                flex-direction: row;
+                div{
+                    padding: 0 20px;
+                    label{
+                        margin-right: 20px;
+                    }
+                }
+            }
+        }
+        .tournaments-content, .tournaments-form-container{
             border: 2px solid #393a39;
             margin-bottom: 20px;
             padding: 10px;
@@ -116,5 +130,11 @@
     @media (max-width: 768px) {
         font-size: 0.8rem; 
         width: 100%;
+        .tournament-wrapper{
+            overflow-x: scroll;
+            .tournaments-content{
+                width:700px;
+            }
+        }
     }
 }
