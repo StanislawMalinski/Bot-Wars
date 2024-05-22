@@ -1,14 +1,19 @@
 import './List.scss'
 import DeleteGameButton from './DeleteGameButton';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { login, logout } from '../User/store';
 import React, { useState, useEffect } from "react";
 import {GameService} from "../services/GameService";
 function GamesList({games, isAuthenticated, user, login, logout }) {
 
+    const navigate = useNavigate();
     const [gamesList, setGamesList] = useState([]);
     const [message, setMessage] = useState('');
+
+    const handleGameClick = (gameId) => {
+        navigate(`/games/details/${gameId}`);
+    };
 
     useEffect(() => {
         const fetchGameData = async () => {
@@ -35,7 +40,7 @@ function GamesList({games, isAuthenticated, user, login, logout }) {
                     )}
                     {gamesList.map((game, index) => (
                         <div key={index} className="menu-btns list-element btn">
-                            <button className="item-name color-primary-3 btn">{game.gameFileName}</button>
+                            <button className="item-name color-primary-3 btn" onClick={() => handleGameClick(game.id)}>{game.gameFileName}</button>
                           {isAuthenticated && user.role === 'Admin' && (
                             <DeleteGameButton gameId={index} />
                           )}

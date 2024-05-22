@@ -40,7 +40,7 @@ export const GameService = {
     return await Api.req(() => {return Api.get(`GameType/getAvailable?page=${page}&pagesize=${pagesize}`)})
   },
   getGame: async function (id) {
-    return await Api.req(() => {return Api.get(`GameType/get?id=${id}`)})
+    return await Api.req(() => {return Api.get(`GameType/getOne?id=${id}`)})
   },
   getByName: async function (name, page, pagesize) {
     return await Api.req(() => {return Api.get(`GameType/getByName?name=${name}&page=${page}&pagesize=${pagesize}`)})
@@ -54,5 +54,8 @@ export const GameService = {
       interfaceDefinition: interfaceDefinition,
       isAvaiableForPlay: isAvaiableForPlay
     })})
+  },
+  getGameFile: async function (id) {
+    return await Api.req(() => {return Api.post(`GameType/getFile?id=${id}`)})
   },
 }
