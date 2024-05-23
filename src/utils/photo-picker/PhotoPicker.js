@@ -8,7 +8,7 @@ import Popup from 'reactjs-popup';
 export default function PhotoPicker({triggerButton, onSelect}){
     const [imageBuffor, setImageBuffor] = useState('');
     const config = {
-        borderRadius: '5px',
+        borderRadius: '10px',
         aspectRatio: 1,
         language: 'en',
         width: '300px',
@@ -27,7 +27,14 @@ export default function PhotoPicker({triggerButton, onSelect}){
                     <div className='user-setting-popup-window-background'>
                         <div className='photo-picker-popup-window'>
                             <div className='photo-picker-popup-container'>
-                                <button className='photo-picker-popup-close-btn' onClick={close}>&times;</button>
+                                <div className='close-button'>
+                                    <div class="close-container"
+                                            onClick={close}>
+                                        <div class="leftright"></div>
+                                        <div class="rightleft"></div>
+                                        <label class="close">close</label>
+                                    </div>
+                                </div>
                                 <div className='photo-picker-component'>
                                     < ReactImagePickerEditor                
                                         config={config}
