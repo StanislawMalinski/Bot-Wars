@@ -4,8 +4,32 @@ import { useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { login, logout } from '../User/store';
-function TournamentDetails({isAuthenticated, user, login, logout }) {
+import { useEffect } from "react";
 
+function TournamentDetails({isAuthenticated, user, login, logout }) {
+    useEffect(() => {
+        // Create a WebSocket instance
+        const socket = new WebSocket('ws://localhost:3000/ws');
+
+        // Event listeners
+        socket.addEventListener('open', () => {
+            console.log('Connected to WebSocket server');
+        });
+
+        socket.addEventListener('message', (event) => {
+            console.log('Received message from server:', event.data);
+            // Perform actions based on the received data
+        });
+
+        socket.addEventListener('close', () => {
+            console.log('Disconnected from WebSocket server');
+        });
+
+        // Clean up on unmount
+        return () => {
+            socket.close();
+        };
+    }, []);
     const { tournamentId } = useParams();
     const tournament = getListOfTournaments().find(t => t.id === parseInt(tournamentId));
 
