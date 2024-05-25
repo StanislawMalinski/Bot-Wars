@@ -9,6 +9,6 @@ export const PointsService = {
     return await Api.req(() => {return Api.get(`Points/getPointsForPlayer?id=${id}`)})
   },
   getPointsHistoryForPlayer: async function (id) {
-    return await Api.req(() => {return Api.get(`Points/getPointsHistoryForPlayer?id=${id}`)})
+    return await Api.req(() => {return Api.get(`Points/getPointsHistoryForPlayer?playerId=${id}`)})
   },
 }

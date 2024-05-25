@@ -29,7 +29,8 @@ export const UserService = {
     store.dispatch(login({
       email: email,
       token: token,
-      role: jwtData['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']
+      role: jwtData['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'],
+      id: jwtData['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier']
     }))
   },
   getPlayerInfo: async function (idOrName) {
@@ -52,10 +53,10 @@ export const UserService = {
     })})
   },
   getGamesForPlayer: async function (id) {
-    return await Api.req(() => {return Api.get(`Player/getGamesForPlayer?id=${id}`)})
+    return await Api.req(() => {return Api.get(`Player/getGamesForPlayer?playerId=${id}`)})
   },
   getImageForPlayer: async function (id) {
-    return await Api.req(() => {return Api.get(`Player/getImageForPlayer?id=${id}`)})
+    return await Api.req(() => {return Api.get(`Player/getImageForPlayer?playerId=${id}`)})
   },
   changeMyImage: async function (image) {
     return await Api.req(() => {return Api.post('Player/changeMyImage', {

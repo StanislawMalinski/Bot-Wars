@@ -1,42 +1,34 @@
 import { useEffect, useState } from "react";
 import {PointsService} from "../../services/PointsService";
-import {XAxis, YAxis, CartesianGrid, Tooltip, LineChart, Line  } from 'recharts';
+import {XAxis, YAxis, CartesianGrid, ResponsiveContainer, Tooltip, LineChart, Line  } from 'recharts';
+import ProfileGameList from './ProfileGameList';
+import TournamentsPlayedTable from './TournamentsPlayedTable';
 
-function StatsTable(props) {
-    return (
-        <table>
-            <tr>
-                <th>Wins</th>
-                <th>Losses</th>
-                <th>Draws</th>
-            </tr>
-            <tr>
-                <td>{props.wins}</td>
-                <td>{props.losses}</td>
-                <td>{props.draws}</td>
-            </tr>
-        </table>
-    );
-}
-
-function RatingTable(props) {
+function RatingTable({user}) {
     const [history, setHistory] = useState([{id: 0, logDate: "", points: 0, playerId: 0}]);
     
     useEffect(() => {
-        setHistory(PointsService.getPointsHistoryForPlayer(props.playerid)["data"]);
-    }, [props.playerid]);
+        console.log(user);
+        PointsService.getPointsHistoryForPlayer(user.id)
+        .then((data) => {
+            setHistory(data.data.data);
+            console.log(history);
+        }).catch((error) => {
+            console.log(error);
+        });
+    }, [user.id]);
 
+    var ticksize = 20;
     const chart = 
-        <LineChart data={history} width={1000} height={300}>
-            <CartesianGrid />
-            <Tooltip />
-            <XAxis dataKey="logDate" />
-            <YAxis dataKey="rating"  />
-            <Line type="linear" dataKey="rating" stroke="#01FF00" fill="#01FF00" /> 
-        </LineChart>;
-
-        console.log(history);
-
+        <ResponsiveContainer minWidth={100} minHeight={200}>
+            <LineChart data={history}>
+                <CartesianGrid/>
+                <Tooltip labelStyle={{fontSize: ticksize}} contentStyle={{fontSize: ticksize}}/>
+                <XAxis dataKey="logDate" tick={{fontSize: ticksize}} />
+                <YAxis dataKey="before" tick={{fontSize: ticksize}} />
+                <Line type="linear" dataKey="before" stroke="#01FF00" fill="#01FF00" /> 
+            </LineChart>
+        </ResponsiveContainer>
     return (
         <>
         {chart}
@@ -44,68 +36,23 @@ function RatingTable(props) {
     );
 }
 
-function BotsTable(props) {
-    return (
-        <table>
-            <tr>
-                <th>Bots</th>
-            </tr>
-            <tr>
-                <td>{props.bots}</td>
-            </tr>
-        </table>
-    );
-}
-
-function GamesAddedTable(props) {
-    return (
-        <table>
-            <tr>
-                <th>Games Added</th>
-            </tr>
-            <tr>
-                <td>{props.games}</td>
-            </tr>
-        </table>
-    );
-}
-
-function TournamentsPlayedTable(props) {
-    return (
-        <table>
-            <tr>
-                <th>Tournaments Played</th>
-            </tr>
-            <tr>
-                <td>{props.tournaments}</td>
-            </tr>
-        </table>
-    );
-}
-
-function changeState(newState) {
+function changeState(newState, user) {
     switch (newState) {
-        case "stats":
-            return <StatsTable wins={10} losses={5} draws={3} />;
         case "rating":
-            return <RatingTable/>;
-        case "bots":
-            return <BotsTable bots={5} />;
+            return <RatingTable user={user}/>;
         case "games":
-            return <GamesAddedTable games={5} />;
+            return <ProfileGameList user={user}/>;
         case "tournaments":
-            return <TournamentsPlayedTable tournaments={5} />;
+            return <TournamentsPlayedTable username={user.login} />;
         default:
             return null;
     }
 }
 
-function ProfileInfoTable(props) {
-    const { state } = props;
+function ProfileInfoTable({ state, user }) {
     const [content, setContent] = useState(null);
     useEffect(() => {
-        const con = changeState(state);
-        setContent(con);
+        setContent(changeState(state, user));
     }, [state]);
 
     return (<>

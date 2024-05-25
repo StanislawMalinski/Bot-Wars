@@ -5,8 +5,7 @@ import {UserService} from "../services/UserService";
 import { connect } from 'react-redux';
 import { login, logout } from '../User/store';
 
-function LoginForm({isAuthenticated, user, login, logout}) {
-
+function RegisterForm() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState(true);
@@ -18,7 +17,7 @@ function LoginForm({isAuthenticated, user, login, logout}) {
             await UserService.loginUser(email, password)
             setMessage('Login succesful.')
         } catch (e) {
-            setMessage('There was a problem with login.')
+            setMessage('There was a problem with the registration.')
         }
     };
 
@@ -65,12 +64,4 @@ function LoginForm({isAuthenticated, user, login, logout}) {
     )
 }
 
-const mapStateToProps = (state) => ({
-    isAuthenticated: state.isAuthenticated,
-    user: state.user,
-  });
-  
-const mapDispatchToProps = {login,logout,};
-
-export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
-
+export default RegisterForm
