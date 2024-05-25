@@ -8,10 +8,8 @@ import { useEffect } from "react";
 
 function TournamentDetails({isAuthenticated, user, login, logout }) {
     useEffect(() => {
-        // Create a WebSocket instance
-        const socket = new WebSocket('ws://localhost:3000/ws');
+        const socket = new WebSocket('ws://localhost:3000/ws'); // to be replaced with the actual WS endpoint address
 
-        // Event listeners
         socket.addEventListener('open', () => {
             console.log('Connected to WebSocket server');
         });
@@ -37,8 +35,6 @@ function TournamentDetails({isAuthenticated, user, login, logout }) {
         return <div>Tournament not found</div>;
     }
     
-    // alert(tournament)
-
     return (
         <div className="tournamentWrapper">
             <p>Szczegóły Turnieju</p>

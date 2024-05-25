@@ -4,7 +4,6 @@ import {Link} from "react-router-dom";
 import UserButtons from './User/UserButtons';
 
 function App() {
-    
     return (
         <div className="app">
             <UserButtons/>
