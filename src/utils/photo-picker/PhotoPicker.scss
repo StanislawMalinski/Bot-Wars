@@ -1,15 +1,3 @@
-.photo-picker-popup-window {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: min(500px, 95%);
-    height: fit-content;
-    padding: 20px;
-    border-radius: 10px;
-    background-color: #6a6a6a;
-}
-
 .user-setting-popup-window-background {
     position: fixed;
     top: 0;
@@ -17,29 +5,112 @@
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-}
 
-.photo-picker-popup-container {
-    display: flex;
-    flex-direction: column;
-}
+    .photo-picker-popup-window {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: min(500px, 95%);
+        height: fit-content;
+        padding: 20px;
+        border-radius: 10px;
+        background-color: #1a1a1a;
 
-.photo-picker-popup-operation-btns {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+        .photo-picker-popup-container {
+            display: flex;
+            flex-direction: column;
+
+            .close-button {
+                $softorange: #10510d;
+                $tomatored: #F25C66;
+
+                .close-container{
+                    position: relative;
+                    margin-left: auto;
+                    width: 50px;
+                    cursor: pointer;
+                }
+
+                .leftright{
+                    height: 4px;
+                    width: 50px;
+                    position: absolute;
+                    margin-top: 24px;
+                    background-color: $softorange;
+                    border-radius: 2px;
+                    transform: rotate(45deg);
+                    transition: all .3s ease-in;
+                    }
+
+                .rightleft{
+                    height: 4px;
+                    width: 50px;
+                    position: absolute;
+                    margin-top: 24px;
+                    background-color: $softorange;
+                    border-radius: 2px;
+                    transform: rotate(-45deg);
+                    transition: all .3s ease-in;
+                }
+
+                label{
+                    color: white;
+                    font-family: Helvetica, Arial, sans-serif; 
+                    font-size: 10px;
+                    text-transform: uppercase;
+                    letter-spacing: 2px;
+                    transition: all .3s ease-in;
+                    opacity: 0;
+                }
+
+                .close{
+                    margin: 50px 0 0 5px;
+                    position: absolute;
+                }
+
+                .close-container:hover .leftright{
+                    transform: rotate(-45deg);
+                    background-color: $tomatored;
+                }
+
+                .close-container:hover .rightleft{
+                    transform: rotate(45deg);
+                    background-color: $tomatored;
+                }
+
+                .close-container:hover label{
+                    opacity: 1;
+                }
+            }
+
+            .photo-picker-component {
+                margin-left: auto;
+                margin-right: auto;
+            }
+            
+            .photo-picker-popup-operation-btns {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+
+                button {
+                    border: none;
+                    margin-top: 20px;
+                    transition: all 0.3s ease;
+                    &:hover {
+                        cursor: pointer;
+                        text-shadow: #188e12 0px 0px 10px;
+                    } 
+                }
+            }
+        }        
+    }
 }
 
 .photo-picker-popup-arrow {
     visibility: hidden;
 }
 
-.photo-picker-popup-close-btn {
-    width: 50px;
-    margin-left: auto;
-    border-radius: 50%;
-}
-
-.photo-picker-component {
-    margin-left: auto;
-    margin-right: auto;
+.place-image {
+    filter: invert(80%);
 }
