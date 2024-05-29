@@ -3,31 +3,44 @@
 .tournamentWrapper{
     @extend .color-primary-0;
 
-    max-width: 70vw;
+    width: 100vw;
+    height: 100vh;
     margin: 0 auto;
     text-align: center;
-    .tournamentDetails{
-        display:flex;
-        flex-direction: row;
-        text-align: left;
 
-        .details{
-            display:flex;
-            flex-direction: column;
+    display: grid;
+    grid-template-columns: 30% 70%;
 
-            p{
+
+    .tournamentOverview{
+        height: 90%;
+        display: grid;
+        grid-template-rows: min-content min-content 1fr;
+
+        p {
+            font-size: 20px;
+            text-align: left;
+        }
+
+        div {
+            background-color: white;
+            border-radius: 10px;
+            margin: 10px 0;
+            padding: 10px;
+        }
+        
+        .tournamentOverviewImage{
+            img{
+                width: 100%;
+                height: 100%;
                 font-size: 20px;
-                margin: 5px 0
+                text-align: left; 
             }
         }
 
-        .tournamentImage{
-            flex-basis: 50%;
-            background-color: red;
+        .TournamentOverviewDescription {
+
         }
     }
-    .tournamentDescription{
-        font-size: 20px;
-        text-align: left;
-    }
+    
 }

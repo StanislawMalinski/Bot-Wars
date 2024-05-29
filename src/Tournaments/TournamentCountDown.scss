@@ -1,0 +1,15 @@
+.tournamentCountdown{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 5px;
+
+    p {
+        padding: 5px;
+        border: 1px solid black;
+        border-radius: 10px;
+
+        background-color: #555;
+
+        color: red;
+    }
+}

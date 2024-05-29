@@ -1,0 +1,24 @@
+.tournamentBotListContainer {
+    overflow-y: scroll;
+    .tournamentBotList {
+    display: flex;
+    flex-direction: column;
+
+    .tournamentBot {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+
+        p {
+            font-size: 20px;
+        }
+    }
+
+    .light {
+        background-color: #545454;
+    }
+
+    .dark {
+        background-color: #333;
+    }
+    }
+}

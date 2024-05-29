@@ -5,6 +5,10 @@ import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { login, logout } from '../User/store';
+import UserButtons from '../User/UserButtons';
+import TournamentBotList from './TournamentBotList';
+import TournamentCountDown from './TournamentCountDown';
+
 function TournamentDetails({isAuthenticated, user, login, logout }) {
 
     const { tournamentId } = useParams();
@@ -25,25 +29,36 @@ function TournamentDetails({isAuthenticated, user, login, logout }) {
     // alert(tournament)
 
     return (<>{(!tournament || Object.keys(tournament).length === 0) ? <div>Tournament not found</div> :
-        (<div className="tournamentWrapper">
-            <p>Szczegóły Turnieju</p>
-            <div className="tournamentDetails">
-                <div className="details">
-                    <p>Title: {tournament.tournamentTitle}</p>
-                    <p>Creator: {tournament.creatorName}</p>
-                    <p>Player limit: {tournament.playersLimit}</p>
-                    <p>Planned on: {tournament.tournamentsDate}</p>
-                    <p>Ograniczenia: {tournament.limitations}</p>
-                    <p>Status: {tournament.status}</p>
+        (<>
+            <UserButtons/>
+            <div className="tournamentWrapper">
+                <div className="col1">
+                    <div className="tournamentOverview">
+                        <div className="tournamentOverviewInfo">
+                            <p>Creator: {tournament.creatorName}</p>
+                            <p>Player limit: {tournament.playersLimit}</p>
+                            <p>Planned on: {tournament.tournamentsDate}</p>
+                            <p>Ograniczenia: {tournament.limitations}</p>
+                            <p>Status: {tournament.status}</p>
+                        </div>
+                        {tournament.image &&
+                            <div className='tournamentOverviewImage'>
+                                <img src={tournament.image} alt="tournament"></img>
+                            </div>}
+                        <div className="tournamentOverviewDescription">
+                            <p>Description: {tournament.description}</p>
+                        </div>
+                    </div>
                 </div>
-                {/* <img className="tournamentImage" src="" alt=""></img> */}
-                <div className="tournamentImage"></div>
+                <div className="col2">
+                    <div className="tournamentTitle">
+                        <h1>{tournament.tournamentTitle}</h1>
+                    </div>
+                    <TournamentCountDown date={tournament.tournamentsDate} />
+                    <TournamentBotList botList={tournament.playersBots} />
+                </div>
             </div>
-            <p className="tournamentDescription">Description: {tournament.description}</p>
-            {isAuthenticated ? (
-                <button className="btn"><Link to={`/tournaments/edit/${tournament.id}`}>Edit Tournament</Link></button>
-            ) : null}
-        </div>)}
+        </>)}
         </>
     );
 }
