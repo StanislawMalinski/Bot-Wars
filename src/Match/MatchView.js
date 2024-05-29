@@ -4,6 +4,7 @@ import UserButtons from '../User/UserButtons';
 import { MatchesService } from '../services/MatchesService';
 import MovesTable from './MovesTable';
 import MatchOverView from './MatchOverView';
+import Visualization from './Visualization';
 
 import './MatchView.scss';
 
@@ -53,6 +54,7 @@ export default function MatchView() {
   
   const [match, setMatch] = useState({});
   const [log, setLog] = useState({"rounds": [], "result": ""});
+  const [gameData, setGameData] = useState({ gameStates: [] });
 
   useEffect(() => {
     MatchesService.getMatch(id).then((data) => {
@@ -63,7 +65,15 @@ export default function MatchView() {
     });
 
     MatchesService.getMatchLog(id).then((data) => {
-      setLog(getLog(data.log));
+      const parsedLog = getLog(data.log);
+      setLog(parsedLog);
+      setGameData({
+        gameStates: parsedLog.rounds.map(round => ({
+          player1: round.boardState,
+          player2: round.playerHand,
+          table: round.playerMove
+        }))
+      });
     }).catch((e) => {
       console.log(e);
     });
@@ -72,13 +82,13 @@ export default function MatchView() {
   return (
     <div>
       <UserButtons />
-      <div className="match-site">
+      <div className="match-site"> 
         <MatchOverView match={match} />
-        <div className="visualisation">
-          <p>Visualisation</p>
+        <div className="visualization">
+          <Visualization gameData={gameData} />
         </div>
         <MovesTable log={log} />
       </div>
     </div>
   );
-}
+} 
