@@ -1,12 +1,11 @@
-import TournamentNav from './TournamentNav';
+import React from 'react';
 import { connect } from 'react-redux';
-import UserButtons from "../User/UserButtons";
+import TournamentNav from './TournamentNav';
 import Leaderboard from "./leaderboard";
 
-function TournamentsLeaderboard({ tournaments, isAuthenticated }) {
+function TournamentsLeaderboard({ isAuthenticated, user }) {
     return (
         <div className="tournaments-container">
-            <UserButtons></UserButtons>
             <TournamentNav />
             <Leaderboard></Leaderboard>
         </div>
@@ -15,6 +14,7 @@ function TournamentsLeaderboard({ tournaments, isAuthenticated }) {
 
 const mapStateToProps = (state) => ({
     isAuthenticated: state.isAuthenticated,
+    user: state.user,
 });
 
 export default connect(mapStateToProps)(TournamentsLeaderboard);
