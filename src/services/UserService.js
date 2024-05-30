@@ -33,6 +33,9 @@ export const UserService = {
       id: jwtData['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier']
     }))
   },
+  searchPlayersByName: async function (name, pageNumber, pageSize) {
+    return await Api.req(() => {return Api.get(`Player/SearchByName?playerName=${name}&PageNumber=${pageNumber}&PageSize=${pageSize}`)})
+  },
   getPlayerInfo: async function (idOrName) {
     if (Number.isInteger(parseInt(idOrName))) {
       return await Api.req(() => {return Api.get(`Player/getPlayerInfo?playerId=${idOrName}`)})

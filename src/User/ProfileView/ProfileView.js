@@ -21,12 +21,13 @@ function ProfileView() {
     const [state, setState] = useState("games");
     const [image, setImage] = useState("");
     const [userLoading, setUserLoading] = useState(true);
-    const myID = store.getState().user.id;
+    const isThatMe = () => {if(!store.getState().user)
+        return false;
+        return parseInt(store.getState().user.id) === user.id;}
 
     useLayoutEffect(() => {
         UserService.getPlayerInfo(name).then((data) => {
             setUser(data.data.data);
-            console.log(user)
             setUserLoading(false)
         }).catch((error) => {
             console.log(error);
@@ -95,7 +96,7 @@ function ProfileView() {
                     </div>
                 </div>
                 <div className='cell row2col1 notcollapse'>
-                    {user.id === myID ? 
+                    {isThatMe() ? 
                         <PhotoPicker 
                             triggerButton={<button className='photo-picker-button'>Change photo</button>} 
                             onSelect={(p) => {

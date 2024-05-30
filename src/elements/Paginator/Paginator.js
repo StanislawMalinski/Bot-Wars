@@ -11,7 +11,7 @@ export default function Paginator({ pageCount, currentPage, handlePageClick }) {
             pageCount={pageCount}
             forcePage={currentPage}
             marginPagesDisplayed={2}
-            pageRangeDisplayed={2   }
+            pageRangeDisplayed={2}
             onPageChange={handlePageClick}
             containerClassName={'pagination'}
             subContainerClassName={'pages pagination'}
