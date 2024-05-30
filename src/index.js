@@ -31,6 +31,8 @@ import { getListOfTournaments } from './Tournaments/getListOfTournaments';
 import UserSettings from './User/Settings/UserSettings';
 import AnimatedBackground from "./AnimatedBackground";
 
+import Temp from "./elements/Ladder/Temp";
+
 const games = [{name:'Szachy', id:1}, {name:'Warcaby', id:2}, {name:'Scrabble', id:3}, {name:'Chińczyk', id:4}, {name:'Go', id:5}]
 
 const tournaments = getListOfTournaments();
@@ -119,6 +121,10 @@ const router = createBrowserRouter([
         path: "/admin/PlayerTournaments",
         element: <PlayerTournaments/>,
     },
+    {
+        path: "/temp",
+        element: <Temp/>,
+    }
     
 ]);
 

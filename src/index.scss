@@ -84,3 +84,30 @@ div {
   z-index: -1;
 }
 
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+  visibility: hidden;
+
+  transition: all 0.5s;
+  &:hover {
+      visibility: visible;
+  }
+}
+
+::-webkit-scrollbar-track {
+  background: #114002;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #001804;
+  border-radius: 4px;
+  transition: all 0.5s;
+  &:hover {
+      background: #016d29;
+  }
+}
+
+::-webkit-scrollbar-corner {
+  background-color: transparent ; 
+}
