@@ -2,6 +2,10 @@ import React, { useRef } from 'react';
 import './Home.scss';
 import roboImg from './resources/robot3.png';
 
+import pythonLogo from './resources/python-logo.svg';
+import javaLogo from './resources/java-logo.svg';
+import cppLogo from './resources/C++-logo.svg';
+
 function Home({ isAuthenticated }) {
     const getStartedRef = useRef(null);
 
@@ -48,33 +52,50 @@ function Home({ isAuthenticated }) {
                     <p>Join tournaments, compete with players, and climb the leaderboard to become the champion.</p>
                 </div>
             </div>
-                        
             <div ref={getStartedRef} className="content">
-                <div className="content-box">
-                    <h2>Getting Started</h2>
-                    <ol>
-                        <li><a href="link-to-signup">Sign Up</a>: Create your account to join the community.</li>
-                        <li><a href="link-to-games">Explore Games</a>: Discover various bot games and tournaments available.</li>
-                        <li><a href="link-to-create-tournament">Create Your Own Tournament</a>: Design and host your tournaments, invite friends, and compete.</li>
-                    </ol>
+            <div className="content-box big-component">
+                    <h2>Language Bot support</h2>
+                    <div className="language-box-container">
+                        <div className="python-logo language-box">
+                            <img className="language-logo" src={pythonLogo} alt="Python Logo" />
+                        </div>
+                        <div className="java-logo language-box">
+                            <img className="language-logo" src={javaLogo} alt="Java Logo" />
+                        </div>
+                        <div className="cpp-logo language-box">
+                            <img className="language-logo" src={cppLogo} alt="C++ Logo" />
+                        </div>
+                    </div>
                 </div>
-                <div className="content-box">
-                    <h2>How to Play</h2>
-                    <ul>
-                        <li><h3>Design Your Bot:</h3> <span>Use our intuitive tools to create and program your bot or see the example bots on our <a href="link-to-signup">GitHub</a> page</span></li>
-                        <li><h3>Test Your Bot:</h3> <span>Run simulations to ensure your bot performs well under different scenarios.</span></li>
-                        <li><h3>Join Tournament:</h3> <span>Enter your bot in matches and tournaments to compete against others.</span></li>
-                        <li><h3>Analyze Results:</h3> <span>Review match results to improve your bot's performance.</span></li>
-                    </ul>
-                </div>
-                <div className="content-box">
-                    <h2>Registration Process</h2>
-                    <ol>
-                        <li>Visit the <a href="link-to-signup">Sign-Up Page</a>.</li>
-                        <li>Fill in your details and verify your email.</li>
-                        <li>Complete your profile and set up your first bot.</li>
-                        <li>Start participating in tournaments and duels!</li>
-                    </ol>
+                <div className="gs-rp-htp-box big-component">
+                    <div className="gs-rp-box">
+                        <div className="getting-started-box content-box">
+                            <h2>Getting Started</h2>
+                            <ol>
+                                <li><a href="link-to-signup">Sign Up</a>: Create your account to join the community.</li>
+                                <li><a href="link-to-games">Explore Games</a>: Discover various bot games and tournaments available.</li>
+                                <li><a href="link-to-create-tournament">Create Your Own Tournament</a>: Design and host your tournaments, invite friends, and compete.</li>
+                            </ol>
+                        </div>
+                        <div className="registration-process content-box">
+                            <h2>Registration Process</h2>
+                            <ol>
+                                <li>Visit the <a href="link-to-signup">Sign-Up Page</a>.</li>
+                                <li>Fill in your details and verify your email.</li>
+                                <li>Complete your profile and set up your first bot.</li>
+                                <li>Start participating in tournaments and duels!</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div className="how-to-play-box content-box">
+                        <h2>How to Play</h2>
+                        <ul>
+                            <li><h3>Design Your Bot:</h3> <span>Use our intuitive tools to create and program your bot or see the example bots on our <a href="link-to-signup">GitHub</a> page</span></li>
+                            <li><h3>Test Your Bot:</h3> <span>Run simulations to ensure your bot performs well under different scenarios.</span></li>
+                            <li><h3>Join Tournament:</h3> <span>Enter your bot in matches and tournaments to compete against others.</span></li>
+                            <li><h3>Analyze Results:</h3> <span>Review match results to improve your bot's performance.</span></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
