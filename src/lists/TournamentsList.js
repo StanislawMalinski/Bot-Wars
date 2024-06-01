@@ -2,94 +2,95 @@ import './TournamentList.scss';
 import DeleteTournamentButton from './DeleteTournamentButton';
 import TournamentNav from '../Tournaments/TournamentNav';
 import {Link, useNavigate} from 'react-router-dom';
-import { connect } from 'react-redux';
-import { TournamentService } from "../services/TournamentService";
-import React, { useState, useEffect, useMemo } from "react";
+import {connect} from 'react-redux';
+import React, {useState} from "react";
+import Paginator from "../elements/Paginator/Paginator"
+import TournamentFilterForm from '../forms/TournamentFilterForm';
 
-function TournamentsList({ tournaments, isAuthenticated }) {
-    const navigate = useNavigate();
-    const currentDate = new Date();
-    const [upcomingTournaments, setUpcomingTournaments] = useState([]);
-    const [pastTournaments, setPastTournaments] = useState([]);
-    const [message, setMessage] = useState('');
-    
-    useEffect(() => {
-        TournamentService.getFilteredTournaments(0, 10, {minPlayOutDate: currentDate.toISOString()})
-            .then((response) => {
-                setUpcomingTournaments(response.data.data.page);
-            }).catch((error) => {
-                setMessage('Error loading tournaments');
-            });
-        TournamentService.getFilteredTournaments(0, 10, {maxPlayOutDate: currentDate.toISOString()})
-            .then((response) => {
-                setPastTournaments(response.data.data.page);
-            }).catch((error) => {
-                setMessage('Error loading tournaments');
-            });
-    }, [currentDate]);
+function TournamentsList({tournaments, isAuthenticated, user}) {
+  const tournamentsPerPage = 8;
+  const navigate = useNavigate();
+  const [filteredTournaments, setFilteredTournaments] = useState([]);
+  const [message, setMessage] = useState('');
+  const [pageCount, setPageCount] = useState('');
+  const [currentPage, setCurrentPage] = useState(0);
+  const tournamentFilterFormRef = React.useRef();
 
-    const handleTournamentClick = (tournamentId) => {
-        navigate(`/tournaments/details/${tournamentId}`);
-    };
+  const handleTournamentClick = (tournamentId) => {
+    navigate(`/tournaments/details/${tournamentId}`);
+  };
 
-    const TournamentItem = ({ tournament }) => (
-        <div className="tournament-item" onClick={() => handleTournamentClick(tournament.id)}>
-            <div className="tournament-detail">{tournament.tournamentTitle}</div>
-            <div className="tournament-detail">{tournament.author}</div>
-            <div className="tournament-detail">{tournament.tournamentsDate}</div>
-            <div className="tournament-detail">{tournament.playersLimit}</div>
-        </div>
-    );
+  const handlePageClick = (selectedObject) => {
+    setCurrentPage(selectedObject.selected);
+  };
 
-    return (
-        <div className="tournaments-container">
-            <TournamentNav/>
-            <div className="tournaments-box">
-                <h1>Upcoming Tournaments</h1>
-                {isAuthenticated && (
-                        <Link className="menu-btn" activeClassName="active" to="/tournaments/add">
-                            <button className="btn">Add Your Tournament</button>
-                        </Link>
-                    )}
-                <div className="tournament-headers">
-                    <span className="header-detail">Name</span>
-                    <span className="header-detail">Author</span>
-                    <span className="header-detail">Date</span>
-                    <span className="header-detail">Action</span>
-                </div>
-                <div className="tournaments-content">
-                    {isAuthenticated ?
-                    upcomingTournaments.map(tournament => (
-                        <div key={tournament.id}>
-                            <TournamentItem key={tournament.id} tournament={tournament} />
-                            <DeleteTournamentButton tournamentId={tournament.id} />
-                        </div>
-                    )) 
-                    : 
-                    upcomingTournaments.map(tournament => (
-                        <TournamentItem key={tournament.id} tournament={tournament} />
-                    ))}
-                </div>
-                <h1>Past Tournaments</h1>
-                <div className="tournament-headers">
-                    <span className="header-detail">Name</span>
-                    <span className="header-detail">Author</span>
-                    <span className="header-detail">Date</span>
-                    <span className="header-detail">Action</span>
-                </div>
-                <div className="tournaments-content">
-                    {pastTournaments.map(tournament => (
-                        <TournamentItem key={tournament.id} tournament={tournament} />
-                    ))}
-                </div>
+  const handleDeleteSuccess = () => {
+    tournamentFilterFormRef.current.filterTournaments();
+  };
+
+  const TournamentItem = ({tournament}) => (
+    <div className="tournament-item" onClick={() => handleTournamentClick(tournament.id)}>
+      <div className="tournament-detail">{tournament.tournamentTitle}</div>
+      <div className="tournament-detail">{tournament.creatorName}</div>
+      <div className="tournament-detail">{tournament.tournamentsDate}</div>
+      <div className="tournament-detail">{tournament.status}</div>
+      {isAuthenticated && user.role === "Admin" ?
+        <DeleteTournamentButton tournamentId={tournament.id} onDeleteSuccess={handleDeleteSuccess}/>
+        : <></>}
+    </div>
+  );
+
+  return (
+    <div className="tournaments-container">
+      <TournamentNav/>
+      <TournamentFilterForm
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        tournamentsPerPage={tournamentsPerPage}
+        setFilteredTournaments={setFilteredTournaments}
+        setPageCount={setPageCount}
+        setMessage={setMessage}
+        ref = {tournamentFilterFormRef}
+      />
+      <div className="tournaments-box">
+        {isAuthenticated && (
+          <button className="btn">
+            <Link className="menu-btn" activeClassName="active" to="/tournaments/add">
+            Add Your Tournament
+            </Link>
+          </button>
+        )}
+        {filteredTournaments.length > 0 ?
+          <div className="tournament-wrapper">
+            <h1>Tournaments</h1>
+            <div className="tournament-headers">
+              <span className="header-detail">Name</span>
+              <span className="header-detail">Author</span>
+              <span className="header-detail">Date</span>
+              <span className="header-detail">Status</span>
+              {isAuthenticated && user.role === "Admin" ?
+                <span className="header-detail">Delete</span>
+                : <></>}
             </div>
-            <p>{message}</p>
-        </div>
-    );
+            <div className="tournaments-content">
+              {filteredTournaments.map(tournament => (
+                <div className="tournaments-table-row" key={tournament.id}>
+                  <TournamentItem key={tournament.id} tournament={tournament}/>
+                </div>
+              ))}
+            </div>
+          </div>
+          : <>There are no tournaments for given filters</>}
+        <Paginator pageCount={pageCount} currentPage={currentPage} handlePageClick={handlePageClick}/>
+      </div>
+      <p>{message}</p>
+    </div>
+  );
 }
 
 const mapStateToProps = (state) => ({
-    isAuthenticated: state.isAuthenticated,
+  isAuthenticated: state.isAuthenticated,
+  user: state.user,
 });
 
 export default connect(mapStateToProps)(TournamentsList);

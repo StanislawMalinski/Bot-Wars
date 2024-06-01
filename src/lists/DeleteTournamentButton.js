@@ -2,21 +2,19 @@ import React from 'react';
 import {TournamentService} from "../services/TournamentService";
 
 
-class DeleteTournamentButton extends React.Component {
-  handleClick = async (tournamentId) => {
+function DeleteTournamentButton({tournamentId,onDeleteSuccess}) {
+  const handleClick = async (event, tournamentId) => {
+    event.stopPropagation();
     try {
-      console.log('usuwamy gre o id: ' + tournamentId)
-      const response = await TournamentService.deleteTournament(tournamentId);
-      console.log(response)
+      await TournamentService.deleteTournament(tournamentId);
+      onDeleteSuccess();
     } catch (e) {
         console.log(e);
     }
   };
+  return (
+      <div className="del-btn color-primary-3" onClick={(e) => handleClick(e, tournamentId)}>Delete</div>    );
 
-  render() {
-    return (
-        <div className="del-btn color-primary-3" onClick={() => this.handleClick(this.props.tournamentId)}>Delete</div>    );
-  }
 }
 
 export default DeleteTournamentButton;

@@ -54,7 +54,7 @@ function Home({ isAuthenticated }) {
             </div>
             <div ref={getStartedRef} className="content">
             <div className="content-box big-component">
-                    <h2>Language Bot support</h2>
+                    <h2>Bot Language support</h2>
                     <div className="language-box-container">
                         <div className="python-logo language-box">
                             <img className="language-logo" src={pythonLogo} alt="Python Logo" />

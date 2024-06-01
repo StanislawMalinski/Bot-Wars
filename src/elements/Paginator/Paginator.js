@@ -1,7 +1,7 @@
 import ReactPaginate from 'react-paginate';
 import "./Paginator.scss";
 
-export default function Paginator({ pageCount, handlePageClick }) {
+export default function Paginator({ pageCount, currentPage, handlePageClick }) {
     return (
         <ReactPaginate
             className='paginator'
@@ -9,6 +9,7 @@ export default function Paginator({ pageCount, handlePageClick }) {
             nextLabel={'≫'}
             breakLabel={'...'}
             pageCount={pageCount}
+            forcePage={currentPage}
             marginPagesDisplayed={2}
             pageRangeDisplayed={2   }
             onPageChange={handlePageClick}

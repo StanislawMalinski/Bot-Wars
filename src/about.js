@@ -128,8 +128,8 @@ function About() {
                     </div>
                     <div className="description">
                         <img src={scrumPhoto} alt="Scrum Master" className="team-photo" />
-                        <h2>Scam Master</h2>
-                        <p>Stanisław Maliński, our Scam Master, facilitates our agile processes, ensures effective communication, and removes any obstacles that may hinder the team's progress.</p>
+                        <h2>Scum Master</h2>
+                        <p>Stanisław Maliński, our Scum Master, facilitates our agile processes, ensures effective communication, and removes any obstacles that may hinder the team's progress.</p>
                     </div>
                 </div>
 

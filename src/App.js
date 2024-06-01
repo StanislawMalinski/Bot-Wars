@@ -4,17 +4,10 @@ import Home from './Home';
 import { useState } from 'react';
 
 function App() {
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const [isCollapsed, setIsCollapsed] = useState(false);
-
-
-    const toggleUserBar = () => {
-        setIsCollapsed(!isCollapsed);
-    };
+    const [isAuthenticated] = useState(false);
 
     return (
         <div className="app">
-            
             <Navbar isAuthenticated={isAuthenticated} user={null} />
                     {/* tutaj przesyla uzytkownika */}
 
