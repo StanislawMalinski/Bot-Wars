@@ -63,16 +63,18 @@ function AddGameForm({isAuthenticated, user, login, logout}) {
                     </div>
                 </form>
             </div>
-            <p className="color-primary-3">
-                Here you can add a new type of a Bot Wars game to the system.<br></br>
-                Following game files must be in the zip archive:<br></br>
-                <ul>
-                    <li>The main game program must be a valid Linux executable and must be named: <i>game</i></li>
-                    <li>File defining game interface for bots, named: <i>interface</i></li>
-                    <li>Text file defining possible numbers of players containing a list of numbers
-                        separated by commas, named: <i>interface</i></li>
-                </ul>
-            </p>
+            <div className={"text-below-form"}>
+                <p className="color-primary-3">
+                    Here you can add a new type of a Bot Wars game to the system.<br></br>
+                    Following game files must be in the zip archive:<br></br>
+                    <ul>
+                        <li>The main game program must be a valid Linux executable and must be named: <i>game</i></li>
+                        <li>File defining game interface for bots, named: <i>interface</i></li>
+                        <li>Text file defining possible numbers of players containing a list of numbers
+                            separated by commas, named: <i>interface</i></li>
+                    </ul>
+                </p>
+            </div>
             <p>{message}</p>
         </div>
     )

@@ -1,0 +1,31 @@
+.AddBotForm {
+    border-radius: 10px;
+}
+
+.game-options-container {
+    margin-top: -20px;
+    position: relative;
+    height: 0;
+    .game-options {
+        background-color: #1a1a1a;
+        width: 100%;
+        .game-option {
+            padding: 2px;
+            cursor: pointer;
+            font-size: 15px;
+            &:hover {
+                background-color: #023204;
+            }
+        }
+    }
+}
+
+.bot-language-label {
+    display: inline;
+}
+
+.bot-language {
+    font-size: 20px;
+    display: inline;
+    margin: 0;
+}

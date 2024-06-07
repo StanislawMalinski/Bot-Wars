@@ -28,6 +28,11 @@ function Navbar({ isAuthenticated, user }) {
                         </Link>
                     </div>
                     <div className="menu-btn">
+                        <Link to="/bots">
+                            <button className="btn">Your bots</button>
+                        </Link>
+                    </div>
+                    <div className="menu-btn">
                         <Link to="/about">
                             <button className="btn">About us</button>
                         </Link>

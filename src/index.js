@@ -30,6 +30,8 @@ import store from './User/store';
 import { getListOfTournaments } from './Tournaments/getListOfTournaments';
 import UserSettings from './User/Settings/UserSettings';
 import AnimatedBackground from "./AnimatedBackground";
+import AddBotForm from "./forms/AddBotForm";
+import BotList from "./lists/BotList";
 
 const games = [{name:'Szachy', id:1}, {name:'Warcaby', id:2}, {name:'Scrabble', id:3}, {name:'Chińczyk', id:4}, {name:'Go', id:5}]
 
@@ -116,7 +118,14 @@ const router = createBrowserRouter([
         path: "/admin/PlayerTournaments",
         element: <PlayerTournaments/>,
     },
-    
+    {
+        path: "/bots/add",
+        element: <AddBotForm/>
+    },
+    {
+        path: "/bots",
+        element: <BotList/>
+    },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

@@ -1,13 +1,12 @@
 import {Api} from './Api'
 
 export const BotService = {
-  getBotsForPlayer: async function (id) {
-    return await Api.req(() => {return Api.get(`Player/getBotsForPlayer?playerId=${id}`)})
+  getBotsForPlayer: async function (username, pageSize, pageNum) {
+    return await Api.req(() => {return Api.get(`Bot/getForPlayer?playerName=${username}&PageNumber=${pageNum}&PageSize=${pageSize}`)})
   },
-  addBot: async function (GameId, Language, BotFile) {
-    return await Api.req(() => {return Api.post(`Bot/add?GameId=${GameId}&Language=${Language}`, {
-      BotFile: BotFile
-    })})
+  addBot: async function (GameId, Language, body) {
+    console.log(body)
+    return await Api.req(() => {return Api.post(`Bot/add?GameId=${GameId}&Language=${Language}`, body)})
   },
   deleteBot: async function (botId) {
     return await Api.req(() => {return Api.delete(`Bot/delete?botId=${botId}`)})
