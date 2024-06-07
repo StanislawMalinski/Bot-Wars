@@ -1,8 +1,8 @@
 @import '../index';
 
 .tournaments-container {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: min(25%, 200px) auto;
     align-items: center;
     font-size: 0.9rem;
 

@@ -40,9 +40,9 @@ function TournamentsList({tournaments, isAuthenticated, user}) {
     </div>
   );
 
-  return (
+  return (<>
+    <TournamentNav/>
     <div className="tournaments-container">
-      <TournamentNav/>
       <TournamentFilterForm
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
@@ -52,6 +52,7 @@ function TournamentsList({tournaments, isAuthenticated, user}) {
         setMessage={setMessage}
         ref = {tournamentFilterFormRef}
       />
+      <div></div>
       <div className="tournaments-box">
         {isAuthenticated && (
           <button className="btn">
@@ -85,6 +86,7 @@ function TournamentsList({tournaments, isAuthenticated, user}) {
       </div>
       <p>{message}</p>
     </div>
+    </> 
   );
 }
 
