@@ -3,10 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {
-    createBrowserRouter,
-    RouterProvider,
-} from "react-router-dom";
+import {createBrowserRouter, RouterProvider,} from "react-router-dom";
 import GamesList from "./lists/GamesList";
 import GameDetails from "./Games/GameDetails";
 import AddGameForm from "./forms/AddGameForm";
@@ -25,17 +22,14 @@ import PlayerTournaments from "./admin/PlayerTournaments";
 import Leaderboard from "./Tournaments/leaderboard.js";
 import TournamentsHelp from "./Tournaments/TournamentsHelp";
 import TournamentsLeaderboard from "./Tournaments/TournamentsLeaderboard";
-import { Provider } from 'react-redux';
+import {Provider} from 'react-redux';
 import store from './User/store';
-import { getListOfTournaments } from './Tournaments/getListOfTournaments';
 import UserSettings from './User/Settings/UserSettings';
 import AnimatedBackground from "./AnimatedBackground";
 import AddBotForm from "./forms/AddBotForm";
 import BotList from "./lists/BotList";
 
 const games = [{name:'Szachy', id:1}, {name:'Warcaby', id:2}, {name:'Scrabble', id:3}, {name:'Chińczyk', id:4}, {name:'Go', id:5}]
-
-const tournaments = getListOfTournaments();
 
 const router = createBrowserRouter([
     {
@@ -68,7 +62,7 @@ const router = createBrowserRouter([
     },
     {
         path: "/tournaments/home",
-        element: <TournamentsList tournaments={tournaments} />,
+        element: <TournamentsList />,
     },
     {
         path: "/tournaments/details/:tournamentId",

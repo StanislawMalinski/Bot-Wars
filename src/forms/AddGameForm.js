@@ -6,20 +6,25 @@ import {GameService} from "../services/GameService";
 function AddGameForm({isAuthenticated, user, login, logout}) {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
-    const [setFile] = useState('');
+    const [file, setFile] = useState('');
     const [message, setMessage] = useState(true);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         try {
-            console.log(name,description)
-            await GameService.addGameType(10,name,description,"string",true)
+            console.log(name, description)
+            await GameService.addGameType(10, name, description, "string", true)
             setMessage('Game added succesfully')
         } catch (e) {
             setMessage('There was a problem with adding game.')
         }
     };
+
+    const onUploadFile = (e) => {
+        console.log(e.target.value)
+        setFile(e.target.value)
+    }
 
     return (
         <div className="add-game-form">
@@ -45,15 +50,22 @@ function AddGameForm({isAuthenticated, user, login, logout}) {
                             onChange={e => setDescription(e.target.value)}
                             maxLength="200"
                         />
-                    </div>
 
+                        <p style={{
+                            color: "#0BE400",
+                            fontSize: "16px"
+                        }}>
+                            The main game program must be a file containing raw code ending with a appropriate file
+                            extension (.py .java .c).<br></br>
+                        </p>
+                    </div>
                     <div className="form-group short-input">
                         <label htmlFor="files">Game files</label>
                         <input
                             type="file"
                             id="files"
-                            accept=".zip"
-                            onChange={e => setFile(e.target.value)}
+                            accept=".py,.java,.c"
+                            onChange={onUploadFile}
                         />
                     </div>
 
@@ -62,18 +74,6 @@ function AddGameForm({isAuthenticated, user, login, logout}) {
                         <button type="button" className="cancel">Cancel</button>
                     </div>
                 </form>
-            </div>
-            <div className={"text-below-form"}>
-                <p className="color-primary-3">
-                    Here you can add a new type of a Bot Wars game to the system.<br></br>
-                    Following game files must be in the zip archive:<br></br>
-                    <ul>
-                        <li>The main game program must be a valid Linux executable and must be named: <i>game</i></li>
-                        <li>File defining game interface for bots, named: <i>interface</i></li>
-                        <li>Text file defining possible numbers of players containing a list of numbers
-                            separated by commas, named: <i>interface</i></li>
-                    </ul>
-                </p>
             </div>
             <p>{message}</p>
         </div>
