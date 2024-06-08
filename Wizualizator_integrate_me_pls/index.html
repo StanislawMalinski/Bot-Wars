@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gra w Karty</title>
+<style>
+    canvas {
+        border: 1px solid black;
+        display: block;
+        margin: auto;
+    }
+    #gameData {
+        width: 80%;
+        height: 300px;
+        margin: 20px auto;
+        border: 1px solid #000;
+        padding: 10px;
+        overflow-y: scroll;
+        white-space: pre-wrap;
+        background-color: #f9f9f9;
+    }
+    #controls {
+        text-align: center;
+        margin: 20px;
+    }
+    #controls input {
+        width: 40px;
+    }
+</style>
+</head>
+<body>
+<canvas id="myCanvas" width="1000" height="600"></canvas>
+<div id="controls">
+    <button id="prevBtn">Poprzedni układ</button>
+    <span id="counter">1 / 1</span>
+    <button id="nextBtn">Następny układ</button>
+    <input type="number" id="moveNumber" min="1" value="1">
+    <button id="goToMoveBtn">Idź do ruchu</button>
+</div>
+<div id="gameData"></div>
+<script>
+    const canvas = document.getElementById('myCanvas');
+    const ctx = canvas.getContext('2d');
+    const cardWidth = 100;
+    const cardHeight = 150;
+    let initialGameState;
+    let moves = [];
+    let currentGameStateIndex = 0;
+    let gameStates = [];
+
+    function drawCard(karta) {
+        ctx.fillStyle = karta.kolor;
+        ctx.fillRect(karta.x, karta.y, cardWidth, cardHeight);
+        ctx.strokeStyle = 'black';
+        ctx.lineWidth = 2;
+        ctx.strokeRect(karta.x, karta.y, cardWidth, cardHeight);
+        ctx.fillStyle = 'black';
+        ctx.font = 'bold 24px Arial';
+        ctx.fillText(karta.liczba, karta.x + 45, karta.y + 75);
+    }
+
+    function drawGameState(gameState) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Draw player 1 cards
+        gameState.player1.forEach((card, i) => {
+            const [liczba, kolor] = card.split(' of ');
+            drawCard({ liczba, kolor, x: cardWidth * i, y: 0 });
+        });
+
+        // Draw player 2 cards
+        gameState.player2.forEach((card, i) => {
+            const [liczba, kolor] = card.split(' of ');
+            drawCard({ liczba, kolor, x: cardWidth * i, y: 450 });
+        });
+
+        // Draw table cards
+        gameState.table.forEach((card, i) => {
+            const [liczba, kolor] = card.split(' of ');
+            drawCard({ liczba, kolor, x: 200 + cardWidth * i, y: 200 });
+        });
+    }
+
+    function updateGameData(gameState) {
+        document.getElementById('gameData').innerText = JSON.stringify(gameState, null, 2);
+    }
+
+    function initializeGame(data) {
+        initialGameState = data.initialGameState;
+        moves = data.moves;
+        gameStates = [JSON.parse(JSON.stringify(initialGameState))];
+
+        function applyMove(gameState, move, player) {
+            const [playerMove, tableMove] = move.split(' ').map(Number);
+            const newState = {
+                player1: [...gameState.player1],
+                player2: [...gameState.player2],
+                table: [...gameState.table]
+            };
+
+            if (player === 1) {
+                const cardToTable = newState.player1[playerMove];
+                const cardFromTable = newState.table[tableMove];
+                newState.player1[playerMove] = cardFromTable;
+                newState.table[tableMove] = cardToTable;
+            } else if (player === 2) {
+                const cardToTable = newState.player2[playerMove];
+                const cardFromTable = newState.table[tableMove];
+                newState.player2[playerMove] = cardFromTable;
+                newState.table[tableMove] = cardToTable;
+            }
+
+            return newState;
+        }
+
+        function generateGameStates() {
+            gameStates = [JSON.parse(JSON.stringify(initialGameState))];
+            for (let i = 0; i < moves.length; i++) {
+                const currentPlayer = (i % 2) + 1;
+                if (moves[i] !== 'fold') {
+                    const newState = applyMove(gameStates[gameStates.length - 1], moves[i], currentPlayer);
+                    gameStates.push(newState);
+                } else {
+                    gameStates.push(JSON.parse(JSON.stringify(gameStates[gameStates.length - 1])));
+                }
+            }
+        }
+
+        generateGameStates();
+
+        function updateUI() {
+            if (gameStates.length === 0) {
+                console.error('No game states found!');
+                return;
+            }
+
+            drawGameState(gameStates[currentGameStateIndex]);
+            updateGameData(gameStates[currentGameStateIndex]);
+            document.getElementById('counter').innerText = `${currentGameStateIndex + 1} / ${gameStates.length}`;
+        }
+
+        // Draw initial game state
+        updateUI();
+
+        // Button handlers
+        document.getElementById('prevBtn').addEventListener('click', () => {
+            if (currentGameStateIndex > 0) {
+                currentGameStateIndex--;
+                updateUI();
+            }
+        });
+
+        document.getElementById('nextBtn').addEventListener('click', () => {
+            if (currentGameStateIndex < gameStates.length - 1) {
+                currentGameStateIndex++;
+                updateUI();
+            }
+        });
+
+        document.getElementById('goToMoveBtn').addEventListener('click', () => {
+            const moveNumber = parseInt(document.getElementById('moveNumber').value, 10);
+            if (moveNumber >= 1 && moveNumber <= gameStates.length) {
+                currentGameStateIndex = moveNumber - 1;
+                updateUI();
+            }
+        });
+    }
+
+    // Fetch initial game state from the server
+    fetch('/game')
+        .then(response => response.json())
+        .then(data => {
+            console.log('Game data fetched:', data);
+            initializeGame(data);
+        })
+        .catch(error => console.error('Error fetching game data:', error));
+</script>
+</body>
+</html>

@@ -12,6 +12,10 @@ $menu-breakpoint: 900px;
     border-bottom: 1px solid #0f0;
     position: relative;
 
+    .logo-link {
+        text-decoration: none;
+    }
+
     .logo {
         display: flex;
         justify-content: left;

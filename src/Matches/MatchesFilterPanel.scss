@@ -1,0 +1,75 @@
+.matches-search-filter-panel {
+    
+    display: flex;
+    flex-direction: column;
+    align-self: start;
+    gap: 5px;
+    background-color: #181818;
+    padding: 20px;
+
+    * {
+        font-size: 20px;
+    }
+
+    .tournaments-list-container {
+        width: 100%;
+        height: 10px;
+        .tournaments-list {
+            position: relative;
+            width: 100%;
+            background-color: #333; 
+            .tournaments-list-element {
+                width: 100%;    
+                padding: 5px;
+                transition: all 0.5s ease;
+
+                &:hover {
+                    background-color: #111;
+                    color: #eee;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
+    .players-list-container {
+        width: 100%;
+        height: 10px;
+        .players-list {
+            position: relative;
+            width: 100%;
+            background-color: #333; 
+            .players-list-element {
+                width: 100%;    
+                padding: 5px;
+                transition: all 0.5s ease;
+
+                &:hover {
+                    background-color: #111;
+                    color: #eee;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
+    .games-list-container {
+        width: 100%;
+        height: 10px;
+        .games-list {
+            position: relative;
+            width: 100%;
+            background-color: #333; 
+            .games-list-element {
+                width: 100%;    
+                padding: 5px;
+                transition: all 0.5s ease;
+                &:hover {
+                    background-color: #111;
+                    color: #eee;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}

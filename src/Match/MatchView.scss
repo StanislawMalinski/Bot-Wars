@@ -1,0 +1,16 @@
+.match-site {
+    display: grid;
+    grid-template-columns: 20% 40% 40%;
+    height: 80vh;
+    width: 96vw;
+
+    column-gap: 10px;
+}
+
+.visualisation {
+    background-color: aqua;
+}
+
+.match-overview {
+    background-color: beige;
+}
