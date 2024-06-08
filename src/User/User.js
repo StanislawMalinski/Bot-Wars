@@ -41,7 +41,7 @@ function User({ isAuthenticated, user, login, logout }) {
             {isAuthenticated ? (
                 <div className="user-profile" onClick={toggleMenu}>
                     <div ref={userInfoRef} className="user-info">
-                        <span className="user-name">username</span>
+                            <span className="user-name">{user.login}</span>
                         <svg
                             className={`arrow-icon ${isMenuOpen ? 'open' : ''}`}
                             xmlns="http://www.w3.org/2000/svg"
