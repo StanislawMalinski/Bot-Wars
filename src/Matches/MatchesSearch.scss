@@ -1,0 +1,6 @@
+.matches-list-container {
+    margin: 20px 0 0 0;
+    display: grid;
+    grid-template-columns: min(25%, 250px) auto;
+    align-items: center;
+}

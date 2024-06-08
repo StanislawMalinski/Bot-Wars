@@ -52,6 +52,9 @@ export const UserService = {
       newLogin: newLogin,
     })})
   },
+  searchPlayersByName: async function (name, pageNumber, pageSize) {
+    return await Api.req(() => {return Api.get(`Player/SearchByName?playerName=${name}&PageNumber=${pageNumber}&PageSize=${pageSize}`)})
+  },
   getGamesForPlayer: async function (id) {
     return await Api.req(() => {return Api.get(`Player/getGamesForPlayer?playerId=${id}`)})
   },

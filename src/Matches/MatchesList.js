@@ -1,7 +1,8 @@
-import "./MatchesList.css";
+import "./MatchesList.scss";
 import {useNavigate} from 'react-router-dom';
+import Paginator from '../elements/Paginator/Paginator';
 
-export default function MatchesList({matchList}) {
+export default function MatchesList({matchList, maxPage, pageClickHandle}) {
     const navigate = useNavigate();
     const handleTournamentClick = (matchId) => {
         return () => navigate(`/match/${matchId}`);
@@ -16,16 +17,19 @@ export default function MatchesList({matchList}) {
         {matchList.map((match) => (
             <div className='match-list-element' key={match.id}>
                 <div className='match-list-element-container'>
-                    <input type="checkbox" onChange={handleMatchChecked(match.id)} />
-                    <div className='match-list-element-title' onClick={handleTournamentClick(match.id)} >{match.tournamentName}</div>
+                    <div className='match-list-element-title-checkbox'>
+                        <input type="checkbox" onChange={handleMatchChecked(match.id)} />
+                        <div className='match-list-element-title' onClick={handleTournamentClick(match.id)} >{match.tournamentName}</div>
+                    </div>
                     <div className='match-list-element-info-container'>
-                        <div className='match-list-element-info'>{match.players.join(', ')}</div>
-                        <div className='match-list-element-info'>{match.gameType}</div>
-                        <div className='match-list-element-info'>{match.date}</div>
+                        <div className='match-list-element-info'>{match.playersBots.map(e => e.userName).join(', ')}</div>
+                        <div className='match-list-element-info'>{match.gameName}</div>
+                        <div className='match-list-element-info'>{match.playedOutDate}</div>
                     </div>
                 </div>
             </div>
         ))}
+        <Paginator pageCount={maxPage} handlePageClick={pageClickHandle}/>
         </div>
         </>
 }

@@ -1,37 +1,38 @@
 import { useParams } from 'react-router-dom';
-import UserButtons from '../User/UserButtons';
+import TournamentNav from '../Tournaments/TournamentNav';
 import { useEffect, useState } from 'react';
 import { MatchesService } from '../services/MatchesService';
 import MatchesList from './MatchesList';
 import MatchesFilterPanel from './MatchesFilterPanel';
-import './MatchesSearch.css';
+import './MatchesSearch.scss';
 
-export default function MatchesSearch() {
-  const { tournamentid, playername, maxdate, mindate, gametype } = useParams();
-  
-  const [tournamentId, setTournamentId] = useState(parseInt(tournamentid) ? parseInt(tournamentid) : null);
-  const [playerName, setPlayerName] = useState(playername ? playername : null);
-  const [maxDate, setMaxDate] = useState(maxdate ? new Date(maxdate) : null);
-  const [minDate, setMinDate] = useState(mindate ? new Date(mindate) : null);
-  const [gameType, setGameType] = useState(gametype ? gametype : null);
-
+export default function MatchesSearch({isAuthenticated}) {
+  const [filter, setFilter] = useState({});
   const [matches, setMatches] = useState([]);
 
+  const [page, setPage] = useState({selected: 0});
+  const [maxPage, setMaxPage] = useState(0);
+
   useEffect(() => {
-    MatchesService.getMatches(1, 10, tournamentId, maxDate, minDate, gameType).then((data) => {
-      setMatches(data);
+    if (filter.minPlayOutDate === '') {
+      filter.minPlayOutDate = new Date(1).toISOString();
+    }
+    MatchesService.getMatches(page.selected, 10, filter).then((data) => {
+      console.log(data);
+      setMatches(data.data.page);
+      setMaxPage(data.data.amountOfPages);
     }).catch((e) => {
       console.log(e);
     });
-  }, [tournamentId, playerName, maxDate, minDate, gameType]);
+  }, [filter, page]);
 
   return (
     <div>
-      <UserButtons />
+      <TournamentNav isAuthenticated={isAuthenticated}/>
       <h1>Matches</h1>
       <div className="matches-list-container">
-        <MatchesFilterPanel setTournamentId={setTournamentId} setPlayerName={setPlayerName} setMaxDate={setMaxDate} setMinDate={setMinDate} setGameType={setGameType} />
-        <MatchesList matchList={matches} />
+        <MatchesFilterPanel triggerFilter={setFilter} />
+        <MatchesList matchList={matches} maxPage={maxPage} pageClickHandle={setPage} />
       </div>
     </div>
   );

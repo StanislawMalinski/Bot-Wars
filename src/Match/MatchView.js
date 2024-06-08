@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import UserButtons from '../User/UserButtons';
 import { MatchesService } from '../services/MatchesService';
 import MovesTable from './MovesTable';
+import {MovesTableButtons} from './MovesTable';
 import MatchOverView from './MatchOverView';
 import Visualization from './Visualization';
 
 import './MatchView.scss';
+import { set } from 'date-fns';
 
 function getLog(log) {
   let table = log.split('\n').map((x) => x.trim());
@@ -55,6 +57,13 @@ export default function MatchView() {
   const [match, setMatch] = useState({});
   const [log, setLog] = useState({"rounds": [], "result": ""});
   const [gameData, setGameData] = useState({ gameStates: [] });
+  const canvasRef = useRef(null);
+  const [round, setRound] = useState(0);
+  const setMove = function (value) {
+    if (value == -2 || value >= log.rounds.length) setRound(log.rounds.length - 1);
+    else setRound(Math.min(Math.max(value,0), log.rounds.length - 1));
+    console.log("round: " + round);
+  }
 
   useEffect(() => {
     MatchesService.getMatch(id).then((data) => {
@@ -81,13 +90,13 @@ export default function MatchView() {
 
   return (
     <div>
-      <UserButtons />
       <div className="match-site"> 
         <MatchOverView match={match} />
         <div className="visualization">
-          <Visualization gameData={gameData} />
+          <Visualization gameData={gameData} curentRound={round} />
+          <MovesTableButtons move={round} setMove={setMove}/>
         </div>
-        <MovesTable log={log} />
+        <MovesTable log={log} scrollRef={canvasRef}/>
       </div>
     </div>
   );

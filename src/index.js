@@ -32,7 +32,6 @@ import UserSettings from './User/Settings/UserSettings';
 import AnimatedBackground from "./AnimatedBackground";
 import MatchesSearch from './Matches/MatchesSearch';
 import MatchView from './Match/MatchView';
-import AnimatedBackground from "./AnimatedBackground";
 
 const games = [{name:'Szachy', id:1}, {name:'Warcaby', id:2}, {name:'Scrabble', id:3}, {name:'Chińczyk', id:4}, {name:'Go', id:5}]
 

@@ -2,8 +2,10 @@ import {Api} from './Api'
 
 export const TournamentService = {
   getFilteredTournaments: async function (page, pageSize, body) {
-    const {tournamentTitle, minPlayOutDate, maxPlayOutDate, creator, userParticipation} = body;
-    return await Api.req(() => {return Api.post(`Tournament/getFiltered?PageNumber=${page}&PageSize=${pageSize}`, body)})
+    return await Api.req(() => {return Api.post(`Tournament/getFiltered?page=${page}&pageSize=${pageSize}`, body)})
+  },
+  getByName: async function (name, page, pageSize) {
+    return await Api.req(() => {return Api.post(`Tournament/getFiltered?page=${page}&pageSize=${pageSize}`, {tournamentTitle: name})})
   },
   getListOfTournaments: async function (page, pageSize) {
     return await Api.req(() => {return Api.post(`Tournament/getFiltered?PageNumber=${page}&PageSize=${pageSize}`, {})})

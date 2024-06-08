@@ -1,9 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './Visualization.scss';
 
-export default function Visualization({ gameData }) {
+export default function Visualization({ gameData, currentMove }) {
   const canvasRef = useRef(null);
   const [gameStateIndex, setGameStateIndex] = useState(0);
+  useEffect(() => {
+    setGameStateIndex(currentMove);
+  }, [currentMove]);
 
   useEffect(() => {
     if (!gameData || !gameData.gameStates || gameData.gameStates.length === 0) return;
@@ -19,7 +22,7 @@ export default function Visualization({ gameData }) {
       try {
         ctx.fillStyle = kolor.toLowerCase();
         ctx.fillRect(x, y, cardWidth, cardHeight);
-        ctx.strokeStyle = 'black';
+        ctx.strokeStyle = 'white'; 
         ctx.lineWidth = 2;
         ctx.strokeRect(x, y, cardWidth, cardHeight);
         ctx.fillStyle = 'black';
@@ -72,7 +75,7 @@ export default function Visualization({ gameData }) {
 
   return (
     <div className="visualization-container">
-      <canvas id="myCanvas" ref={canvasRef} width="1500" height="600"></canvas> {/* Adjusted canvas size */}
+      <canvas id="myCanvas" ref={canvasRef} width="1500" height="600"></canvas>
       <div id="controls">
         <button onClick={() => setGameStateIndex(Math.max(0, gameStateIndex - 1))}>
           Poprzedni układ
@@ -89,9 +92,6 @@ export default function Visualization({ gameData }) {
           value={gameStateIndex + 1}
           onChange={(e) => setGameStateIndex(e.target.value - 1)}
         />
-        <button onClick={() => setGameStateIndex(document.getElementById('moveNumber').value - 1)}>
-          Idź do ruchu
-        </button>
       </div>
     </div>
   );

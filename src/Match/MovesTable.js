@@ -21,15 +21,28 @@ function getColor(value) {
     return 'def';
 }
 
-export default function MovesTable({log}) {
-    let boardState, playerMove, playerHand;
+function MovesTableButtons({move, setMove}) {
+    return(<> 
+            <div className="match-table-btns">
+                <div className="match-table-btns-container">
+                        <button className="match-table-btn" onClick={setMove(0)}>First</button>
+                        <button className="match-table-btn" onClick={setMove(move - 1)}>≪</button>
+                        <button className="match-table-btn">{move + 1}</button>
+                        <button className="match-table-btn" onClick={setMove(move + 1)}>≫</button>
+                        <button className="match-table-btn" onClick={setMove(-2)}>Last</button>
+                </div>
+            </div>
+        </>
+    );
+}
 
-    const [move, setMove] = useState(1);
+export default function MovesTable({log, scrollRef, }) {
+    let boardState, playerMove, playerHand;
 
     return <>
         <div className="move-table">
             <div className="move-table-container">
-                <div className='move-table-container-scrollable-table'>
+                <div className='move-table-container-scrollable-table' ref={scrollRef}>
                     <table>
                         <thead>
                             <tr>
@@ -41,7 +54,6 @@ export default function MovesTable({log}) {
                         </thead>
                         <tbody>
                             {log.rounds.map((round, index) => {
-                                //console.log(round.boardState);
                                 boardState = round.boardState.map((x) => <p className={getColor(x)}>{x}</p>)
                                 playerMove = round.playerMove.map((x) => <p className={getColor(x)}>{x}</p>)
                                 playerHand = round.playerHand.map((x) => <p className={getColor(x)}>{x}</p>)
@@ -56,16 +68,9 @@ export default function MovesTable({log}) {
                         </tbody>
                     </table>
                 </div>
-                <div className="match-table-btns">
-                <div className="match-table-btns-container">
-                        <button className="match-table-btn">First</button>
-                        <button className="match-table-btn">≪</button>
-                        <button className="match-table-btn">{move}</button>
-                        <button className="match-table-btn">≫</button>
-                        <button className="match-table-btn">Last</button>
-                </div>
-            </div>
             </div>
         </div>
     </>
 }
+
+export { MovesTableButtons };

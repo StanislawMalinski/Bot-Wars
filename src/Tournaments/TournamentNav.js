@@ -14,9 +14,11 @@ function TournamentNav({ isAuthenticated }) {
 
     return (
         <div className="navbar">
-            <div className="logo">
-                <h1>Bot-Wars</h1>
-            </div>
+            <NavLink exact to="/" className="logo-link">
+                <div className="logo">
+                    <h1>Bot-Wars</h1>
+                </div>
+            </NavLink>
             <nav className={`nav ${menuOpen ? 'open' : ''}`}>
                 <div className="menu-btns">
                     <div className="menu-btn">
@@ -35,8 +37,8 @@ function TournamentNav({ isAuthenticated }) {
                         </NavLink>
                     </div>
                     <div className="menu-btn">
-                        <NavLink exact to="/" className={({ isActive }) => (isActive ? 'active-nav' : 'inactive')}>
-                            <button className="btn">Home</button>
+                        <NavLink exact to="/matches/" className={({ isActive }) => (isActive ? 'active-nav' : 'inactive')}>
+                            <button className="btn">Matches</button>
                         </NavLink>
                     </div>
                     <div className="menu-btn">
