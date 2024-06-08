@@ -26,12 +26,17 @@ export const UserService = {
     })})
     const token = response.data.data
     const jwtData = jwtDecode(token)
+    const id = jwtData['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
+    const playerInfo = await Api.req(() => {return Api.get(`Player/getPlayerInfo?playerId=${id}`)});
+    const playerLogin = playerInfo.data.data.login;
     store.dispatch(login({
+      login: playerLogin,
       email: email,
       token: token,
       role: jwtData['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'],
-      id: jwtData['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier']
+      id: id
     }))
+
   },
   searchPlayersByName: async function (name, pageNumber, pageSize) {
     return await Api.req(() => {return Api.get(`Player/SearchByName?playerName=${name}&PageNumber=${pageNumber}&PageSize=${pageSize}`)})
