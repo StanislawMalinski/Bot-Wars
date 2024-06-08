@@ -5,14 +5,14 @@ import store from '../User/store'
 
 export const UserService = {
 
-  registerUser: async function (username, email, password, roleId) {
+  registerUser: async function (username, email, password) {
     return await Api.req(() => {return Api.post('Player/registerPlayer', {
       email: email,
       login: username,
       password: password,
     })})
   },
-  registerAdmin: async function (username, email, password, roleId) {
+  registerAdmin: async function (username, email, password) {
     return await Api.req(() => {return Api.post('Player/registerAdmin', {
       email: email,
       login: username,

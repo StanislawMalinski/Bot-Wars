@@ -1,0 +1,73 @@
+@import '../index';
+@import "../Home";
+
+.login-register-game-form {
+  @extend .color-primary-0;
+  @extend h1;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  form {
+    @extend .menu-btns;
+    border: solid $color-primary-3 2px;
+    border-radius: 15px;
+    background-color: #181818;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 20px;
+
+      label {
+        @extend .color-primary-3;
+        font-size: 25px;
+        margin-bottom: 5px;
+      }
+
+      input, select, textarea {
+        width: 100%;
+        padding: 5px;
+        min-height: 25px;
+      }
+
+      &.short-input {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        label {
+          flex-basis: 48%;
+        }
+
+        input, select {
+          flex-basis: 48%;
+          max-width: 200px;
+        }
+      }
+    }
+
+    .actions {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+
+      .submit, .cancel {
+        @extend .btn;
+        width: auto;
+        flex-grow: 0;
+      }
+    }
+  }
+
+  p{
+    font-size: 20px;
+    color: red;
+  }
+
+}

@@ -1,7 +1,9 @@
 import './AddGameForm.scss'
 import './Form.scss'
-import React, { useState } from "react";
+import './LoginRegisterGameForm.scss'
+import React, {useState} from "react";
 import {UserService} from "../services/UserService";
+import {useNavigate} from "react-router-dom";
 
 function RegisterForm() {
     const [name, setName] = useState('');
@@ -11,6 +13,7 @@ function RegisterForm() {
     const [passwordsMatch, setPasswordsMatch] = useState(true);
     const [message, setMessage] = useState(true);
 
+    const navigate = useNavigate();
 
     const handlePasswordChange = (e) => {
         setPassword(e.target.value);
@@ -25,16 +28,17 @@ function RegisterForm() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await UserService.registerUser(name, email, password, 1)
-            setMessage('Registered successfully')
+            await UserService.registerUser(name, email, password)
+            await UserService.loginUser(email, password)
+            navigate("/")
         } catch (e) {
             setMessage('There was a problem with the registration.')
         }
     };
 
     return (
-        <div className="add-game-form">
-            <div className="form">
+        <div>
+            <div className="login-register-game-form">
                 <h1>Register</h1>
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">
@@ -89,12 +93,12 @@ function RegisterForm() {
 
                     </div>
 
-                    {!passwordsMatch && <p style={{ color: 'red' }}>Passwords do not match</p>}
+                    {!passwordsMatch && <p style={{color: 'red'}}>Passwords do not match</p>}
 
                     <div className="form-group actions">
                         {passwordsMatch && <button type="submit" className="submit">Register</button>}
 
-                        <button type="button" className="cancel">Cancel</button>
+                        <button type="button" className="cancel" onClick={() => navigate("/")}>Cancel</button>
                     </div>
                 </form>
             </div>
