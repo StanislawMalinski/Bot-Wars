@@ -12,14 +12,18 @@
         padding-right: 10px;
         text-shadow: 0cm 0cm 0.08cm #fff;
 
+
         &.hover .user-name::before {
             transform: scaleX(1);
             transform-origin: bottom left;
         }
 
-        &.hover .arrow-icon {
-            width: 24px;
-            height: 24px;
+        transition: all 1s ease-in-out;
+        &:hover {
+            transform: scale(1.1);
+        }
+        .arrow-icon {
+
         }
 
         .user-name {
