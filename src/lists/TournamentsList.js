@@ -27,7 +27,7 @@ function TournamentsList({ tournaments, isAuthenticated }) {
             }).catch((error) => {
                 setMessage('Error loading tournaments');
             });
-    }, [currentDate]);
+    }, []);
 
     const handleTournamentClick = (tournamentId) => {
         navigate(`/tournaments/details/${tournamentId}`);

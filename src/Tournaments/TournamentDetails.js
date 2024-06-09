@@ -3,7 +3,6 @@ import { TournamentService } from '../services/TournamentService';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { login, logout } from '../User/store';
 import UserButtons from '../User/UserButtons';
 import TournamentBotList from './TournamentBotList';
@@ -13,6 +12,32 @@ function TournamentDetails({isAuthenticated, user, login, logout }) {
 
     const { tournamentId } = useParams();
     const [tournament, setTournament] = useState(null);
+
+    useEffect(() => {
+        // Create a WebSocket instance
+        const socket = new WebSocket(`ws://localhost:3000/tournamentWs/${tournamentId}`);
+
+        // Event listeners
+        socket.addEventListener('open', () => {
+            console.log('Connected to WebSocket server');
+        });
+
+        socket.addEventListener('message', (event) => {
+            console.log('Received message from server:', event.data);
+            // Perform actions based on the received data
+        });
+
+        socket.addEventListener('close', () => {
+            console.log('Disconnected from WebSocket server');
+        });
+
+        // Clean up on unmount
+        return () => {
+            if (socket.readyState === 1) { // <-- This is important
+                socket.close();
+            }
+        }
+    }, []);
 
     useEffect(() => {
         TournamentService.getTournament(tournamentId)
@@ -25,9 +50,6 @@ function TournamentDetails({isAuthenticated, user, login, logout }) {
             });
     }, [tournamentId]);
 
-    console.log(tournamentId)
-    // alert(tournament)
-
     return (<>{(!tournament || Object.keys(tournament).length === 0) ? <div>Tournament not found</div> :
         (<>
             <UserButtons/>
@@ -38,7 +60,7 @@ function TournamentDetails({isAuthenticated, user, login, logout }) {
                             <p>Creator: {tournament.creatorName}</p>
                             <p>Player limit: {tournament.playersLimit}</p>
                             <p>Planned on: {tournament.tournamentsDate}</p>
-                            <p>Ograniczenia: {tournament.limitations}</p>
+                            <p>Constraints: {tournament.limitations}</p>
                             <p>Status: {tournament.status}</p>
                         </div>
                         {tournament.image &&
