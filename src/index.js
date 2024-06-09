@@ -4,7 +4,7 @@ import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {createBrowserRouter, RouterProvider,} from "react-router-dom";
-import GamesList from "./lists/GamesList";
+import GamesView from "./Games/GamesView";
 import GameDetails from "./Games/GameDetails";
 import AddGameForm from "./forms/AddGameForm";
 import RegisterForm from "./forms/RegisterForm";
@@ -42,7 +42,7 @@ const router = createBrowserRouter([
     },
     {
         path: "/games",
-        element: <GamesList games={games}/>,
+        element: <GamesView />,
     },
     {
         path: "/games/details/:gameId",

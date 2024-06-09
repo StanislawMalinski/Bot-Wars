@@ -1,16 +1,22 @@
 import './AddGameForm.scss'
 import './Form.scss'
-import React, {useState} from "react";
+import React, {useState, useRef} from "react";
 import {GameService} from "../services/GameService";
 
-function AddGameForm({isAuthenticated, user, login, logout}) {
+function AddGameForm() {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [file, setFile] = useState('');
     const [message, setMessage] = useState(true);
 
+    const fileInput = useRef(null);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        const file = fileInput.current.files[0];
+        const body = new FormData();
+        body.append('BotFile', file);
 
         try {
             console.log(name, description)
@@ -47,8 +53,8 @@ function AddGameForm({isAuthenticated, user, login, logout}) {
                         <textarea
                             id="description"
                             value={description}
-                            onChange={e => setDescription(e.target.value)}
                             maxLength="200"
+                            ref={fileInput}
                         />
 
                         <p style={{

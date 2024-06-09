@@ -1,0 +1,19 @@
+.game-list-container {
+    background-color: #181818;
+    
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 5px;
+    
+    .game-list-container {
+        
+        height: 97%;
+        padding: 5px;
+        .list {
+            overflow-y: scroll;
+        }
+    }
+    .paginator{
+        margin: auto 0;
+    }
+}
