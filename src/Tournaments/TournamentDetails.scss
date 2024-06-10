@@ -44,3 +44,34 @@
     }
     
 }
+.ladder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+}
+
+.match {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 5px;
+    width: 300px;
+}
+
+.players {
+    display: flex;
+    justify-content: space-between;
+}
+
+.winner {
+    font-weight: bold;
+    color: green;
+}
+
+.loser {
+    color: red;
+}
+
+.result {
+    margin-top: 10px;
+}

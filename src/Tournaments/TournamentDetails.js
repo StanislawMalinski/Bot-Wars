@@ -12,10 +12,29 @@ function TournamentDetails({isAuthenticated, user, login, logout }) {
 
     const { tournamentId } = useParams();
     const [tournament, setTournament] = useState(null);
-
+    const [ladder, setLadder] = useState(null);
+    
+    const Match = ({ match }) => {
+        const winnerBot = match.PlayersBots.find(player => player.BotId === match.Winner);
+    
+        return (
+            <div className="match">
+                <div className="players">
+                    {match.PlayersBots.map(player => (
+                        <div key={player.BotId} className={player.BotId === match.Winner ? 'winner' : 'loser'}>
+                            {player.UserName}
+                        </div>
+                    ))}
+                </div>
+                <div className="result">
+                    Winner: {winnerBot ? winnerBot.UserName : 'No winner yet'}
+                </div>
+            </div>
+        );
+    };
     useEffect(() => {
         // Create a WebSocket instance
-        const socket = new WebSocket(`ws://localhost:3000/tournamentWs/${tournamentId}`);
+        const socket = new WebSocket(`ws://10.242.93.198:8080/tournamentWs/${tournamentId}`);
 
         // Event listeners
         socket.addEventListener('open', () => {
@@ -24,6 +43,7 @@ function TournamentDetails({isAuthenticated, user, login, logout }) {
 
         socket.addEventListener('message', (event) => {
             console.log('Received message from server:', event.data);
+            setLadder(JSON.parse(event.data));
             // Perform actions based on the received data
         });
 
@@ -75,9 +95,14 @@ function TournamentDetails({isAuthenticated, user, login, logout }) {
                 <div className="col2">
                     <div className="tournamentTitle">
                         <h1>{tournament.tournamentTitle}</h1>
-                    </div>
+</div>
                     <TournamentCountDown date={tournament.tournamentsDate} />
                     <TournamentBotList botList={tournament.playersBots} />
+                    <div className="ladder">
+                    {ladder && ladder.map(match => (
+    <Match key={match.matchId} match={match} />
+))}
+        </div>
                 </div>
             </div>
         </>)}
