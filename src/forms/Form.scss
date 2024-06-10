@@ -9,6 +9,8 @@
         padding: 20px;
         display: flex;
         flex-direction: column;
+        max-width: 1000px;
+        margin: 0 auto;
 
         .form-group {
             display: flex;
@@ -39,6 +41,7 @@
                 input, select {
                     flex-basis: 48%;
                     max-width: 200px;
+                    margin: auto;
                 }
             }
         }
@@ -50,9 +53,17 @@
 
             .submit, .cancel {
                 @extend .btn;
-                width: auto; // Auto width based on content
+                width: auto;
                 flex-grow: 0;
             }
         }
+    }
+}
+
+.text-below-form {
+    max-width: 1000px;
+    margin: 0 auto;
+    p > ul {
+        list-style: inside;
     }
 }
