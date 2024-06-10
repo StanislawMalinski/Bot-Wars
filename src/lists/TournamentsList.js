@@ -7,7 +7,7 @@ import React, {useState} from "react";
 import Paginator from "../elements/Paginator/Paginator"
 import TournamentFilterForm from '../forms/TournamentFilterForm';
 
-function TournamentsList({tournaments, isAuthenticated, user}) {
+function TournamentsList({isAuthenticated, user}) {
   const tournamentsPerPage = 8;
   const navigate = useNavigate();
   const [filteredTournaments, setFilteredTournaments] = useState([]);

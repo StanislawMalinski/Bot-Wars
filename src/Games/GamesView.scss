@@ -1,0 +1,15 @@
+.games-container {
+    display: grid;
+    grid-template-columns: 50% 50%;    
+
+    & > div {
+        background-color: #181818;
+        width: 90%;
+        justify-self: center;
+        height: 70vh;
+        overflow: hidden;
+        padding-bottom: 5px;
+
+        border-radius: 5px;
+    }
+}
