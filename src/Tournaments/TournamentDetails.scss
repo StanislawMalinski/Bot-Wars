@@ -1,11 +1,19 @@
 @import '../index';
+@import '../Home';
 
 .tournamentWrapper{
     @extend .color-primary-0;
 
     max-width: 70vw;
     margin: 0 auto;
+    margin-top: 20px;
     text-align: center;
+    border: solid $color-primary-3 2px;
+    border-radius: 15px;
+    background-color: #181818;
+    padding: 20px;
+    color: $color-primary-0;
+
     .tournamentDetails{
         display:flex;
         flex-direction: row;
@@ -16,6 +24,7 @@
             flex-direction: column;
 
             p{
+                color: $color-primary-0;
                 font-size: 20px;
                 margin: 5px 0
             }

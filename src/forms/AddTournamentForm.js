@@ -43,13 +43,13 @@ function AddTournamentForm({isAuthenticated, user, login, logout }) {
 
     return (
         <div className="form">
-            <h1>Dodaj nowy turniej</h1>
+            <h1>Add a new tournament</h1>
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
-                    <label htmlFor="title">Tytuł</label>
+                    <label htmlFor="title">Title</label>
                     <input 
                         type="text" 
-                        placeholder="Tytuł (max 30 znaków)"
+                        placeholder="Title (max 30 characters)"
                         id="title" 
                         value={title}
                         onChange={e => setTitle(e.target.value)}
@@ -58,10 +58,10 @@ function AddTournamentForm({isAuthenticated, user, login, logout }) {
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="description">Opis</label>
+                    <label htmlFor="description">Description</label>
                     <textarea 
                         id="description" 
-                        placeholder="Opis (max 200 znaków)"
+                        placeholder="Description (max 200 characters)"
                         value={description}
                         onChange={e => setDescription(e.target.value)}
                         maxLength="200"
@@ -69,7 +69,7 @@ function AddTournamentForm({isAuthenticated, user, login, logout }) {
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="gameType">Typ Gry</label>
+                    <label htmlFor="gameType">Game Type</label>
                     <select 
                         id="gameType" 
                         value={gameType}
@@ -79,7 +79,7 @@ function AddTournamentForm({isAuthenticated, user, login, logout }) {
                 </div>
 
                 <div className="form-group short-input">
-                    <label htmlFor="playerLimit">Limit Graczy</label>
+                    <label htmlFor="playerLimit">Player limit</label>
                     <input 
                         type="number" 
                         id="playerLimit" 
@@ -89,7 +89,7 @@ function AddTournamentForm({isAuthenticated, user, login, logout }) {
                 </div>
 
                 <div className="form-group short-input">
-                    <label htmlFor="date">Data Rozgrywki</label>
+                    <label htmlFor="date">Tournament date</label>
                     <input 
                         type="date" 
                         id="date" 
@@ -99,16 +99,17 @@ function AddTournamentForm({isAuthenticated, user, login, logout }) {
                 </div>
 
                 <div className="form-group short-input">
-                    <label htmlFor="image">Zdjęcie</label>
+                    <label htmlFor="image">Image</label>
                     <input 
                         type="file" 
                         id="image"
+                        accept=".jpg,.jpeg,.png"
                     />
                 </div>
 
                 <div className="form-group actions">
-                    <button type="submit" className="submit">Dodaj turniej</button>
-                    <button type="button" className="cancel">Anuluj</button>
+                    <button type="submit" className="submit">Add a tournament</button>
+                    <button type="button" className="cancel">Cancel</button>
                 </div>
 
                 {message && <p>{message}</p>}

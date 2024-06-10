@@ -38,7 +38,7 @@ function RegisterForm() {
 
     return (
         <div>
-            <div className="login-register-game-form">
+            <div className="form">
                 <h1>Register</h1>
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">

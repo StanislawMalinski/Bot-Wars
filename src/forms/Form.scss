@@ -1,16 +1,27 @@
 @import '../index';
+@import "../Home";
 
 .form {
     @extend .color-primary-0;
     @extend h1;
 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
     form {
         @extend .menu-btns;
+        border: solid $color-primary-3 2px;
+        border-radius: 15px;
+        background-color: #181818;
         padding: 20px;
         display: flex;
         flex-direction: column;
+        // from different branch
         max-width: 1000px;
         margin: 0 auto;
+        //
+        width: 50%;
 
         .form-group {
             display: flex;
@@ -58,6 +69,19 @@
             }
         }
     }
+
+    p{
+        font-size: 20px;
+        color: red;
+    }
+
+    ul {
+        margin-left: auto;
+        margin-right: auto;
+        display: table;
+        text-align: left
+    }
+
 }
 
 .text-below-form {
