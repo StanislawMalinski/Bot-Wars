@@ -1,0 +1,164 @@
+0
+-1 -1
+g2 g4
+1
+g2 g4
+g8 f6
+0
+g8 f6
+d2 d4
+1
+d2 d4
+f6 g4
+0
+f6 g4
+f1 g2
+1
+f1 g2
+e7 e5
+0
+e7 e5
+g2 f1
+1
+g2 f1
+e5 d4
+0
+e5 d4
+g1 f3
+1
+g1 f3
+f8 b4
+0
+f8 b4
+b1 d2
+1
+b1 d2
+b4 d2
+0
+b4 d2
+d1 d2
+1
+d1 d2
+b8 c6
+0
+b8 c6
+f3 g5
+1
+f3 g5
+d7 d5
+0
+d7 d5
+d2 d3
+1
+d2 d3
+e8 g8
+0
+e8 g8
+d3 a6
+1
+d3 a6
+b7 a6
+0
+b7 a6
+e2 e4
+1
+e2 e4
+d5 e4
+0
+d5 e4
+f1 e2
+1
+f1 e2
+g4 e5
+0
+g4 e5
+e1 d1
+1
+e1 d1
+c8 f5
+0
+c8 f5
+e2 a6
+1
+e2 a6
+f5 g4
+0
+f5 g4
+g5 f3
+1
+g5 f3
+g4 f3
+0
+g4 f3
+d1 d2
+1
+d1 d2
+f3 h1
+0
+f3 h1
+c2 c3
+1
+c2 c3
+d8 g5
+0
+d8 g5
+d2 c2
+1
+d2 c2
+d4 d3
+0
+d4 d3
+a6 d3
+1
+a6 d3
+e4 d3
+0
+e4 d3
+c2 b1
+1
+c2 b1
+g5 f5
+0
+g5 f5
+a2 a4
+1
+a2 a4
+f5 f2
+0
+f5 f2
+b1 a2
+1
+b1 a2
+f2 h2
+0
+f2 h2
+a2 b1
+1
+a2 b1
+h2 c2
+0
+h2 c2
+b1 a2
+1
+b1 a2
+c2 a4
+0
+c2 a4
+a2 b1
+1
+a2 b1
+a4 c2
+0
+a4 c2
+b1 a2
+1
+b1 a2
+h1 d5
+0
+h1 d5
+a2 a3
+1
+a2 a3
+c2 b3
+-1
+1
