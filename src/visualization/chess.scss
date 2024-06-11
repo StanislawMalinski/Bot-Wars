@@ -1,24 +1,13 @@
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background-size: cover;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    font-family: 'Roboto Mono', monospace; /* Robotic font */
-
-  }
-  
   .chess-container {
     display: flex;
     justify-content: center;
-    align-items: flex-start;
-    background: rgba(0, 0, 0, 0.4);  // Semi-transparent background to highlight content
+    align-items: center;
+    background: rgba(0, 0, 0, 0.4); // Semi-transparent background to highlight content
     border-radius: 10px;
     padding: 20px;
+    height: 100vh;
   }
-  
+
   .chessboard-container {
     position: relative;
     width: 650px;
@@ -34,7 +23,7 @@ body {
     // opacity: 0.6;
 
   }
-  
+
   .chessboard {
     width: 500px;
     height: 500px;
@@ -44,18 +33,18 @@ body {
     justify-self: center;
     box-shadow: 0 5px 15px rgba(200, 200, 200, 0.5)
   }
-  
+
   .buttons {
     margin-top: 10px;
     text-align: center;
     width: 70%;
     height: 40px;
-    z-index: 100;
     font-size: 15px;
   }
-  
+
   .buttons button {
-    background-color: #14980D; /* Main Primary color */
+    background-color: #14980D;
+    /* Main Primary color */
     border: none;
     color: white;
     padding: 10px 24px;
@@ -67,13 +56,15 @@ body {
     cursor: pointer;
     border-radius: 12px;
     transition: background-color 0.3s ease;
-    letter-spacing: 1px; /* Slight spacing for a tech look */
+    letter-spacing: 1px;
+    /* Slight spacing for a tech look */
   }
-  
+
   .buttons button:hover {
-    background-color: #185515; /* Primary color 4 for hover */
+    background-color: #185515;
+    /* Primary color 4 for hover */
   }
-  
+
   .moves-list-container {
     position: relative;
     margin-left: 20px;
@@ -84,23 +75,26 @@ body {
     padding: 10px;
     border-radius: 8px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-      /* Custom scrollbar styles */
-    scrollbar-width: thin; /* For Firefox */
-    scrollbar-color: #14980D #333; /* For Firefox */
+    /* Custom scrollbar styles */
+    scrollbar-width: thin;
+    /* For Firefox */
+    scrollbar-color: #14980D #333;
+    /* For Firefox */
   }
-  
+
   .moves-list {
     list-style-type: none;
     padding: 0;
     margin: 0;
     background-color: #222;
-    background: rgba(0, 0, 0, 0.6); 
+    background: rgba(0, 0, 0, 0.6);
   }
-  
+
   .move-item {
     padding: 5px 10px;
     cursor: pointer;
-    color: #14980D; /* Primary color 2 */
+    color: #14980D;
+    /* Primary color 2 */
     background-color: transparent;
     border-radius: 4px;
     transition: background-color 0.3s, color 0.3s;
@@ -109,13 +103,13 @@ body {
     font-size: 25px;
     letter-spacing: 1px;
   }
-  
+
   .move-item:hover {
     background-color: #f0f0f0;
   }
-  
+
   .move-item.current-move {
     background-color: #d3d3d3;
-    color: #185515; /* Main Primary color */
+    color: #185515;
+    /* Main Primary color */
   }
-  
