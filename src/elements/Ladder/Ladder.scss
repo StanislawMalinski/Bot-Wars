@@ -1,0 +1,94 @@
+.ladder{
+    padding: 10px;
+    background-color: #1a1a1a;
+    height: 500px;
+    width: 100%;
+    display: grid;
+    grid-template-rows: 1fr min-content;
+    .ladder-zoom {
+        overflow: scroll;
+        transition: all 0s 0.5s;
+        .ladder-zoom-container {
+            height: min-content;
+            width: min-content;
+            cursor: grab;
+
+            div {
+                user-select: none;
+            }
+
+            .ladder-record {
+                .user-name {
+                    font-size: 25px;
+                    font-weight: bold;
+                    cursor: pointer;
+                }
+
+                .bot {
+                    display: flex;
+                    flex-direction: row;
+                    overflow-x: hidden;
+                    img {
+                        width: 35px;
+                        aspect-ratio: 1;
+                        border-radius: 5px;
+                    }
+                    .bot-name {
+                        margin: 0 5px;
+                    }   
+
+                    div {
+                        font-size: 15px;
+                    }
+                }
+            }
+        }
+    }
+
+    .zoom-btns {
+        display: flex;
+        justify-content: right;
+        gap: 10px;
+        margin-top: 20px;
+
+        .zoom-btn {
+            cursor: pointer;
+            background-color: #515151;
+            border-radius: 50%;
+            transition: all 0.3s;
+            height: 30px;
+            padding: 2px;
+            aspect-ratio: 1;
+
+            &:hover {
+                background-color: #646464;
+            }
+
+            img {
+                object-fit: fill;
+                width: 100%;
+                height: 100%;
+                vertical-align: top;
+                transition: all 0.5s;
+
+                &:hover {
+                    filter: invert(1);
+                }
+            }
+        }
+    }
+}
+
+.round-title {
+    position: sticky;
+}
+
+.origin {
+    position: absolute;
+    z-index: 1000000;
+    height: 5px;
+    width: 5px;
+    background-color: #FF0000;
+    border-radius: 50%;
+}
+
