@@ -28,6 +28,10 @@ import UserSettings from './User/Settings/UserSettings';
 import AnimatedBackground from "./AnimatedBackground";
 import AddBotForm from "./forms/AddBotForm";
 import BotList from "./lists/BotList";
+import Chess from "./visualization/chess.js";
+import $ from 'jquery'; // Import jQuery
+window.$ = $; // Make jQuery available globally
+
 
 const games = [{name:'Szachy', id:1}, {name:'Warcaby', id:2}, {name:'Scrabble', id:3}, {name:'Chińczyk', id:4}, {name:'Go', id:5}]
 
@@ -119,6 +123,10 @@ const router = createBrowserRouter([
     {
         path: "/bots",
         element: <BotList/>
+    },
+    {
+        path: "/chess",
+        element: <Chess/>
     },
 ]);
 
