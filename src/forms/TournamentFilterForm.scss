@@ -1,38 +1,143 @@
 .tournaments-form-container {
     margin-top: 25px;
-    h2 {
-        margin: 20px 0;
-        text-align: center;
-        overflow-wrap: break-word;
-    }
-    .tournaments-form {
-        display: flex;
-        flex-wrap: wrap;
-        flex-direction: row;
-        .tournaments-form-wrapper {
-            max-width: 100%;
-        }
-        .tournaments-form-button-container {
-            display: flex;
-            flex-grow: 1;
-            margin-top: 10px;
-            justify-content: space-evenly;
-        }
-        div {
-            padding: 0 20px;
-            label {
-                margin-right: 20px;
-                overflow-wrap: break-word;
-            }
-        }
-    }
-    border: 2px solid #393a39;
+    padding: 20px;
+    border: 2px solid #0be400; /* Primary color */
+    border-radius: 8px;
+    background-color: rgba(13, 13, 13, 0.9); /* Updated to darker background */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: 'Roboto', Arial, sans-serif; /* Updated font */
+    letter-spacing: 0.5px; /* Added letter spacing */
     margin-bottom: 20px;
-    padding: 10px;
-    font-family: Arial, Helvetica, sans-serif;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column;
+}
 
-    @media (max-width: 768px) {
-        font-size: 0.8rem;
-        width: 100%;
+h2 {
+    margin: 20px 0;
+    text-align: center;
+    overflow-wrap: break-word;
+    color: #14980D; /* Main Primary color */
+    font-size: 1.5rem;
+}
+
+.tournaments-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* Adjust spacing */
+}
+
+.tournaments-form-wrapper {
+    flex: 1 1 calc(50% - 20px); /* Adjust width */
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    label {
+        font-weight: bold;
+        color: #2E602B; /* Primary color */
+        font-size: 1.7rem;
+    }
+
+    input {
+        padding: 10px;
+        border: 1px solid #333; /* Darker border */
+        border-radius: 4px;
+        font-size: 1rem;
+        background-color: #222; /* Darker input backgrounds */
+        color: #ddd; /* Light text color for visibility */
     }
 }
+
+.tournaments-form-button-container {
+    display: flex;
+    flex-grow: 3;
+    flex-basis: 700px;
+    margin-top: 20px;
+    justify-content: space-evenly;
+
+    button {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        background-color: #14980D; /* Main Primary color */
+        color: white;
+        letter-spacing: 1px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s;
+
+        &:hover {
+            background-color: #0BE400; /* Primary color */
+        }
+    }
+
+    button:last-child {
+        background-color: #BC9310; /* Main Secondary color */
+
+        &:hover {
+            background-color: #FFC300; /* Secondary color */
+        }
+    }
+
+    @media (max-width: 768px) {
+        .tournaments-form-wrapper {
+            flex: 1 1 100%;
+        }
+    
+        font-size: 0.8rem;
+    }
+
+}
+
+.filter-dropdown-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    letter-spacing: 1px;
+    width: 100%;
+    padding: 10px;
+
+    text-align: center;
+    cursor: pointer;
+    font-size: 1.3rem;
+    border-radius: 4px;
+    margin: 10px; 
+
+    border: none;
+    color: rgb(57, 185, 31);/* Space between button and form */
+    background-color: black;
+    box-shadow: 0 0 0.2cm #088f0f; /* Primary color */
+    color: white;
+
+    .arrow-icon {
+        width: 20px;
+        height: 20px;
+        fill: #0f0;
+        transition: width 0.3s ease, height 0.3s ease;
+        margin-left: 5px;
+
+        .hover & {
+            width: 24px;
+            height: 24px;
+        }
+
+        &.open {
+            transform: rotate(180deg);
+        }
+    }
+    
+}
+
+.filter-dropdown-button:hover {
+    background-color: #111;
+    color: #777; /* Darker green on hover */
+}
+
+
+

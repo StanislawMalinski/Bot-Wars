@@ -1,6 +1,8 @@
 import React, {forwardRef, useEffect, useImperativeHandle, useState} from 'react';
 import {TournamentService} from "../services/TournamentService";
 import './TournamentFilterForm.scss';
+import ArrowDown from '../resources/arrow-down.svg';
+import ArrowUp from '../resources/arrow-up.svg';
 
 const TournamentFilterForm = forwardRef(function TournamentFilterForm({
                                                currentPage,
@@ -10,6 +12,7 @@ const TournamentFilterForm = forwardRef(function TournamentFilterForm({
                                                setPageCount,
                                                setMessage
                                              }, ref) {
+  const [showFilters, setShowFilters] = useState(false);  
   const [tournamentTitle, setTournamentTitle] = useState('');
   const [minPlayOutDate, setMinPlayOutDate] = useState(new Date(0));
   const [maxPlayOutDate, setMaxPlayOutDate] = useState(new Date(new Date().setFullYear(new Date().getFullYear() + 10)));
@@ -67,10 +70,26 @@ const TournamentFilterForm = forwardRef(function TournamentFilterForm({
     setTournamentTitle('');
   };
 
+  const toggleFilters = () => setShowFilters(!showFilters);
+
   return (
     <div className="tournaments-form-container">
+            <button className="filter-dropdown-button" onClick={toggleFilters}>Filter tournaments
+            <svg
+                            className={`arrow-icon ${showFilters ? 'open' : ''}`}
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                        >
+                            <g>
+                                <path d="M12,2A10,10,0,1,0,22,12,10.011,10.011,0,0,0,12,2Zm0,18a8,8,0,1,1,8-8A8.009,8.009,0,0,1,12,20Z"/>
+                                <polygon points="12 12.586 8.707 9.293 7.293 10.707 12 15.414 16.707 10.707 15.293 9.293 12 12.586"/>
+                            </g>
+            </svg>
+            </button>
+            {showFilters && (
       <form onSubmit={filterTournaments}>
-        <h2>Filter tournaments</h2>
         <div className="tournaments-form">
           <div className="tournaments-form-wrapper">
             <label htmlFor="title">Title</label>
@@ -133,6 +152,7 @@ const TournamentFilterForm = forwardRef(function TournamentFilterForm({
           </div>
         </div>
       </form>
+      )}
     </div>
   )
 })
