@@ -124,12 +124,12 @@ function About() {
                     <div className="description">
                         <img src={productPhoto} alt="Product Owner" className="team-photo" />
                         <h2>Product Owner</h2>
-                        <p>John Stachurski, our Product Owner, ensures that the project aligns with the vision and requirements. He manages the project timeline, prioritizes tasks, and coordinates with the team to meet our goals.</p>
+                        <p>Jan Stachurski, our Product Owner, ensures that the project aligns with the vision and requirements. He manages the project timeline, prioritizes tasks, and coordinates with the team to meet our goals.</p>
                     </div>
                     <div className="description">
                         <img src={scrumPhoto} alt="Scrum Master" className="team-photo" />
-                        <h2>Scum Master</h2>
-                        <p>Stanisław Maliński, our Scum Master, facilitates our agile processes, ensures effective communication, and removes any obstacles that may hinder the team's progress.</p>
+                        <h2>Scrum Master</h2>
+                        <p>Stanisław Maliński, our Scrum Master, facilitates our agile processes, ensures effective communication, and removes any obstacles that may hinder the team's progress.</p>
                     </div>
                 </div>
 
@@ -173,7 +173,7 @@ function About() {
                     <img src={officePhoto} alt="Team Photo" className="process-photo" />
                     <div className="description process">
                         <p>The development of Bot-Wars involves a collaborative effort where each team member contributes their unique skills.</p>
-                        <p>The project is managed by our dedicated <span className="product-owner">Product Owner: John Doe</span>, who ensures that our goals are met and that we stay on track.</p>
+                        <p>The project is managed by our dedicated <span className="product-owner">Product Owner: Jan Stachurski</span>, who ensures that our goals are met and that we stay on track.</p>
                         <p>From initial brainstorming sessions to final implementation, our team works hard to bring this platform to life.</p>
                     </div>
                 </div>
