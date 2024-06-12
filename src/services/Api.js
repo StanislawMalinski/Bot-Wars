@@ -2,7 +2,8 @@ import axios from "axios";
 import c from "./client.config.json";
 import store from '../User/store'
 
-const baseURL = c["protocol"] + "://" + c["host"] + ":" + c["port"] + c["path"] + c["version"];
+const port = process.env.NODE_ENV === "production" ? 80 : c["port"];
+const baseURL = c["protocol"] + "://" + c["host"] + ":" + port + c["path"] + c["version"];
 
 export const Api = axios.create({
     baseURL: baseURL,
