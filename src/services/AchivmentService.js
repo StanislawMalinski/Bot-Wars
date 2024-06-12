@@ -1,12 +1,12 @@
 import {Api} from './Api'
 
-import icon1 from '../resources/icon1.svg';
-import icon2 from '../resources/icon2.svg';
-import icon3 from '../resources/icon3.svg';
-import icon4 from '../resources/icon1.svg';
-import icon5 from '../resources/icon2.svg';
-import icon6 from '../resources/icon3.svg';
-import icon7 from '../resources/skull.svg';
+import tour1 from '../resources/achivements/tour1.png';
+import tour3 from '../resources/achivements/tour3.png';
+import tour5 from '../resources/achivements/tour5.png';
+import contestant1 from '../resources/achivements/contestant1.png';
+import contestant5 from '../resources/achivements/contestant5.png';
+import contestant10 from '../resources/achivements/contestant10.png';
+import notImplemented from '../resources/skull.svg';
 
 const getIcon = function (typeOfAchivment) {
   switch (typeOfAchivment) {
@@ -25,7 +25,7 @@ const getIcon = function (typeOfAchivment) {
     case 7:
       return icon7;
     default:
-      return icon1;
+      return notImplemented;
   }
 }
 
