@@ -1,3 +1,11 @@
+### Uruchamianie całości (backend+frontend) w konteneryzacji (wdrożeniowo)
+```
+docker compose pull
+docker compose up
+
+```
+open `localhost` in your favorite browser
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

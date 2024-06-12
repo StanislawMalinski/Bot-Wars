@@ -16,7 +16,7 @@ jobs:
         uses: cypress-io/github-action@v6
         with:
           install-command: npm ci --legacy-peer-deps
-          start: docker compose -f docker-compose-all.yml up
+          start: docker compose up
           wait-on: http://localhost:8080/swagger/index.html
           wait-on-timeout: 300
           browser: chrome
