@@ -11,19 +11,19 @@ import notImplemented from '../resources/skull.svg';
 const getIcon = function (typeOfAchivment) {
   switch (typeOfAchivment) {
     case 1:
-      return icon1;
+      return tour1;
     case 2:
-      return icon2;
+      return tour3;
     case 3:
-      return icon3;
+      return tour5;
     case 4:
-      return icon4;
+      return contestant1;
     case 5:
-      return icon5;
+      return contestant5;
     case 6:
-      return icon6;
+      return contestant10;
     case 7:
-      return icon7;
+      return contestant10;
     default:
       return notImplemented;
   }
